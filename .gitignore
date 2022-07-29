@@ -1,53 +1,56 @@
-# Miscellaneous
-*.java.hsp
-*.sonarj
-*.sw*
-.DS_Store
-build.sh
-integration-repo
-ivy-cache
-argfile*
-activemq-data/
-classes/
+# Compiled class file
+*.class
 
-# Log files
-jxl.log
-jmx.log
-derby.log
+# Log file
+*.log
 
-# Gradle artifacts
-.gradle
-.gradletasknamecache
-/build
-buildSrc/build
-/spring-*/build
-/spring-core/graalvm/build
-/spring-core/kotlin-coroutines/build
-/framework-bom/build
-/integration-tests/build
-/src/asciidoc/build
-spring-test/test-output/
+# BlueJ files
+*.ctxt
 
-# Maven artifacts
-pom.xml
-target/
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# Eclipse artifacts, including WTP generated manifests
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+*.DS_Store
 bin
+target
+QLDLSpringMVC/target
+Database
 .classpath
 .project
 .settings
-.springBeans
-spring-*/src/main/java/META-INF/MANIFEST.MF
-
-# IDEA artifacts and output dirs
-*.iml
-*.ipr
-*.iws
+src/main/webapp/META-INF
 .idea
-out
-test-output
-atlassian-ide-plugin.xml
+*.iml
 
-# VS Code
-.vscode/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
