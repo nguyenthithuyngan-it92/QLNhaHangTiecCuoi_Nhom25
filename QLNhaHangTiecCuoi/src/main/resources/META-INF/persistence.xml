@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.nhom25_QLNhaHangTiecCuoi_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.nhom25.pojo.Weddinghall</class>
+    <class>com.nhom25.pojo.Account</class>
+    <class>com.nhom25.pojo.Paymentmethods</class>
+    <class>com.nhom25.pojo.OrderFood</class>
+    <class>com.nhom25.pojo.Category</class>
+    <class>com.nhom25.pojo.Feedback</class>
+    <class>com.nhom25.pojo.Wedding</class>
+    <class>com.nhom25.pojo.Food</class>
+    <class>com.nhom25.pojo.Weddingservices</class>
+    <class>com.nhom25.pojo.User</class>
+    <class>com.nhom25.pojo.Order</class>
+    <class>com.nhom25.pojo.Orders</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qlnhahang?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="2107"/>
+    </properties>
+  </persistence-unit>
+</persistence>
