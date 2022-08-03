@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="jumbotron">
     <h5>Nhà hàng tiệc cưới ... hân hạnh mang lại cho quý khách trải nghiệm tuyệt vời!!!</h5>
     <hr width="60%" color="gray" size="2"/>
@@ -13,17 +14,17 @@
             <p class="footer">THÔNG TIN LIÊN HỆ</p>
             <ul class="social">
                 <li class="nav-item">
-                    <img src="{{ url_for('static', filename='images/iconcall.png')}}" class="icon rounded" width="30" alt="Call" />
+                    <img src="<c:url value="/img/iconcall.png" />" class="icon rounded" width="30" alt="Call" />
                     0123456789
                 </li>
                 <li class="nav-item">
                     <a href="#" target="_blank">
-                        <img src="{{ url_for('static', filename='images/iconfb.png')}}" class="icon rounded" width="30 alt="Facebook" />
+                        <img src="<c:url value="/img/iconfb.png" />" class="icon rounded" width="30 alt="Facebook" />
                         Facebook
                     </a>
                 </li>
                 <li class="nav-item">
-                    <img src="{{ url_for('static', filename='images/iconmap.png')}}" class="icon rounded" width="30" alt="Address" />
+                    <img src="<c:url value="/img/iconmap.png" />" class="icon rounded" width="30" alt="Address" />
                     371 Nguyễn Kiệm, Phường 3, Quận Gò Vấp, TP.HCM
                 </li>
             </ul>
