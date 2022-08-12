@@ -6,26 +6,18 @@
 package com.nhom25.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author LENOVO
+ * @author ASUS
  */
 @Controller
-@ControllerAdvice
-public class IndexController {
-    
-    @RequestMapping("/")
-    public String index(Model model) {
-        return "index";
-    }
-    
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+@RequestMapping("/index")
+public class IntroduceController {
+    @GetMapping("/introduce")
+    public String introduce(){
+        return "introduce";
     }
 }
