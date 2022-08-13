@@ -5,19 +5,24 @@
  */
 package com.nhom25.controllers;
 
+import com.nhom25.pojo.Food;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author ASUS
+ * @author LENOVO
  */
 @Controller
+@ControllerAdvice
 @RequestMapping("/admin")
-public class StatisticalController {
-    @GetMapping("/statistical")
-    public String statistical(){
-        return "statistical";
+public class AdminController {
+    @GetMapping("/foods")
+    public String listFood(Model model){
+        model.addAttribute("food", new Food());
+        return "foods";
     }
 }

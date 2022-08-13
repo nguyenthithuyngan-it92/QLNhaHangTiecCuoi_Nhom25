@@ -5,7 +5,10 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -23,6 +26,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -46,49 +50,68 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByPosition", query = "SELECT u FROM User u WHERE u.position = :position"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
-
+    public static final String EMPLOYEE = "EMPLOYEE";
+    public static final String ADMIN = "ADMIN";
+    public static final String CUSTOMER = "CUSTOMER";
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
+//    @Size(min = 1, max = 100, message = "{user.name.error.sizeMsg}")
     @Column(name = "name")
     private String name;
+    
+//    @Pattern(regexp = "\\d{12}", message = "{user.identityCard.error.invalidMsg}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 12)
     @Column(name = "identity_card")
     private String identityCard;
+    
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    
+//    @Pattern(regexp = "\\d{11}", message = "{user.phone.error.invalidMsg}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "phone")
     private String phone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    
+//    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "{user.email.error.invalidMsg}")
     @Size(max = 100)
     @Column(name = "email")
     private String email;
+    
     @Size(max = 3)
     @Column(name = "sex")
     private String sex;
+    
     @Size(max = 50)
     @Column(name = "position")
     private String position;
+    
     @Size(max = 8)
     @Column(name = "user_role")
     private String userRole;
+    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Feedback> feedbackSet;
+    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Orders> ordersSet;
+    
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Account account;
 
@@ -104,6 +127,15 @@ public class User implements Serializable {
         this.name = name;
         this.identityCard = identityCard;
         this.phone = phone;
+    }
+    
+    public User(String name, String identityCard, String phone, String userRole, String sex, String email) {
+        this.name = name;
+        this.identityCard = identityCard;
+        this.phone = phone;
+        this.userRole = userRole;
+        this.sex = sex;
+        this.email = email;
     }
 
     public Integer getUserId() {
@@ -137,7 +169,7 @@ public class User implements Serializable {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
+    
     public String getPhone() {
         return phone;
     }

@@ -315,3 +315,35 @@ iframe{
     margin-left: auto;
 }
 
+
+/*REGISTER*/
+div.register {
+    width: 90%;  
+}
+
+div.left, .right{
+    display: inline-table;  
+}
+
+div.left > .form-group, .right > .form-group{
+    margin: 10px 10px 10px 10px;
+    width: 380px;
+}
+
+div.btnregister{
+    margin: auto;
+}
+
+div.login {
+    width: 50%; 
+}
+
+form .form-group{
+    margin: 10px 10px 10px 10px;   
+}
+
+form .login{
+    margin-right: auto;
+}
+
+

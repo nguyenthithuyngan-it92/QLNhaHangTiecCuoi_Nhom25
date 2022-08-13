@@ -5,10 +5,10 @@
  */
 package com.nhom25.controllers;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -20,12 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
         return "index";
-    }
-    
-    @GetMapping("/login")
-    public String login(){
-        return "login";
     }
 }

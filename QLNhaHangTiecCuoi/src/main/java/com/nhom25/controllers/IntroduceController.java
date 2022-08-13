@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author ASUS
  */
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/")
 public class IntroduceController {
     @GetMapping("/introduce")
     public String introduce(){

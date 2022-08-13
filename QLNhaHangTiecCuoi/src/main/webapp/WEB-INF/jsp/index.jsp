@@ -6,6 +6,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<form method="get" class="d-flex">
+    <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa để tìm...">
+    <button type="submit" class="btn btn-primary" type="button">Tìm kiếm</button>
+</form>
+
 <section class="page-section clearfix">
     <div class="container">
         <div class="intro">
@@ -38,4 +43,8 @@
     </div>
 </section>
 
+
+<c:if test="${currentUser != null}">
+    ${currentUser.username}
+</c:if>
 
