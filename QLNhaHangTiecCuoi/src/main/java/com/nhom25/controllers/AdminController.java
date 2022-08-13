@@ -5,10 +5,11 @@
  */
 package com.nhom25.controllers;
 
-import javax.servlet.http.HttpSession;
+import com.nhom25.pojo.Food;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -17,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @ControllerAdvice
-public class IndexController {
-    
-    @RequestMapping("/")
-    public String index(Model model, HttpSession session) {
-        model.addAttribute("currentUser", session.getAttribute("currentUser"));
-        return "index";
+@RequestMapping("/admin")
+public class AdminController {
+    @GetMapping("/foods")
+    public String listFood(Model model){
+        model.addAttribute("food", new Food());
+        return "foods";
     }
 }

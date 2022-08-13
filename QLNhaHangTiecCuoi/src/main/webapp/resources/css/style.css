@@ -3,6 +3,10 @@
     scroll-behavior: smooth;
 }
 
+h1{
+    margin: 5px;
+    padding: 20px;
+}
 h5{
     margin: 0;
     padding: 10px;
@@ -11,6 +15,7 @@ h5{
     font-style: italic;
 }
 
+/*FOOTER*/
 .icon{
     padding: 5px;
     width: 50px;
@@ -28,7 +33,9 @@ h5{
     font-weight: bold;
     font-size: 20px;
 }
-
+.social {
+    list-style-type: none;
+}
 li.nav-item {
     font-size: 15px;
 }
@@ -42,4 +49,35 @@ iframe{
     width: 90%;
     margin: 15px 0;
 }
+
+/*REGISTER*/
+div.register {
+    width: 90%;  
+}
+
+div.left, .right{
+    display: inline-table;  
+}
+
+div.left > .form-group, .right > .form-group{
+    margin: 10px 10px 10px 10px;
+    width: 380px;
+}
+
+div.btnregister{
+    margin: auto;
+}
+
+div.login {
+    width: 50%; 
+}
+
+form .form-group{
+    margin: 10px 10px 10px 10px;   
+}
+
+form .login{
+    margin-right: auto;
+}
+
 

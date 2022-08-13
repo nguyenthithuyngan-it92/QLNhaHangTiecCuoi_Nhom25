@@ -5,6 +5,7 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,9 +16,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -41,21 +45,35 @@ public class Account implements Serializable {
     @NotNull
     @Column(name = "user_id")
     private Integer userId;
+    
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 100, message = "{account.username.error.sizeMsg}")
     @Column(name = "username")
     private String username;
+    
     @Basic(optional = false)
     @NotNull
+    @NotEmpty(message = "{account.password.sizeMsg}")
     @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
+    
+    @Transient 
+    private String confirmPassword;
+    
     @Column(name = "active")
     private Boolean active;
+    
     @Size(max = 200)
     @Column(name = "avatar")
     private String avatar;
+    
+    @JsonIgnore
+    @Transient
+    private MultipartFile avt;
+    
+    @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private User user;
@@ -144,6 +162,34 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "com.nhom25.pojo.Account[ userId=" + userId + " ]";
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    /**
+     * @return the avt
+     */
+    public MultipartFile getAvt() {
+        return avt;
+    }
+
+    /**
+     * @param avt the avt to set
+     */
+    public void setAvt(MultipartFile avt) {
+        this.avt = avt;
     }
     
 }

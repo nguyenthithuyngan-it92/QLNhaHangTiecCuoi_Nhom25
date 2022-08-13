@@ -8,3 +8,7 @@
 
 <h1>Hello World!</h1>
 
+<c:if test="${currentUser != null}">
+    ${currentUser.username}
+</c:if>
+

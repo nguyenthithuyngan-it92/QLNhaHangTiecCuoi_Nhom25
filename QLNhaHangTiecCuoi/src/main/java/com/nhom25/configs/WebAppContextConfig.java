@@ -5,8 +5,10 @@
  */
 package com.nhom25.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
+import com.nhom25.validator.PassValidator;
+import com.nhom25.validator.WebAppValidator;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -33,8 +35,9 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = {
     "com.nhom25.controllers",
     "com.nhom25.repository",
-    "com.nhom25.service",
-    "com.nhom25.pojo"
+    "com.nhom25.services",
+    "com.nhom25.pojo",
+    "com.nhom25.validator"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
 
@@ -76,17 +79,28 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return m;
     }
 
+    @Bean(name = "validator")
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean bean
+                = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource());
+        return bean;
+    }
+
     @Override
     public Validator getValidator() {
         return validator();
     }
 
     @Bean
-    public Validator validator() {
-        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
-        v.setValidationMessageSource(messageSource());
+    public WebAppValidator userValidator() {
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new PassValidator());
 
-        return v;
+        WebAppValidator validator = new WebAppValidator();
+        validator.setSpringValidators(springValidators);
+
+        return validator;
     }
 
     @Bean
@@ -96,16 +110,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
         resolver.setDefaultEncoding("UTF-8");
         return resolver;
-    }
-
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", "tr-ng-h-m-tp-hcm",
-                        "api_key", "129162374872392",
-                        "api_secret", "Tpb6bk0-oTQf7B1o6wcwJU68c1Q",
-                        "secure", true));
-        return cloudinary;
     }
 }
