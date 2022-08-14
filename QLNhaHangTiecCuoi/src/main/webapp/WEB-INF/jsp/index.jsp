@@ -44,7 +44,3 @@
 </section>
 
 
-<c:if test="${currentUser != null}">
-    ${currentUser.username}
-</c:if>
-

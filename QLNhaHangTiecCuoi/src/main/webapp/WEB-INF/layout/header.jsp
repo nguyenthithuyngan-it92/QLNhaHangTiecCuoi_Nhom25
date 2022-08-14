@@ -15,7 +15,7 @@
 </h1>
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container-fluid">
+    <div class="container-fluid mb-0">
 <!--        <a class="navbar-brand" href="javascript:void(0)">Nhà hàng tiệc cưới</a>-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
@@ -50,19 +50,14 @@
                     </a>
                 </li>
 
-                <sec:authorize access="hasAuthority('ADMIN')">
+                <sec:authorize access="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
                     <li class="nav-item">
-                        <a class="nav-link text-warning" href="<c:url value="/admin/foods" />">
-                            <i class="fa-solid fa-address-book" aria-hidden="true"></i> Quản lý</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin/statistical" />">
-                            Thống kê
-                        </a>
+                        <a class="nav-link text-warning" href="<c:url value="/admin/" />">
+                            <i class="fa-solid fa-address-book" aria-hidden="true"></i> Trang quản lý</a>
                     </li>
                 </sec:authorize>
             </ul>
-            <ul class="navbar-nav">       
+            <ul class="navbar-nav align-center">       
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name == null}">
                         <li class="nav-item">
