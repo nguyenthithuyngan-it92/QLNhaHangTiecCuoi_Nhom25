@@ -21,9 +21,6 @@
     line-height: 4rem;
 }
 
-.navbar{
-    margin-bottom: 20px; 
-}
 
 .container,
 .container-fluid,
@@ -330,8 +327,8 @@ div.left > .form-group, .right > .form-group{
     width: 380px;
 }
 
-div.btnregister{
-    margin: auto;
+div.btnregister > button{
+    margin: -10px 10px 100px 10px;
 }
 
 div.login {
@@ -346,4 +343,32 @@ form .login{
     margin-right: auto;
 }
 
+.align-center {
+    align-items: center !important;
+}
+
+.navbar{
+    margin-bottom: 20px; 
+}
+
+a.nav-link.text-info {
+    display: flex;
+    align-items: center;
+}
+
+a.nav-link.text-info img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-right: 7px
+}
+
+/* Validate form register*/
+.was-validated .form-control.is-invalid:valid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
 

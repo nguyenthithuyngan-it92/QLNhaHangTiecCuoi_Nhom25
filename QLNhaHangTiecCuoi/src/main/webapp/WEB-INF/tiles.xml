@@ -36,19 +36,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/login.jsp" />
         <put-attribute name="footer" value="" />
     </definition>
-    
-    <definition name="foods" extends="baseLayout">
-        <put-attribute name="title" value="Quản lý món ăn" />
-        <put-attribute name="content"
-                       value="/WEB-INF/jsp/foods.jsp" />
-    </definition>
-    
-    <definition name="statistical" extends="baseLayout">
-        <put-attribute name="title" value="Thống kê" />
-        <put-attribute name="content"
-                       value="/WEB-INF/jsp/statistical.jsp" />
-    </definition>
-    
+        
     <definition name="feedback" extends="baseLayout">
         <put-attribute name="title" value="Phản hồi" />
         <put-attribute name="content"
@@ -65,6 +53,33 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Giới thiệu" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/introduce.jsp" />
+    </definition>
+    
+    <!--TRANG QUẢN LÝ-->
+    <definition name="baseAdminLayout"
+                template="/WEB-INF/layout/base_admin.jsp">
+        <put-attribute name="titleAdmin" value="" />
+        <put-attribute name="headerAdmin"
+                       value="/WEB-INF/layout/header_admin.jsp" />
+        <put-attribute name="contentAdmin" value="" />
+    </definition>
+    
+    <definition name="admin" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Quản lý" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/admin.jsp" />
+    </definition>
+    
+    <definition name="foods" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Quản lý món ăn" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/foods.jsp" />
+    </definition>
+    
+    <definition name="statistical" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Thống kê" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/statistical.jsp" />
     </definition>
 
 </tiles-definitions>
