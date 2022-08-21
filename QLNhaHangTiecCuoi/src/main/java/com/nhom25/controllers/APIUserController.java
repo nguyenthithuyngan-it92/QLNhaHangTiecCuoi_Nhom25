@@ -32,18 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class APIUserController {
 
     @Autowired
-    private Cloudinary cloudinary;
-
-    @Autowired
     private UserService userService;
-
-    @Autowired
-    private WebAppValidator userValidator;
-
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        binder.setValidator(userValidator);
-//    }
 
     @PostMapping(path = "/api/add-user", produces = {
         MediaType.APPLICATION_JSON_VALUE

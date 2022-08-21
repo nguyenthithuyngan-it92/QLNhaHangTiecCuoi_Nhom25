@@ -86,6 +86,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByName(String name) {
-        return this.getUserByName(name);
+        return this.userRepository.getUserByName(name);
+    }
+
+    @Override
+    public boolean addEmployee(User user) {
+        return this.userRepository.addEmployee(user);
     }
 }

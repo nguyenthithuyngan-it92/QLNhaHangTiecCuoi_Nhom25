@@ -22,4 +22,6 @@ public interface UserService extends UserDetailsService {
     List<User> getUsers(String name);
     Account addAccount(Account acnt);
     List<Account> getAccounts(String username);
+    
+    boolean addEmployee(User emp);
 }

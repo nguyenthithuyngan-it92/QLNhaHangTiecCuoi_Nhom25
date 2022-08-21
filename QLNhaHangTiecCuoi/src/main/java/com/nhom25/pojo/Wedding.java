@@ -5,12 +5,16 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -30,23 +34,17 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "wedding")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Wedding.findAll", query = "SELECT w FROM Wedding w"),
-    @NamedQuery(name = "Wedding.findByWeddingId", query = "SELECT w FROM Wedding w WHERE w.weddingId = :weddingId"),
-    @NamedQuery(name = "Wedding.findByCoefficient", query = "SELECT w FROM Wedding w WHERE w.coefficient = :coefficient")})
 public class Wedding implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "wedding_id")
     private Integer weddingId;
+    
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 16777215)
+    @Size(min = 1, max = 100, message = "{wedding.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     @Lob
@@ -56,16 +54,32 @@ public class Wedding implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "coefficient")
     private Float coefficient;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddingId")
     private Set<Feedback> feedbackSet;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddingId")
     private Set<Orders> ordersSet;
+    
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "weddinghall_id", nullable = false)
+//    private Weddinghall weddinghallId;
+    
     @JoinColumn(name = "weddinghall_id", referencedColumnName = "weddinghall_id")
     @ManyToOne(optional = false)
+    @JsonIgnore
+    @NotNull(message="{wedding.wdhall.notNullMsg}")
     private Weddinghall weddinghallId;
+    
     @JoinColumn(name = "weddingservices_id", referencedColumnName = "weddingservices_id")
     @ManyToOne(optional = false)
+    @JsonIgnore
+    @NotNull(message="{wedding.wdservices.notNullMsg}")
     private Weddingservices weddingservicesId;
+    
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "weddingservices_id", nullable = false)
+//    private Weddingservices weddingservicesId;
 
     public Wedding() {
     }

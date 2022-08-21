@@ -20,4 +20,6 @@ public interface UserRepository {
     User addUser(User user);
     List<Account> getAccounts(String username);
     List<User> getUsers(String name);
+    
+    boolean addEmployee(User emp);
 }

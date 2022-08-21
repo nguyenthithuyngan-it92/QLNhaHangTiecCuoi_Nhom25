@@ -5,11 +5,14 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,10 +22,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -41,8 +46,8 @@ public class Food implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "food_id")
     private Integer foodId;
     @Basic(optional = false)
@@ -55,6 +60,10 @@ public class Food implements Serializable {
     @Size(max = 255)
     @Column(name = "image")
     private String image;
+
+    @Transient
+    private MultipartFile img;
+
     @Lob
     @Size(max = 16777215)
     @Column(name = "description")
@@ -64,6 +73,8 @@ public class Food implements Serializable {
         @JoinColumn(name = "order_id", referencedColumnName = "order_id")})
     @ManyToMany
     private Set<Orders> ordersSet;
+    
+    @JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     @ManyToOne(optional = false)
     private Category categoryId;
@@ -161,5 +172,19 @@ public class Food implements Serializable {
     public String toString() {
         return "com.nhom25.pojo.Food[ foodId=" + foodId + " ]";
     }
-    
+
+    /**
+     * @return the img
+     */
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    /**
+     * @param img the img to set
+     */
+    public void setImg(MultipartFile img) {
+        this.img = img;
+    }
+
 }

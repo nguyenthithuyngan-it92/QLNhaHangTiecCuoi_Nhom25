@@ -8,6 +8,26 @@ document.cookie = "promo_shown=1; Max-Age=2600000; Secure";
 var bar = document.querySelector('.bar');
 var subNav = document.querySelectorAll('.side-bar-nav ul li .link-wrapper');
 
+window.onload = () => {
+    let dateOfBirth = document.getElementById('dateOfBirthId');
+
+    if (dateOfBirth) {
+        const currentDate = new Date();
+        let year = currentDate.getFullYear() - 18;
+        let month = currentDate.getMonth() + 1;
+        let date = currentDate.getDate();
+
+        if (month < 10) {
+            month = `0${month}`;
+        }
+        if (date < 10) {
+            date = `0${date}`;
+        }
+
+        dateOfBirth.setAttribute('max', `${year}-${month}-${date}`);
+    }
+};
+
 if (bar) {
     bar.onclick = function () {
         document.querySelector('.side-bar').classList.toggle('hide');
