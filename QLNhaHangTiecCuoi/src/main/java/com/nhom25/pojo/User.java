@@ -6,6 +6,8 @@
 package com.nhom25.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,11 +27,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -63,12 +67,11 @@ public class User implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
-//    @Size(min = 1, max = 100, message = "{user.name.error.sizeMsg}")
+    @Size(min = 1, max = 100, message = "{user.name.error.sizeMsg}")
     @Column(name = "name")
     private String name;
     
-//    @Pattern(regexp = "\\d{12}", message = "{user.identityCard.error.invalidMsg}")
+    @Pattern(regexp = "\\d{12}", message = "{user.identityCard.error.invalidMsg}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 12)
@@ -77,16 +80,17 @@ public class User implements Serializable {
     
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     
-//    @Pattern(regexp = "\\d{11}", message = "{user.phone.error.invalidMsg}")
+    @Pattern(regexp = "\\d{10}", message = "{user.phone.error.invalidMsg}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "phone")
     private String phone;
     
-//    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "{user.email.error.invalidMsg}")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "{user.email.error.invalidMsg}")
     @Size(max = 100)
     @Column(name = "email")
     private String email;

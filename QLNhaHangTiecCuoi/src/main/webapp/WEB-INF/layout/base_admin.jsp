@@ -10,15 +10,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>
             <tiles:insertAttribute name="titleAdmin" />
         </title>
 
         <link href="<c:url value="/img/icon.jpg" />" rel="shorcut icon"/>
-
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +35,19 @@
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         
         <link href="<c:url value="/css/style_admin.css"/>" rel="stylesheet" />
     </head>
     <body>
         <tiles:insertAttribute name="headerAdmin" />
 
-        <div class="container">
+        <div class="main-content slide-left">
             <tiles:insertAttribute name="contentAdmin" />
         </div>
+        
         <script src="<c:url value="/js/admin.js"/>"></script>
     </body>
 </html>

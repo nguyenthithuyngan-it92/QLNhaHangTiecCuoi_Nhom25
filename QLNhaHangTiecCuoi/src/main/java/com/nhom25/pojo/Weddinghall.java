@@ -5,6 +5,7 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -19,10 +20,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -49,7 +53,7 @@ public class Weddinghall implements Serializable {
     private Integer weddinghallId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 100, message = "{hall.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     @Column(name = "active")
@@ -57,8 +61,11 @@ public class Weddinghall implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "max_table")
+    @Max(value = 1000, message = "{hall.maxTable.error}")
     private int maxTable;
+    
     @Column(name = "price")
+    @Max(value = 100000000, message = "{hall.maxPrices.error}")
     private Long price;
     @Lob
     @Size(max = 16777215)
@@ -67,6 +74,12 @@ public class Weddinghall implements Serializable {
     @Size(max = 200)
     @Column(name = "image")
     private String image;
+    
+    @JsonIgnore
+    @Transient
+    private MultipartFile img;
+    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddinghallId")
     private Set<Wedding> weddingSet;
 
@@ -171,6 +184,20 @@ public class Weddinghall implements Serializable {
     @Override
     public String toString() {
         return "com.nhom25.pojo.Weddinghall[ weddinghallId=" + weddinghallId + " ]";
+    }
+
+    /**
+     * @return the img
+     */
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    /**
+     * @param img the img to set
+     */
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
     
 }

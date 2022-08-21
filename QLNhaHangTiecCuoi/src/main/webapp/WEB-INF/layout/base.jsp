@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
             <tiles:insertAttribute name="title" />
         </title>
@@ -24,6 +25,7 @@
         
         
         <link href="<c:url value="/css/style.css"/>" rel="stylesheet" />
+        
         <style>
             .was-validated .form-control.is-invalid:valid {
                 background-image: url("<c:url value="/img/icons/invalid.svg" />");

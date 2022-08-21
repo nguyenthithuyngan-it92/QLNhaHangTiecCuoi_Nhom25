@@ -70,16 +70,40 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/admin.jsp" />
     </definition>
     
-    <definition name="foods" extends="baseAdminLayout">
+    <definition name="foodManagement" extends="baseAdminLayout">
         <put-attribute name="titleAdmin" value="Quản lý món ăn" />
         <put-attribute name="contentAdmin"
-                       value="/WEB-INF/jsp/foods.jsp" />
+                       value="/WEB-INF/jsp/food_management.jsp" />
     </definition>
     
     <definition name="statistical" extends="baseAdminLayout">
         <put-attribute name="titleAdmin" value="Thống kê" />
         <put-attribute name="contentAdmin"
                        value="/WEB-INF/jsp/statistical.jsp" />
+    </definition>
+    
+    <definition name="employeeManagement" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Quản lý nhân viên" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/employee_management.jsp" />
+    </definition>
+    
+    <definition name="weddingHallManagement" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Quản lý sảnh cưới" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/weddingHall_management.jsp" />
+    </definition>
+    
+    <definition name="weddingServicesManagement" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Quản lý dịch vụ" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/weddingServices_management.jsp" />
+    </definition>
+    
+    <definition name="weddingManagement" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Quản lý tiệc cưới" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/wedding_management.jsp" />
     </definition>
 
 </tiles-definitions>

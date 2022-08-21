@@ -85,7 +85,19 @@ public class UserRepositoryImpl implements  UserRepository {
 
     @Override
     public List<User> getUsers(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query.select(root);
+        
+        if(name != null){
+            Predicate p = builder.like(root.get("name").as(String.class), String.format("%%%s%%", name));
+            query = query.where(p); 
+        }
+        
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
     @Override
@@ -103,6 +115,20 @@ public class UserRepositoryImpl implements  UserRepository {
         
         Query q = session.createQuery(query);
         return (User) q.getSingleResult();
+    }
+
+    @Override
+    public boolean addEmployee(User emp) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        try {
+            session.saveOrUpdate(emp);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println("==Có lỗi xảy ra! Cập nhật thao tác thất bại==" + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
     }
     
 }

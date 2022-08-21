@@ -6,11 +6,12 @@
 package com.nhom25.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -47,8 +47,9 @@ public class Category implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    private Set<Food> foodSet;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "categoryId")
+    private List<Food> foods;
+//    private Set<Food> foodSet;
 
     public Category() {
     }
@@ -78,14 +79,14 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public Set<Food> getFoodSet() {
-        return foodSet;
-    }
-
-    public void setFoodSet(Set<Food> foodSet) {
-        this.foodSet = foodSet;
-    }
+//    @XmlTransient
+//    public Set<Food> getFoodSet() {
+//        return foodSet;
+//    }
+//
+//    public void setFoodSet(Set<Food> foodSet) {
+//        this.foodSet = foodSet;
+//    }
 
     @Override
     public int hashCode() {
@@ -110,6 +111,20 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "com.nhom25.pojo.Category[ categoryId=" + categoryId + " ]";
+    }
+
+    /**
+     * @return the foods
+     */
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    /**
+     * @param foods the foods to set
+     */
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
     
 }

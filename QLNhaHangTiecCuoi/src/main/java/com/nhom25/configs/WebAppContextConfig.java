@@ -5,6 +5,10 @@
  */
 package com.nhom25.configs;
 
+import com.nhom25.formatters.CategoryFormatter;
+import com.nhom25.formatters.WeddingFormatter;
+import com.nhom25.formatters.WeddingHallFormatter;
+import com.nhom25.formatters.WeddingServicesFormatter;
 import com.nhom25.validator.PassValidator;
 import com.nhom25.validator.WebAppValidator;
 import java.util.HashSet;
@@ -14,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -37,7 +42,8 @@ import org.springframework.web.servlet.view.JstlView;
     "com.nhom25.repository",
     "com.nhom25.services",
     "com.nhom25.pojo",
-    "com.nhom25.validator"
+    "com.nhom25.validator",
+    "com.nhom25.formatters"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
 
@@ -90,6 +96,14 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public Validator getValidator() {
         return validator();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new CategoryFormatter());
+        registry.addFormatter(new WeddingHallFormatter());
+        registry.addFormatter(new WeddingServicesFormatter());
+        registry.addFormatter(new WeddingFormatter());
     }
 
     @Bean
