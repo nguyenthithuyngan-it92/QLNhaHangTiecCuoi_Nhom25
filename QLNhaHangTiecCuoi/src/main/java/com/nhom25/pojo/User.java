@@ -63,6 +63,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
+    @JsonIgnore
     private Integer userId;
     
     @Basic(optional = false)
@@ -76,11 +77,13 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 12)
     @Column(name = "identity_card")
+    @JsonIgnore
     private String identityCard;
     
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonIgnore
     private Date dateOfBirth;
     
     @Pattern(regexp = "\\d{10}", message = "{user.phone.error.invalidMsg}")
@@ -88,23 +91,28 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "phone")
+    @JsonIgnore
     private String phone;
     
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "{user.email.error.invalidMsg}")
     @Size(max = 100)
     @Column(name = "email")
+    @JsonIgnore
     private String email;
     
     @Size(max = 3)
     @Column(name = "sex")
+    @JsonIgnore
     private String sex;
     
     @Size(max = 50)
     @Column(name = "position")
+    @JsonIgnore
     private String position;
     
     @Size(max = 8)
     @Column(name = "user_role")
+    @JsonIgnore
     private String userRole;
     
     @JsonIgnore

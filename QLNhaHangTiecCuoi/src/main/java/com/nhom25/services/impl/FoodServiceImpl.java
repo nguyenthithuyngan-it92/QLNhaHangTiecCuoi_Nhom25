@@ -60,7 +60,4 @@ public class FoodServiceImpl implements FoodService{
     public boolean deleteFood(int id) {
         return this.foodRepository.deleteFood(id);
     }
-
-    
-    
 }
