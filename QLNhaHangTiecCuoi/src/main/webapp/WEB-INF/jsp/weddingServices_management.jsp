@@ -23,38 +23,28 @@
         <input type="text" placeholder="Nhập tên để tìm..." name="name">
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
-    <!--    <div class="result alert-danger">
-    <c:if test="${errMsg != null}">
-        <div class="form-group">
-            <span class="form-message-login error">
-        ${errMsg}
-    </span>
-</div>
-    </c:if>
-    <c:if test="${successMsg != null}">
-        <div class="form-group">
-            <span class="form-message-login success">
-        ${successMsg}
-    </span>
-</div>
-    </c:if>
-</div>-->
 </div>
 
-<c:if test="${errMsg != null}">
-    <div class="form-group">
-        <span class="form-message-login error">
-            ${errMsg}
-        </span>
-    </div>
-</c:if>
-<c:if test="${successMsg != null}">
-    <div class="form-group">
-        <span class="form-message-login success">
-            ${successMsg}
-        </span>
-    </div>
-</c:if>
+<div class="msg">
+    <c:choose>
+        <c:when test="${errMsg != null}">
+            <div class="form-group">
+                <span class="alert alert-danger">
+                    ${errMsg}
+                </span>
+            </div>
+        </c:when>
+        <c:when test="${successMsg != null}">
+            <div class="form-group">
+                <span class="alert alert-success">
+                    ${successMsg}
+                </span>
+            </div>
+        </c:when>
+    </c:choose>
+</div>
+
+<!--TABLE-->
 <div class="main-table">
     <div class="main-title">
         <h2 class="text-uppercase text-center text-info">DANH SÁCH DỊCH VỤ</h2>
@@ -63,6 +53,7 @@
         <table class="table">
             <thead class="table-success">
                 <tr class="text-uppercase text-center">
+                    <th class="id">Mã</th>
                     <th class="name">Tên dịch vụ</th>
                     <th>Giá</th>
                     <th>Mô tả</th>
@@ -74,24 +65,37 @@
             <tbody>
                 <c:forEach items="${wdservices}" var="services">
                     <tr>
-                        <td>${services.name}</td>
-                        <td><fmt:formatNumber type="number" maxFractionDigits="3" 
-                                          value="${services.price}" />  VNĐ
+                        <td>${services.weddingservicesId}</td>
+                        <td id="name${services.weddingservicesId}">${services.name}</td>
+                        <td id="price${services.weddingservicesId}">
+                            <fmt:formatNumber type="number" maxFractionDigits="3" 
+                                              value="${services.price}" />  VNĐ
                         </td>
-                        <td>${services.description}</td>
+                        <td id="description${services.weddingservicesId}">${services.description}</td>
 
                         <sec:authorize access="hasAuthority('ADMIN')">
                             <td class="d-flex">
-                                <a class="user-edit" href="javascript:;" onclick="">
+                                <a class="user-edit" href="javascript:;" 
+                                   onclick="getWdServiceInfo(${services.weddingservicesId})" 
+                                   data-bs-toggle="modal" data-bs-target="#myModal">
                                     <i class="fa-solid fa-pen-to-square text-primary"
                                        data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
                                 </a>
-                                <%--<c:if test="${user.orders.isEmpty()}">--%>
-                                <a class="user-delete" href="javascript:;" onclick="">
-                                    <i class="fa-solid fa-trash-can text-danger"
-                                       data-bs-toggle="tooltip" title="Xóa"></i>
-                                </a>
-                                <%--</c:if>--%>
+                                   
+                                <c:choose>
+                                    <c:when test="${services.weddingSet.isEmpty() || services.weddingSet == null}">
+                                        <a class="user-delete" href="javascript:;" onclick="deleteWdService(${services.weddingservicesId})">
+                                            <i class="fa-solid fa-trash-can text-danger"
+                                               data-bs-toggle="tooltip" title="Xóa"></i>
+                                        </a>
+                                    </c:when>
+                                    <c:when test="${!services.weddingSet.isEmpty() || services.weddingSet != null}">
+                                        <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
+                                            <i class="fa-solid fa-trash-can text-danger" 
+                                               data-bs-toggle="tooltip" title="Không thể xóa!"></i>
+                                        </a>
+                                    </c:when>
+                                </c:choose>
                             </td>
                         </sec:authorize>
                     </tr>
@@ -100,8 +104,6 @@
         </table>
     </div>
 </div>
-
-
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -112,7 +114,7 @@
                        method="post" enctype="multipart/form-data">
                 <!--Modal Header--> 
                 <div class="modal-header">
-                    <h2 class="modal-title text-primary">
+                    <h2 class="modal-title text-primary" id="title">
                         <i class="fa-solid fa-circle-plus"></i>
                         Thêm dịch vụ
                     </h2>
@@ -125,87 +127,48 @@
                     <%--<form:errors path="*" cssClass="alert alert-danger" element="div" />--%>
 
                     <div class="form-group">
-                        <label for="name">
+                        <label for="inputName">
                             <spring:message code="service.name" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:input name="name" path="name" id="name" 
+                        <form:input name="name" path="name" id="inputName" 
                                     cssClass="form-control" placeholder="Nhập tên dịch vụ..."/>
                         <%--<form:errors path="name" cssClass="text-danger" />--%>
                     </div>
 
                     <div class="form-group">
-                        <label for="price">
+                        <label for="inputPrice">
                             <spring:message code="service.price" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:input name="price" type="number" path="price" id="price" 
+                        <form:input name="price" type="number" path="price" id="inputPrice" 
                                     cssClass="form-control" placeholder="Nhập giá dịch vụ..."/>
                         <%--<form:errors path="identityCard" cssClass="text-danger" />--%>
                     </div>
 
                     <div class="form-group">
-                        <label for="description">
+                        <label for="inputDescription">
                             <spring:message code="service.description" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:textarea name="description" path="description" id="description" 
+                        <form:textarea name="description" path="description" id="inputDescription" 
                                        cssClass="form-control" placeholder="Nhập mô tả..."/>
                         <%--<form:errors path="dateOfBirth" cssClass="text-danger" />--%>
                     </div>
+                    <form:input path="weddingservicesId" name="weddingservicesId" hidden="true" id="inputWdServicesId" value="0" />
                 </div>
 
                 <!--Modal footer--> 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Thêm</button>
-                    <button class="btn btn-success" type="button" disabled>
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Đang thêm...
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" id="button" class="btn btn-success">Thêm</button>
+                    
+                    <button type="reset" onclick="setButtonService()" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </form:form>
         </div>
     </div>
 </div>
 
-<!-- The Modal-->
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!--Modal Header--> 
-            <div class="modal-header">
-                <h4 class="modal-title">Thông báo</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!--Modal body--> 
-            <div class="modal-body">
-                <c:if test="${errMsg != null}">
-                    <div class="form-group">
-                        <span class="form-message-login error">
-                            ${errMsg}
-                        </span>
-                    </div>
-                </c:if>
-                <c:if test="${successMsg != null}">
-                    <div class="form-group">
-                        <span class="form-message-login success">
-                            ${successMsg}
-                        </span>
-                    </div>
-                </c:if>
-            </div>
-
-            <!--Modal footer--> 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -213,3 +176,5 @@
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 </script>
+
+<script src="<c:url value="/js/management.js"/>"></script>

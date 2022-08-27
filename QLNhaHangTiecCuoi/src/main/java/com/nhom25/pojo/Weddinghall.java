@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,26 +52,33 @@ public class Weddinghall implements Serializable {
     @Basic(optional = false)
     @Column(name = "weddinghall_id")
     private Integer weddinghallId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100, message = "{hall.name.sizeMsg}")
     @Column(name = "name")
     private String name;
+    
     @Column(name = "active")
     private Boolean active;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "max_table")
-    @Max(value = 1000, message = "{hall.maxTable.error}")
+    @Min(value = 5, message = "{hall.maxTable.minError}")
+    @Max(value = 100, message = "{hall.maxTable.maxError}")
     private int maxTable;
     
     @Column(name = "price")
-    @Max(value = 100000000, message = "{hall.maxPrices.error}")
+    @Min(value = 1000000, message = "{hall.prices.minError}")
+    @Max(value = 100000000, message = "{hall.prices.maxError}")
     private Long price;
+    
     @Lob
     @Size(max = 16777215)
     @Column(name = "description")
     private String description;
+    
     @Size(max = 200)
     @Column(name = "image")
     private String image;
@@ -80,7 +88,7 @@ public class Weddinghall implements Serializable {
     private MultipartFile img;
     
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddinghallId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "weddinghallId")
     private Set<Wedding> weddingSet;
 
     public Weddinghall() {

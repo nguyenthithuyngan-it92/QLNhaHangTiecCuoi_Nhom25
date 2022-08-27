@@ -16,4 +16,5 @@ public interface WeddingServicesService {
     List<Weddingservices> getWeddingServices(String name);
     Weddingservices getWeddingServiceById(int id);
     boolean addOrUpdateWeddingService(Weddingservices ws);
+    boolean deleteWdService(int weddingservicesId);
 }

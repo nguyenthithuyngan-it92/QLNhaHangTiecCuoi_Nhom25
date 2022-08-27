@@ -19,13 +19,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -55,31 +52,27 @@ public class Wedding implements Serializable {
     @Column(name = "coefficient")
     private Float coefficient;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddingId")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddingId", fetch = FetchType.EAGER)
     private Set<Feedback> feedbackSet;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddingId")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "weddingId", fetch = FetchType.EAGER)
     private Set<Orders> ordersSet;
     
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "weddinghall_id", nullable = false)
-//    private Weddinghall weddinghallId;
     
-    @JoinColumn(name = "weddinghall_id", referencedColumnName = "weddinghall_id")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "weddinghall_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     @NotNull(message="{wedding.wdhall.notNullMsg}")
     private Weddinghall weddinghallId;
     
-    @JoinColumn(name = "weddingservices_id", referencedColumnName = "weddingservices_id")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "weddingservices_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     @NotNull(message="{wedding.wdservices.notNullMsg}")
     private Weddingservices weddingservicesId;
     
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "weddingservices_id", nullable = false)
-//    private Weddingservices weddingservicesId;
 
     public Wedding() {
     }

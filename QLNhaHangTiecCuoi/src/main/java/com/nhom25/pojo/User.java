@@ -6,11 +6,7 @@
 package com.nhom25.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -27,7 +23,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -63,7 +58,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
-    @JsonIgnore
+//    @JsonIgnore
     private Integer userId;
     
     @Basic(optional = false)
@@ -72,9 +67,9 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
     
-    @Pattern(regexp = "\\d{12}", message = "{user.identityCard.error.invalidMsg}")
+//    @Pattern(regexp = "\\d{12}", message = "{user.identityCard.error.invalidMsg}")
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{user.identityCard.notNullMsg}")
     @Size(min = 1, max = 12)
     @Column(name = "identity_card")
     @JsonIgnore
@@ -86,9 +81,9 @@ public class User implements Serializable {
     @JsonIgnore
     private Date dateOfBirth;
     
-    @Pattern(regexp = "\\d{10}", message = "{user.phone.error.invalidMsg}")
+//    @Pattern(regexp = "\\d{10}", message = "{user.phone.error.invalidMsg}")
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{user.phone.notNullMsg}")
     @Size(min = 1, max = 11)
     @Column(name = "phone")
     @JsonIgnore

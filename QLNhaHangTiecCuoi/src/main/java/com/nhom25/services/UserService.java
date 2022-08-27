@@ -23,5 +23,8 @@ public interface UserService extends UserDetailsService {
     Account addAccount(Account acnt);
     List<Account> getAccounts(String username);
     
+    //Management
     boolean addEmployee(User emp);
+    Account getAccountById(int id);
+    boolean addAccountEmp(Account accEmp);
 }

@@ -74,7 +74,11 @@ public class FoodRepositoryImpl implements FoodRepository{
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try {
-            session.saveOrUpdate(f);
+            if(f.getFoodId() == 0){
+                session.save(f);
+            } else {
+                session.update(f);
+            }
             return true;
         } catch (HibernateException e) {
             System.err.println("==Có lỗi xảy ra! Cập nhật thao tác thất bại==" + e.getMessage());
@@ -84,14 +88,14 @@ public class FoodRepositoryImpl implements FoodRepository{
     }
 
     @Override
-    public boolean deleteFood(int id) {
+    public boolean deleteFood(int foodId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
 
         try {
-            Food f = session.get(Food.class, id);
+            Food f = session.get(Food.class, foodId);
             session.delete(f);
             return true;
-        } catch (Exception ex) {
+        } catch (HibernateException ex) {
             ex.printStackTrace();
             return false;
         }

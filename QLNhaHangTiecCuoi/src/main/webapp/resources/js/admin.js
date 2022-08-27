@@ -26,6 +26,23 @@ window.onload = () => {
 
         dateOfBirth.setAttribute('max', `${year}-${month}-${date}`);
     }
+    
+    let createdDate = document.getElementById('createdDate');
+    if (createdDate) {
+        const currentDate = new Date();
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        let date = currentDate.getDate();
+
+        if (month < 10) {
+            month = `0${month}`;
+        }
+        if (date < 10) {
+            date = `0${date}`;
+        }
+
+        createdDate.setAttribute('max', `${year}-${month}-${date}`);
+    }
 };
 
 if (bar) {

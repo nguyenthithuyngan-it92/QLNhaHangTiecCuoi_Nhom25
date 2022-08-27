@@ -59,12 +59,31 @@ public class WeddingHallRepositoryImpl implements WeddingHallRepository{
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try {
-            session.saveOrUpdate(weddinghall);
+            if(weddinghall.getWeddinghallId() == 0){
+                session.save(weddinghall);
+            } else {
+                session.update(weddinghall);
+            }
             return true;
         } catch (HibernateException e) {
             System.err.println("==Có lỗi xảy ra! Cập nhật thao tác thất bại==" + e.getMessage());
             e.printStackTrace();
         }
+        return false;
+    }
+
+    @Override
+    public boolean deleteWdHall(int weddinghallId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Weddinghall wh = session.get(Weddinghall.class, weddinghallId);
+            session.delete(wh);
+            
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        
         return false;
     }
     

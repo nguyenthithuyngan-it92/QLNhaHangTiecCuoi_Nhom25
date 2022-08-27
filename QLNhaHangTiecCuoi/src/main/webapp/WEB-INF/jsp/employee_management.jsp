@@ -24,6 +24,27 @@
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
 </div>
+
+<div class="msg">
+    <c:choose>
+        <c:when test="${errMsg != null}">
+            <div class="form-group">
+                <span class="alert alert-danger">
+                    ${errMsg}
+                </span>
+            </div>
+        </c:when>
+        <c:when test="${successMsg != null}">
+            <div class="form-group">
+                <span class="alert alert-success">
+                    ${successMsg}
+                </span>
+            </div>
+        </c:when>
+    </c:choose>
+</div>
+
+<!--TABLE-->
 <div class="main-table">
     <div class="main-title">
         <h2 class="text-uppercase text-center text-info">DANH SÁCH NHÂN VIÊN</h2>
@@ -42,9 +63,9 @@
                     <th>Chức vụ</th>
                     <th>Vai trò</th>
                     <th>Trạng thái</th>
-                        <sec:authorize access="hasAuthority('ADMIN')">
+                    <sec:authorize access="hasAuthority('ADMIN')">
                         <th>Hành động</th>
-                        </sec:authorize>
+                    </sec:authorize>
                 </tr>
             </thead>
             <tbody>
@@ -86,7 +107,9 @@
                             <sec:authorize access="hasAuthority('ADMIN')">
                                 <td class="d-flex">
                                     <c:if test="${user.account.userId != user.userId}">
-                                        <a class="user-edit" href="javascript:;" onclick="">
+                                        <a class="user-edit" href="javascript:;" 
+                                           onclick="getUserId(${user.userId})" 
+                                           data-bs-toggle="modal" data-bs-target="#myModalAccount">
                                             <i class="fa-solid fa-user-check text-success" 
                                                data-bs-toggle="tooltip" title="Tạo tài khoản"></i>
                                         </a>
@@ -112,7 +135,7 @@
     </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal THÊM NHÂN VIÊN -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content employee">
@@ -201,7 +224,7 @@
                             </label>
                             <form:input path="position" id="positionId" 
                                         cssClass="form-control" placeholder="Nhập chức vụ..."/>
-                            <form:errors path="position" cssClass="text-danger" />
+                            <%--<form:errors path="position" cssClass="text-danger" />--%>
                         </div>
 
                         <div class="form-group select">
@@ -222,13 +245,83 @@
                 <!--Modal footer--> 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Thêm</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                    <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </form:form>
         </div>
     </div>
 </div>
 
+<!-- The Modal TẠO TÀI KHOẢN-->
+<div class="modal" id="myModalAccount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <c:url value="/admin/employee-management" var="actionAccount" />
+            <form:form action="${actionAccount}" modelAttribute="accountEmp" 
+                       method="post" enctype="multipart/form-data">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title text-primary">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Thêm tài khoản
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+
+
+                <!-- Modal body -->
+                <div class="modal-body wedding">
+                    <div class="form-group">
+                        <label for="userId">Mã</label>
+                        <form:input id="userId" path="userId" readonly="true" cssClass="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">
+                            <spring:message code="user.username" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="username" name="username" id="username" 
+                                    cssClass="form-control" placeholder="Nhập tên tài khoản..."/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <spring:message code="user.password" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="password" type="password" name="password" id="password" 
+                                    cssClass="form-control" placeholder="Nhập mật khẩu..."/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <spring:message code="user.confirmPassword" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="confirmPassword" name="confirmPassword" type="password"
+                                    id="confirmPassword" cssClass="form-control" 
+                                    placeholder="Nhập mật khẩu xác nhận..."
+                                    data-bs-toggle="tooltip" data-bs-placement="right" title="Bạn phải nhập mật khẩu xác nhận!"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="avt">
+                            <spring:message code="user.avatar" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="avt" class="form-control" type="file" id="upload_avatar"/>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" style="width: 150px;">Tạo tài khoản</button>
+                    <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form:form>
+        </div>
+    </div>
+</div>
 
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -236,3 +329,5 @@
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 </script>
+
+<script src="<c:url value="/js/management.js"/>"></script>
