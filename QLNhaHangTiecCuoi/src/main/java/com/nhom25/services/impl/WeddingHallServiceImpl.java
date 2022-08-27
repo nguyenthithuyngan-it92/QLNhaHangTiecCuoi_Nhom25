@@ -55,5 +55,10 @@ public class WeddingHallServiceImpl implements WeddingHallService{
 
         return false;
     }
+
+    @Override
+    public boolean deleteWdHall(int weddinghallId) {
+        return this.weddingHallRepository.deleteWdHall(weddinghallId);
+    }
     
 }

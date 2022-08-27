@@ -54,7 +54,7 @@ thead tr {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
- /*--------- side bar -----------*/ 
+/*--------- side bar -----------*/ 
 .side-bar {
     position: fixed;
 
@@ -239,7 +239,7 @@ thead tr {
     margin-left: 15px;
 }
 
- /*----------------- header start -------------------*/ 
+/*----------------- header start -------------------*/ 
 header {
     min-height: 80px;
     margin-left: 300px;
@@ -355,7 +355,7 @@ header .head_inner .left-part ul li.have_dots span::before {
     border-radius: 50%;
 }
 
- /*-------------- Hide side bar ----------------*/ 
+/*-------------- Hide side bar ----------------*/ 
 .side-bar.hide {
     width: 100px;
     overflow: hidden;
@@ -395,7 +395,7 @@ header, .main-content {
 
 .main-content .main-table .main-title {
     margin: 35px 0 0;
-    
+
 }
 
 .main-content .main-table .main-title h2 {
@@ -410,19 +410,22 @@ header, .main-content {
 }
 
 .main-table .user-table .table .table-primary .text-center th,
-.main-table .user-table .table .table-success .text-center th{
+.main-table .user-table .table .table-success .text-center th,
+.main-table .user-table .table .table-warning .text-center th{
     padding: 12px 10px;
     min-width: 130px;
     font-size: 1.4em;
     font-weight: bold;
     margin-bottom: auto;
     text-align: center;
+    vertical-align: middle;
 }
 
 .main-table .user-table .table .table-primary .text-center .name,
 .main-table .user-table .table .table-success .text-center .name{
-    min-width: 200px;
+    min-width: 165px;
 }
+
 .main-table .user-table .table tbody tr .d-flex a{
     margin: auto;
 }
@@ -432,13 +435,10 @@ header, .main-content {
     font-size: 1.5rem;
     cursor: pointer;
     text-align: center;
+    vertical-align: middle;
 }
-
-.main-table .user-table .table tbody tr .d-flex {
-    padding: 0;
-    font-size: 5px;
-    cursor: pointer;
-    text-align: center;
+.main-table .user-table .table tbody tr td a{
+    vertical-align: middle;
 }
 
 header, .main-content {
@@ -452,7 +452,7 @@ header, .main-content {
     }
 }
 
- /*Tablet*/ 
+/*Tablet*/ 
 @media screen and (max-width: 992px) {
     .side-bar {
         left: -300px;
@@ -485,7 +485,7 @@ header, .main-content {
     .main-content .main-table .user-table .table {
         width: 180%;
     }
-    
+
     .main-table .user-table table tbody tr td {
         padding-right: 10px;
     }
@@ -497,10 +497,15 @@ header, .main-content {
 }
 
 @media screen and (max-width: 767px) {
-    
+
     .search form {
         width: 200px;
         height: 40px;
+    }
+
+    .searchPay .form-search.d-flex {
+        width: 800px;
+        height: 80px;
     }
 
     .main-content .main-table .user-table {
@@ -522,7 +527,12 @@ header, .main-content {
         height: 40px;
     }
 
-    .search,
+    .searchPay .form-search.d-flex {
+        width: 100%;
+        height: 80px;
+    }
+
+    .search, .searchPay
     header .head_inner .left-part {
         width: 100%;
         margin: 15px;
@@ -536,7 +546,7 @@ header, .main-content {
         margin-left: 0;
     }
 
-   .main-content{
+    .main-content{
         width: 100%;
     }
 }
@@ -591,6 +601,66 @@ header, .main-content {
 
 .main-content .search .btnModal:hover {
     opacity: 0.8;
+}
+
+/*WEDDING-MANAGEMENT*/ 
+.main-table .user-table .table .table-success .text-center .id{
+    min-width: 5px !important;
+}
+.main-table .user-table .table .table-success .text-center .description{
+    min-width: 200px !important;
+}
+
+.main-table .user-table .table .table-wedding tr td{
+    margin-bottom: auto !important;
+    margin-top: auto !important;
+}
+
+/*WEDDINGSERVICES-MANAGEMENT*/ 
+.user-delete.disabled{
+    opacity: 0.4;
+}
+
+.main-table .user-table .table .table-success .text-center .min{
+    min-width: 80px;
+}
+
+.wedding .form-check.disabled{
+    opacity: 0.5 !important;
+    color: #ccc !important;
+}
+
+/*FOOD-MANAGEMENT*/ 
+.user-table {
+    max-height: 425px !important;
+    overflow-y: auto;
+}
+
+.imageMana {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 150px;
+    display: inline-block;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgb(192, 192, 192);
+}
+
+.main-table .user-table .table .food tr td {
+    vertical-align: middle;
+}
+
+.main-table .user-table .table .food tr .d-flex {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    font-size: 5px;
+    cursor: pointer;
+    text-align: center;  
+}
+
+.main-table .user-table.food .table .table-success.food .text-center .description{
+    min-width: 175px !important;
 }
 
 /*MODAL*/
@@ -699,7 +769,7 @@ header, .main-content {
 }
 
 .accordion-item .accordion-item-custom {
-  padding: 10px 0px 10px 30px;  
+    padding: 10px 0px 10px 30px;  
 }
 
 .accordion-item .accordion-item-custom:hover a span, 
@@ -729,4 +799,83 @@ header, .main-content {
     font-weight: bold;
     font-style: italic;
     text-align: center;
+}
+
+/*PAY*/
+.searchPay {
+    height: 80px;
+}
+
+.searchPay .form-search.d-flex{
+    position: relative;
+    width: 800px;
+    height: 45px;
+    margin-left: auto;
+}
+
+.searchPay .form-search.d-flex div{
+    width: 310px;
+}
+
+.searchPay .form-search.d-flex label{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.searchPay .form-search.d-flex .date{
+    width: 300px;
+    height: 100%;
+    padding: 10px 15px;
+    border: none;
+    margin-bottom: 10px;
+
+    font-size: 1.4rem;
+    box-shadow: 0 0 8px rgb(223, 223, 223);
+}
+
+.searchPay .form-search.d-flex button {
+    margin-top: 30px;
+    width: 50px;
+    height: 100%;
+    padding-top: 5px;
+    border: none;
+
+    font-size: 2em;
+    text-align: center;
+
+    color: #fff;
+    background-color: var(--secondary-color);
+
+    cursor: pointer;
+}
+
+.main-table .user-table .table.orders .table-success .text-center .min,
+.main-table .user-table .table.orders .table-warning .text-center .min{
+    min-width: 50px !important;
+}
+
+.main-table .user-table .table.orders .table-warning .text-center .name {
+    min-width: 165px;
+}
+
+.button-pay {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    width: 150px !important;
+    padding: 10px;
+    height: 10px;
+}
+
+.button-pay:hover{
+    opacity: 0.6;
+    color: #fff;
+}
+
+.msg .form-group .alert {
+    font-size: 15px;
+    width: 50%;
+    font-weight: bold;
+    font-style: italic;
 }

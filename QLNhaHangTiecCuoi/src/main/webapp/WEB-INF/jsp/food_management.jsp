@@ -23,46 +23,95 @@
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
 </div>
+
+<div class="msg">
+    <c:choose>
+        <c:when test="${errMsg != null}">
+            <div class="form-group">
+                <span class="alert alert-danger">
+                    ${errMsg}
+                </span>
+            </div>
+        </c:when>
+        <c:when test="${successMsg != null}">
+            <div class="form-group">
+                <span class="alert alert-success">
+                    ${successMsg}
+                </span>
+            </div>
+        </c:when>
+    </c:choose>
+</div>
+
+<!--TABLE-->
 <div class="main-table">
     <div class="main-title">
         <h2 class="text-uppercase text-center text-info">DANH SÁCH MÓN ĂN</h2>
     </div>
-    <div class="user-table">
-<!--        <div class="spinner-grow text-danger" id="myLoading"></div>-->
+    <div class="user-table food">
+        <!--        <div class="spinner-grow text-danger" id="myLoading"></div>-->
         <table class="table">
-            <thead class="table-success">
+            <thead class="table-success food">
                 <tr class="text-uppercase text-center">
+                    <th class="id">Mã</th>
+                    <th>Ảnh</th>
                     <th class="name">Tên món ăn</th>
-                    <th>Danh mục món</th>
+                    <th hidden="true">Mã danh mục</th>
+                    <th class="name">Danh mục món</th>
                     <th>Giá</th>
-                    <th>Mô tả</th>
-                    <sec:authorize access="hasAuthority('ADMIN')">
+                    <th class="description">Mô tả</th>
+                    
+                        <sec:authorize access="hasAuthority('ADMIN')">
                         <th>Hành động</th>
-                    </sec:authorize>
+                        </sec:authorize>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="food">
                 <c:forEach items="${foods}" var="food">
                     <tr>
-                        <td>${food.name}</td>
+                        <td>${food.foodId}</td>
+                        
+                         <td id="image${food.foodId}">
+                             <img src="${food.image}" alt="${food.name}" class="imageMana"/>
+                         </td>
+                         
+                        <td id="name${food.foodId}">${food.name}</td>
+
+                        <td id="cate${food.foodId}" hidden="true">${food.categoryId.categoryId}</td>
                         <td>${food.categoryId.name}</td>
-                        <td><fmt:formatNumber type="number" maxFractionDigits="3" 
-                              value="${food.price}" />  VNĐ
+
+                        <td id="price${food.foodId}">
+                            <fmt:formatNumber type="number" maxFractionDigits="3" 
+                                              value="${food.price}" />  VNĐ
                         </td>
-                        <td>${food.description}</td>
+                        <td id="description${food.foodId}">${food.description}</td>
 
                         <sec:authorize access="hasAuthority('ADMIN')">
-                            <td class="d-flex">
-                                <a class="user-edit" href="javascript:;" onclick="">
+                            <td class="d-flex" style="padding-top: 50px; padding-bottom: 50px;">
+                                <a class="user-edit" href="javascript:;" 
+                                   onclick="getFoodInfo(${food.foodId})" 
+                                   data-bs-toggle="modal" data-bs-target="#myModal">
                                     <i class="fa-solid fa-pen-to-square text-primary" 
                                        data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
                                 </a>
-                                
-                                <a class="user-delete" href="javascript:;" onclick="deleteFood(${food.foodId})">
-                                    <i class="fa-solid fa-trash-can text-danger"
-                                       data-bs-toggle="tooltip" title="Xóa"></i>
-                                </a>
-                                <%--</c:if>--%>
+
+                                <!--XÓA-->
+                                <c:choose>
+                                    <c:when test="${food.ordersSet.isEmpty() || food.ordersSet == null}">
+                                        <a class="user-delete" href="javascript:;" 
+                                           onclick="deleteFood(${food.foodId})">
+                                            <i class="fa-solid fa-trash-can text-danger"
+                                               data-bs-toggle="tooltip" title="Xóa"></i>
+                                        </a>
+                                    </c:when>
+                                    <c:when test="${!food.ordersSet.isEmpty() || food.ordersSet != null}">
+                                        <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
+                                            <i class="fa-solid fa-trash-can text-danger"
+                                               data-bs-toggle="tooltip" title="Không thể xóa!"></i>
+                                        </a>
+                                    </c:when>
+                                </c:choose>
+
                             </td>
                         </sec:authorize>
                     </tr>
@@ -71,7 +120,7 @@
         </table>
     </div>
 </div>
-        
+
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -81,9 +130,9 @@
                        method="post" enctype="multipart/form-data">
                 <!--Modal Header--> 
                 <div class="modal-header">
-                    <h2 class="modal-title text-primary">
+                    <h2 class="modal-title text-primary" value="Thêm món ăn" id="title" >
                         <i class="fa-solid fa-circle-plus"></i>
-                            Thêm món ăn
+                        Thêm món ăn
                     </h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -91,70 +140,72 @@
                 <!--Modal body--> 
                 <div class="modal-body wedding">
 
-                    <%--<form:errors path="*" cssClass="alert alert-danger" element="div" />--%>
+                    <form:errors path="*" cssClass="alert alert-danger" element="div" />
 
                     <div class="form-group">
-                        <label for="name">
+                        <label for="inputName">
                             <spring:message code="food.name" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:input name="name" path="name" id="name" 
+                        <form:input name="name" path="name" id="inputName" 
                                     cssClass="form-control" placeholder="Nhập tên món ăn..."/>
                         <%--<form:errors path="name" cssClass="text-danger" />--%>
                     </div>
-                    
+
                     <div class="form-group select">
-                        <label for="sel2" class="form-label">
+                        <label for="inputCate" class="form-label">
                             <spring:message code="food.cate" />
                         </label>
                         <div class="selected">
-                            <form:select path="categoryId" class="form-select">
+                            <form:select path="categoryId" id="inputCate" cssClass="form-select">
                                 <c:forEach items="${categories}" var="c">
-                                    <option value="${c.categoryId}">${c.name}</option>
+                                    <option id="categories${c.categoryId}" value="${c.categoryId}">${c.name}</option>
                                 </c:forEach>
                             </form:select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="price">
+                        <label for="inputPrice">
                             <spring:message code="food.price" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:input name="price" type="number" path="price" id="price" 
+                        <form:input name="price" type="number" path="price" id="inputPrice" 
                                     cssClass="form-control" placeholder="Nhập giá..."/>
                         <%--<form:errors path="identityCard" cssClass="text-danger" />--%>
                     </div>
 
                     <div class="form-group">
-                        <label for="description">
+                        <label for="inputDescription">
                             <spring:message code="food.description" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:textarea name="description" path="description" id="description" 
+                        <form:textarea name="description" path="description" id="inputDescription" 
                                        cssClass="form-control" placeholder="Nhập mô tả..."/>
                         <%--<form:errors path="dateOfBirth" cssClass="text-danger" />--%>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label for="img">
+                        <label for="inputImage">
                             <spring:message code="food.img" />
                             <span class="text-danger">(*)</span>
                         </label>
-                        <form:input name="img" path="img" cssClass="form-control" type="file" id="img" />
+                        <form:input name="img" path="img" cssClass="form-control" type="file" id="inputImage" />
                     </div>
-                    
+
+                    <form:input path="foodId" name="foodId" id="inputFoodId" hidden="true" value="0" />
                 </div>
 
                 <!--Modal footer--> 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Thêm</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" id="button" class="btn btn-success">Thêm</button>
+                    <button type="reset" onclick="setButtonFood()" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </form:form>
         </div>
     </div>
 </div>
+
 
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -164,9 +215,3 @@
 </script>
 
 <script src="<c:url value="/js/management.js" />"></script>
-<!--<script>
-    <c:url value="/api/admin/food-management" var="endpoint" />
-    window.onload = function () {
-        loadAdminProducts('${endpoint}');
-    };
-</script>-->

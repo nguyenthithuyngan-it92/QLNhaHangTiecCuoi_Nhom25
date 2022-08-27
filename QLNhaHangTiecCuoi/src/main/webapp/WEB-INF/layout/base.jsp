@@ -41,7 +41,7 @@
         
         <tiles:insertAttribute name="footer" />
         
-        <script src="<c:url value="/js/main.js"/>"></script>
+<!--        <script src="<c:url value="/js/main.js"/>"></script>-->
         <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
     </body>
 </html>

@@ -62,7 +62,7 @@ public class Weddingservices implements Serializable {
     private String description;
     
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "weddingservicesId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "weddingservicesId")
     private Set<Wedding> weddingSet;
 
     public Weddingservices() {

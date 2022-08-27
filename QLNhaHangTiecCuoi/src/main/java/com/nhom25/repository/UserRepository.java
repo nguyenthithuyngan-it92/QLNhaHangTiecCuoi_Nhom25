@@ -21,5 +21,8 @@ public interface UserRepository {
     List<Account> getAccounts(String username);
     List<User> getUsers(String name);
     
+    //Management
     boolean addEmployee(User emp);
+    Account getAccountById(int id);
+    boolean addAccountEmp(Account accEmp);
 }

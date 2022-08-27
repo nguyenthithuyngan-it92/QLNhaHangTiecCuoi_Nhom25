@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +24,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,13 +52,18 @@ public class Food implements Serializable {
     @Basic(optional = false)
     @Column(name = "food_id")
     private Integer foodId;
+    
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message="{food.name.notNullMsg}")
     @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
+    
+    @NotNull(message="{food.price.notNullMsg}")
+    @Min(value = 100000, message = "{food.price.minError}")
     @Column(name = "price")
     private Long price;
+    
     @Size(max = 255)
     @Column(name = "image")
     private String image;
@@ -68,15 +75,17 @@ public class Food implements Serializable {
     @Size(max = 16777215)
     @Column(name = "description")
     private String description;
+    
     @JoinTable(name = "orderdetails", joinColumns = {
         @JoinColumn(name = "food_id", referencedColumnName = "food_id")}, inverseJoinColumns = {
         @JoinColumn(name = "order_id", referencedColumnName = "order_id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Orders> ordersSet;
     
     @JsonIgnore
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull(message="{food.cate.notNullMsg}")
     private Category categoryId;
 
     public Food() {

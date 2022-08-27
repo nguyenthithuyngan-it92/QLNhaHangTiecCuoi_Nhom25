@@ -5,8 +5,9 @@
  */
 package com.nhom25.controllers;
 
+import com.nhom25.pojo.Account;
 import com.nhom25.pojo.User;
-import com.nhom25.services.CategoryService;
+import com.nhom25.services.OrdersService;
 import com.nhom25.services.UserService;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,15 +33,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ControllerAdvice
 @RequestMapping("/admin")
 public class AdminController {
-    
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private OrdersService ordersService;
    
     
     @GetMapping("/")
     public String admin(Model model, @RequestParam(required = false) Map<String, String> params, HttpSession session){
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
         
+        //Danh sách khách hàng
         String name = params.getOrDefault("name", null);
         model.addAttribute("user", this.userService.getUsers(name));
         
@@ -47,25 +52,31 @@ public class AdminController {
     }
     
     @GetMapping("/employee-management")
-    public String listEmployee(Model model, @RequestParam(required = false) Map<String, String> params){
+    public String listEmployee(Model model, ModelMap map, @RequestParam(required = false) Map<String, String> params){
+        //Danh sách nhân viên
         String name = params.getOrDefault("name", null);
         model.addAttribute("users", this.userService.getUsers(name));
         
-        model.addAttribute("emp", new User());
+        User user = new User();
+        Account act = new Account();
+        
+        map.addAttribute("emp", user);
+        map.addAttribute("accountEmp", act);
         
         return "employeeManagement";
     }
     
 //THÊM NHÂN VIÊN
     @PostMapping("/employee-management")
-    public String addEmployee(Model model, @ModelAttribute(value = "emp") @Valid User emp,
-                                            BindingResult result) {
-        //Thêm tiệc cưới
+    public String addEmployee(Model model, @ModelAttribute(value = "emp") @Valid User emp, BindingResult resultUser,
+                                            @ModelAttribute(value = "accountEmp") @Valid Account accEmp,
+                                            BindingResult resultAccount) {
+        //Thêm nhân viên
         String errMsg = "";
         String successMsg = "";
-        if (!result.hasErrors()) {
+        if (!resultUser.hasErrors()) {
             if (this.userService.addEmployee(emp) == true) {
-                successMsg = "Thêm thành công!";
+                successMsg = "Thêm nhân viên thành công!";
                 model.addAttribute("successMsg", successMsg);
 
                 return "redirect:/admin/employee-management";
@@ -76,7 +87,28 @@ public class AdminController {
             errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
         }
         model.addAttribute("errMsg", errMsg);
-
+        
+        //Tạo tài khoản nhân viên
+        if (!resultAccount.hasErrors()) {
+            if (this.userService.addAccountEmp(accEmp) == true) {
+                successMsg = "Tạo tài khoản thành công!";
+                model.addAttribute("successMsg", successMsg);
+                return "redirect:/admin/employee-management";
+            } else {
+                errMsg = "Đã có lỗi xảy ra khi thêm!!!";
+            }
+        } else {
+            errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
+        }
+        model.addAttribute("errMsg", errMsg);
+        
         return "employeeManagement";
+    }
+    
+    @GetMapping("/pay")
+    public String listOrders(Model model, @RequestParam(required = false) Map<String, String> params){
+        model.addAttribute("orders", this.ordersService.getListOrders(params));
+
+        return "pay";
     }
 }

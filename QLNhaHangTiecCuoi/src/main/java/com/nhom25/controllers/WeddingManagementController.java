@@ -16,7 +16,6 @@ import com.nhom25.services.WeddingService;
 import com.nhom25.services.WeddingServicesService;
 import java.util.Map;
 import javax.validation.Valid;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,12 +74,12 @@ public class WeddingManagementController {
         String successMsg = "";
         if (!result.hasErrors()) {
             if (this.foodService.addFood(food)) {
-                successMsg = "Thêm thành công!";
+                successMsg = "Thao tác thành công!";
                 model.addAttribute("successMsg", successMsg);
 
                 return "redirect:/admin/food-management";
             } else {
-                errMsg = "Đã có lỗi xảy ra khi thêm!!!";
+                errMsg = "Đã có lỗi xảy ra khi thao tác!!!";
             }
         } else {
             errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
@@ -109,17 +108,17 @@ public class WeddingManagementController {
         String successMsg = "";
         if (!result.hasErrors()) {
             if (this.weddingService.addOrUpdateWedding(wedding)) {
-                successMsg = "Thêm thành công!";
+                successMsg = "Thao tác thành công!";
                 model.addAttribute("successMsg", successMsg);
 
                 return "redirect:/admin/wedding-management";
             } else {
-                errMsg = "Đã có lỗi xảy ra khi thêm!!!";
+                errMsg = "Đã có lỗi xảy ra khi thao tác!!!";
             }
         } else {
             errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
         }
-//        this.weddingService.addOrUpdateWedding(wedding);
+
         model.addAttribute("errMsg", errMsg);
 
         return "weddingManagement";
@@ -138,19 +137,20 @@ public class WeddingManagementController {
 //THÊM SẢNH CƯỚI
     @PostMapping("/weddingHall-management")
     public String addWeddingHall(Model model, @ModelAttribute(value = "weddinghall") @Valid Weddinghall weddinghall,
-                                            BindingResult result) {
+                                            BindingResult result, @RequestParam(required = false) Map<String, String> params) {
         //Thêm sảnh cưới
         String errMsg = "";
         String successMsg = "";
+        
         if (!result.hasErrors()) {
             if (this.weddingHallService.addOrUpdateWeddingHall(weddinghall)) {
-                successMsg = "Thêm thành công!";
+                successMsg = "Thao tác thành công!";
                 model.addAttribute("successMsg", successMsg);
                 
-
+//                model.addAttribute("weddinghalls", this.weddingHallService.getWeddingHalls(""));
                 return "redirect:/admin/weddingHall-management";
             } else {
-                errMsg = "Đã có lỗi xảy ra khi thêm!!!";
+                errMsg = "Đã có lỗi xảy ra khi thao tác!!!";
             }
         } else {
             errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
@@ -180,13 +180,13 @@ public class WeddingManagementController {
         String successMsg = "";
         if (!result.hasErrors()) {
             if (this.weddingServicesService.addOrUpdateWeddingService(ws) == true) {
-                successMsg = "Thêm thành công!";
+                successMsg = "Thao tác thành công!";
                 model.addAttribute("successMsg", successMsg);
 //                model.addAttribute("wdservices", this.weddingServicesService.getWeddingServices(name));
 
                 return "redirect:/admin/weddingService-management";
             } else {
-                errMsg = "Đã có lỗi xảy ra khi thực hiện thao tác thêm!!!";
+                errMsg = "Đã có lỗi xảy ra khi thao tác!!!";
             }
         } else {
             errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
