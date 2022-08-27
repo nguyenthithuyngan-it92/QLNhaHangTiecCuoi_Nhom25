@@ -111,5 +111,30 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="contentAdmin"
                        value="/WEB-INF/jsp/wedding_management.jsp" />
     </definition>
+    
+    <!-- TRANG KHÁCH HÀNG -->
+    <definition name="foods" extends="baseLayout">
+        <put-attribute name="title" value="Món ăn" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/foods.jsp" />
+    </definition>
+    
+    <definition name="detailFood" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết món ăn" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/detailFood.jsp" />
+    </definition>
+    
+    <definition name="weddings" extends="baseLayout">
+        <put-attribute name="title" value="Tiệc cưới" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/weddings.jsp" />
+    </definition>
+    
+    <definition name="detailWedding" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết tiệc cưới" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/detailWedding.jsp" />
+    </definition>
 
 </tiles-definitions>

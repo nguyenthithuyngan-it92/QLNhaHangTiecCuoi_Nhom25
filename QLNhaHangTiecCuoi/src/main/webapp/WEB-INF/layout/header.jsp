@@ -34,15 +34,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="<c:url value="" />" role="button" data-bs-toggle="dropdown">Dịch vụ</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Tiệc cưới</a></li>
-                        <li><a class="dropdown-item" href="#">Món ăn</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/weddings" />">Tiệc cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/foods" />">Món ăn</a></li>
                         <li><a class="dropdown-item" href="#">Dịch vụ khác</a></li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/feedback" />">
-                        Phản hồi
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/contact" />">

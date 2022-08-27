@@ -5,6 +5,8 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -56,9 +58,11 @@ public class Feedback implements Serializable {
     private Date createdDate;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
+    @JsonProperty("user")
     private User userId;
     @JoinColumn(name = "wedding_id", referencedColumnName = "wedding_id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
+    @JsonIgnore
     private Wedding weddingId;
 
     public Feedback() {
