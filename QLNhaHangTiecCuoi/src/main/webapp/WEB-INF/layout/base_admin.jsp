@@ -40,6 +40,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         
         <link href="<c:url value="/css/style_admin.css"/>" rel="stylesheet" />
+        
+        
+        <script src="<c:url value="/js/management.js"/>"></script>
     </head>
     <body>
         <tiles:insertAttribute name="headerAdmin" />

@@ -16,6 +16,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -43,7 +44,7 @@ public class UserRepositoryImpl implements  UserRepository {
     public Account addAccount(Account acnt) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(acnt);
+            session.saveOrUpdate(acnt);
 
             return acnt;
         } catch(HibernateException ex) {
@@ -57,7 +58,7 @@ public class UserRepositoryImpl implements  UserRepository {
     public User addUser(User user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(user);
+            session.saveOrUpdate(user);
 
             return user;
         } catch(HibernateException ex) {
@@ -120,15 +121,38 @@ public class UserRepositoryImpl implements  UserRepository {
     @Override
     public boolean addEmployee(User emp) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
         try {
             session.saveOrUpdate(emp);
+//            session.flush();
             return true;
         } catch (HibernateException e) {
+            session.clear();
             System.err.println("==Có lỗi xảy ra! Cập nhật thao tác thất bại==" + e.getMessage());
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean addAccountEmp(Account accEmp) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.saveOrUpdate(accEmp);
+//            session.flush();
+            return true;
+        } catch (HibernateException e) {
+            session.clear();
+            System.err.println("==Add employee error==" + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Account getAccountById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        return session.get(Account.class, id);
     }
     
 }

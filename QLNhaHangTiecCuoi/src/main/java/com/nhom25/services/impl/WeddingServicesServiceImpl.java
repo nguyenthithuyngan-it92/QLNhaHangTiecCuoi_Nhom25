@@ -36,4 +36,9 @@ public class WeddingServicesServiceImpl implements WeddingServicesService{
     public boolean addOrUpdateWeddingService(Weddingservices ws) {
         return this.weddingServicesRepository.addOrUpdateWeddingService(ws);
     }
+
+    @Override
+    public boolean deleteWdService(int weddingservicesId) {
+        return this.weddingServicesRepository.deleteWdService(weddingservicesId);
+    }
 }

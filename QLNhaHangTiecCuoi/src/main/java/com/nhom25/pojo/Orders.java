@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,7 +70,7 @@ public class Orders implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
     @JoinColumn(name = "wedding_id", referencedColumnName = "wedding_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Wedding weddingId;
 
     public Orders() {

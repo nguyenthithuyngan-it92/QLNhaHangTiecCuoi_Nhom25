@@ -32,7 +32,7 @@
         <div class="side-bar-nav">
             <ul>
                 <li>
-                    <a href="<c:url value="/admin/" />" class="link-wrapper">
+                    <a href="<c:url value="/admin/" />" class="link-wrapper active">
                         <span><i class="fas fa-home"></i></span>
                         <span class="nav-link">Bảng điều khiển</span>
                     </a>
@@ -47,6 +47,12 @@
                     <a href="<c:url value="/admin/employee-management" />" class="link-wrapper">
                         <span><i class="fas fa-users"></i></span>
                         <span class="nav-link">Quản lý nhân viên</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<c:url value="/admin/pay" />" class="link-wrapper">
+                        <span><i class="fa-solid fa-wallet"></i></span>
+                        <span class="nav-link">Thanh toán</span>
                     </a>
                 </li>
                 <li>

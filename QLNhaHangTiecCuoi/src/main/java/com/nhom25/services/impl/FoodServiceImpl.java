@@ -57,8 +57,8 @@ public class FoodServiceImpl implements FoodService{
     }
 
     @Override
-    public boolean deleteFood(int id) {
-        return this.foodRepository.deleteFood(id);
+    public boolean deleteFood(int foodId) {
+        return this.foodRepository.deleteFood(foodId);
     }
 
     

@@ -61,7 +61,11 @@ public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try {
-            session.saveOrUpdate(ws);
+            if(ws.getWeddingservicesId() == 0){
+                session.save(ws);
+            } else {
+                session.update(ws);
+            }
             return true;
         } catch (HibernateException e) {
             System.err.println("==Có lỗi xảy ra! Cập nhật thao tác thất bại==" + e.getMessage());
@@ -69,6 +73,21 @@ public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
             return false;
         }
         
+    }
+
+    @Override
+    public boolean deleteWdService(int weddingservicesId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Weddingservices ws = session.get(Weddingservices.class, weddingservicesId);
+            session.delete(ws);
+            
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
     }
     
 }

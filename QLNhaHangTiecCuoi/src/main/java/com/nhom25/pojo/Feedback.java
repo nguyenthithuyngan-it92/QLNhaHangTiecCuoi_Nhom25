@@ -8,6 +8,7 @@ package com.nhom25.pojo;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -57,7 +58,7 @@ public class Feedback implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
     @JoinColumn(name = "wedding_id", referencedColumnName = "wedding_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Wedding weddingId;
 
     public Feedback() {

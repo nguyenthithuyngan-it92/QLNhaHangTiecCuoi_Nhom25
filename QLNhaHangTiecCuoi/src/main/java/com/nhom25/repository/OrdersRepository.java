@@ -5,16 +5,15 @@
  */
 package com.nhom25.repository;
 
-import com.nhom25.pojo.Wedding;
+import com.nhom25.pojo.Orders;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author LENOVO
  */
-public interface WeddingRepository {
-    List<Wedding> getWeddings(String kw);
-    Wedding getWeddingById(int id);
-    boolean addOrUpdateWedding(Wedding wedding);
-    boolean deleteWedding(int weddingId);
+public interface OrdersRepository {
+    List<Orders> getListOrders(Map<String, String> params);
+    Orders getOrdersById(int orderId);
 }
