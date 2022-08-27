@@ -33,13 +33,11 @@ function addFeedback(endpoint, weddingId) {
     }).then(function(res) {
         return res.json();
     }).then(function(data) {
-        let d = document.querySelector("#feedbacks li:first-child");
+        let d = document.querySelector("#feedbacks");
         let h = `
                 <li class="list-group-item"><em>${data.content}</em> - được phản hồi bởi <strong>${data.user.name}</strong> - vào <strong>${moment(data.createDate).locale("vi").fromNow()}</strong></li>
             `;
         d.insertAdjacentHTML("beforebegin", h);
-    }).catch (function(error) {
-        console.log(error)
     })
 }
 

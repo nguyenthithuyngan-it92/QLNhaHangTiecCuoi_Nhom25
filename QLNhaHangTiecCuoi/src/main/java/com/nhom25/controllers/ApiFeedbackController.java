@@ -43,12 +43,19 @@ public class ApiFeedbackController {
         MediaType.APPLICATION_JSON_VALUE
     })
     public ResponseEntity<Feedback> addFeedback(@RequestBody Map<String, String> params, HttpSession session) {
-        String content = params.get("content");
-        int wedddingId = Integer.parseInt(params.get("weddingId"));
         Account accountId = (Account) session.getAttribute("currentUser");
         User user = accountId.getUser();
-        Feedback f = this.weddingCusService.addFeedback(content, wedddingId, user);
-        
-        return new ResponseEntity<>(f, HttpStatus.CREATED);
+        if (accountId != null && user != null) {
+            try {
+                String content = params.get("content");
+                int wedddingId = Integer.parseInt(params.get("weddingId"));
+                Feedback f = this.weddingCusService.addFeedback(content, wedddingId, user);
+                
+                return new ResponseEntity<>(f, HttpStatus.CREATED);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
