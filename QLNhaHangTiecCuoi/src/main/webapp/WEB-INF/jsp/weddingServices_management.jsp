@@ -161,10 +161,7 @@
                 <!--Modal footer--> 
                 <div class="modal-footer">
                     <button type="submit" id="button" class="btn btn-success">Thêm</button>
-                    <button class="btn btn-success" type="button" disabled>
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Đang thêm...
-                    </button>
+                    
                     <button type="reset" onclick="setButtonService()" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </form:form>

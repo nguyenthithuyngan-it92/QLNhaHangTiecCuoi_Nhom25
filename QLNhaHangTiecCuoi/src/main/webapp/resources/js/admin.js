@@ -26,11 +26,8 @@ window.onload = () => {
 
         dateOfBirth.setAttribute('max', `${year}-${month}-${date}`);
     }
-};
-
-window.onload = () => {
+    
     let createdDate = document.getElementById('createdDate');
-
     if (createdDate) {
         const currentDate = new Date();
         let year = currentDate.getFullYear();
