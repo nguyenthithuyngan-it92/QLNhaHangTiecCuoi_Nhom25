@@ -11,7 +11,7 @@ function loadFeedback(endpoint) {
         let h = '';
         for (let d of data)
             h += `
-                <li class="list-group-item"><em>${d.content}</em> duoc binh luan boi <strong>${d.user.name}</strong> vao luc <strong>${moment(d.createDate).locale("vi").fromNow()}</strong></li>
+                <li class="list-group-item"><em>${d.content}</em> - được phản hồi bởi <strong>${d.user.name}</strong> - vào <strong>${moment(d.createDate).locale("vi").fromNow()}</strong></li>
             `
         f.innerHTML = h;
     });
@@ -19,6 +19,8 @@ function loadFeedback(endpoint) {
 
 
 function addFeedback(endpoint, weddingId) {
+    console.log({"content": document.getElementById("feedbackId").value,
+            "weddingId": weddingId})
     fetch(endpoint, {
         method: "post",
         body: JSON.stringify({
@@ -33,9 +35,11 @@ function addFeedback(endpoint, weddingId) {
     }).then(function(data) {
         let d = document.querySelector("#feedbacks li:first-child");
         let h = `
-                <li class="list-group-item"><em>${data.content}</em> duoc binh luan boi <strong>${data.user.name}</strong> vao luc <strong>${moment(data.createDate).locale("vi").fromNow()}</strong></li>
+                <li class="list-group-item"><em>${data.content}</em> - được phản hồi bởi <strong>${data.user.name}</strong> - vào <strong>${moment(data.createDate).locale("vi").fromNow()}</strong></li>
             `;
         d.insertAdjacentHTML("beforebegin", h);
-    });
+    }).catch (function(error) {
+        console.log(error)
+    })
 }
 

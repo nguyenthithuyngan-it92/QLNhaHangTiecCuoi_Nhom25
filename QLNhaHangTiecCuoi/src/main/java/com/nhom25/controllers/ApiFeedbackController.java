@@ -5,6 +5,7 @@
  */
 package com.nhom25.controllers;
 
+import com.nhom25.pojo.Account;
 import com.nhom25.pojo.Feedback;
 import com.nhom25.pojo.User;
 import com.nhom25.services.WeddingCusService;
@@ -29,23 +30,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ApiFeedbackController {
+
     @Autowired
     private WeddingCusService weddingCusService;
 
-//    @GetMapping("/wedding/{weddingId}/feedbacks")
-//    public ResponseEntity<List<Feedback>> getFeedbacks(@PathVariable(value="weddingId") int id) {
-//        return new ResponseEntity<>(this.weddingCusService.getFeedbacks(id), HttpStatus.OK);
-//    }
-//    
-//    @PostMapping(path = "/wedding/{weddingId}/feedbacks", produces = {
-//        MediaType.APPLICATION_JSON_VALUE
-//    })
-//    public ResponseEntity<Feedback> addFeedback(@RequestBody Map<String, String> params, HttpSession session) {
-//        String content = params.get("content");
-//        int wedddingId = Integer.parseInt(params.get("weddingId"));
-//        User userId = (User) session.getAttribute("currentUser");
-//        Feedback f = this.weddingCusService.addFeedback(content, wedddingId, userId);
-//        
-//        return new ResponseEntity<>(f, HttpStatus.CREATED);
-//    }
+    @GetMapping("/wedding/{weddingId}/feedbacks")
+    public ResponseEntity<List<Feedback>> getFeedbacks(@PathVariable(value = "weddingId") int id) {
+        return new ResponseEntity<>(this.weddingCusService.getFeedbacks(id), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/wedding/{weddingId}/feedbacks", produces = {
+        MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity<Feedback> addFeedback(@RequestBody Map<String, String> params, HttpSession session) {
+        String content = params.get("content");
+        int wedddingId = Integer.parseInt(params.get("weddingId"));
+        Account accountId = (Account) session.getAttribute("currentUser");
+        User user = accountId.getUser();
+        Feedback f = this.weddingCusService.addFeedback(content, wedddingId, user);
+        
+        return new ResponseEntity<>(f, HttpStatus.CREATED);
+    }
 }
