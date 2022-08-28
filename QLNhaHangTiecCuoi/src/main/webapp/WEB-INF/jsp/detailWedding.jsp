@@ -23,9 +23,8 @@
         </div>
     </div>
 </div>
-
 <br><br>
-
+<c:url value="/api/wedding/${wedding.weddingId}/feedbacks" var="endpoint" />
 <sec:authorize access="!isAuthenticated()">
     <strong>Vui lòng <a href="<c:url value="/login" />">đăng nhập</a> để phản hồi!!!</strong>
 </sec:authorize>
@@ -35,6 +34,7 @@
     </div>
     <br><br>
     <button class="btn btn-danger" onclick="addFeedback('${endpoint}', ${wedding.weddingId})">Thêm phản hồi</button>
+    <br><br>
 </sec:authorize>
     
     
@@ -46,7 +46,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/wedding.js" />"></script>
 <script>
-    <c:url value="/api/wedding/${wedding.weddingId}/feedbacks" var="endpoint" />
     window.onload = function () {
         loadFeedback('${endpoint}');
     }
