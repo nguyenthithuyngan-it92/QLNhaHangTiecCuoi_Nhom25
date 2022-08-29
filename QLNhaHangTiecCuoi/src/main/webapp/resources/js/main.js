@@ -11,20 +11,17 @@ window.onload = () => {
     const uploadBtn = document.getElementById("upload_widget");
     let userId;
 
-    //lấy dữ liệu
     let dateOfBirth = document.getElementById('dateOfBirth');
     let phoneInput = document.getElementById('phone');
     let cmndInput = document.getElementById('identityCard');
     let passwordInput = document.getElementById('password');
     let confirmPasswordInput = document.getElementById('confirmPassword');
 
-    //hiển thị lỗi 
     let textValidatePass = document.getElementById('invalid-feedback-password');
     let textValidateCFPass = document.getElementById('invalid-feedback-cfpassword');
     let textValidatePhone = document.getElementById('invalid-feedback-phone');
     let textValidateCMND = document.getElementById('invalid-feedback-cmnd');
     
-    //giới hạn chọn ngày sinh 
     if (dateOfBirth) {
         const currentDate = new Date();
         let year = currentDate.getFullYear() - 18;
@@ -41,7 +38,6 @@ window.onload = () => {
         dateOfBirth.setAttribute('max', `${year}-${month}-${date}`);
     }
 
-    //bắt lỗi
     const handleValidateForm = (event, inputType) => {
         switch (inputType) {
             case 'phone':
