@@ -105,9 +105,6 @@
                                         </a>
                                     </c:when>
                                 </c:choose>
-                                <%--<c:if test="${user.orders.isEmpty()}">--%>
-
-                                <%--</c:if>--%>
                             </td>
                         </sec:authorize>
                     </tr>

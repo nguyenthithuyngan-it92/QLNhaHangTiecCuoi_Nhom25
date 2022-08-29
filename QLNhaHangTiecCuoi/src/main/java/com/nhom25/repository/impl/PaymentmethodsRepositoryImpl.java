@@ -6,13 +6,13 @@
 package com.nhom25.repository.impl;
 
 import com.nhom25.pojo.Category;
-import com.nhom25.pojo.Food;
-import com.nhom25.repository.CategoryRepository;
+import com.nhom25.pojo.Paymentmethods;
+import com.nhom25.repository.PaymentmethodsRepository;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -25,41 +25,29 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class CategoryRepositoryImpl implements CategoryRepository{
+public class PaymentmethodsRepositoryImpl implements PaymentmethodsRepository{
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<Category> getCategories() {
-        List<Category> cates;
+    public List<Paymentmethods> getListPaymentmethods() {
+        List<Paymentmethods> payment;
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Category> cr = builder.createQuery(Category.class);
-        Root<Category> root = cr.from(Category.class);
+        CriteriaQuery<Paymentmethods> cr = builder.createQuery(Paymentmethods.class);
+        Root<Paymentmethods> root = cr.from(Paymentmethods.class);
 
         CriteriaQuery query = cr.select(root);
 
-        cates = session.createQuery(query).getResultList();        
-        return cates;
+        payment = session.createQuery(query).getResultList();        
+        return payment;
     }
 
     @Override
-    public Category getCategoryById(int cateId) {
+    public Paymentmethods getPaymentmethodsById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        return session.get(Category.class, cateId);
-    }
-
-    @Override
-    public List<Food> getFoodsByCategory(int id) {
-        List<Food> foods = null;
-        Session session = this.sessionFactory.getObject().getCurrentSession(); 
-        Category cate = session.get(Category.class, id);
-        if (cate != null) {
-            Hibernate.initialize(cate.getFoods());
-            foods = cate.getFoods();
-        }
-
-        return foods;
+        
+        return session.get(Paymentmethods.class, id);
     }
     
 }
