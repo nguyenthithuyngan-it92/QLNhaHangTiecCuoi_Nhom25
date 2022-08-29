@@ -10,10 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,9 +49,14 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
     
+    
+    @Column(name = "count_food")
+    private int countFood;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "categoryId")
-    private Set<Food> foodSet;
+    private List<Food> foods;
+//    private Set<Food> foodSet;
 
     public Category() {
     }
@@ -83,14 +86,14 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public Set<Food> getFoodSet() {
-        return foodSet;
-    }
-
-    public void setFoodSet(Set<Food> foodSet) {
-        this.foodSet = foodSet;
-    }
+//    @XmlTransient
+//    public Set<Food> getFoodSet() {
+//        return foodSet;
+//    }
+//
+//    public void setFoodSet(Set<Food> foodSet) {
+//        this.foodSet = foodSet;
+//    }
 
     @Override
     public int hashCode() {
@@ -118,17 +121,31 @@ public class Category implements Serializable {
     }
 
     /**
+     * @return the countFood
+     */
+    public int getCountFood() {
+        return countFood;
+    }
+
+    /**
+     * @param countFood the countFood to set
+     */
+    public void setCountFood(int countFood) {
+        this.countFood = countFood;
+    }
+
+    /**
      * @return the foods
      */
-//    public List<Food> getFoods() {
-//        return foods;
-//    }
-//
-//    /**
-//     * @param foods the foods to set
-//     */
-//    public void setFoods(List<Food> foods) {
-//        this.foods = foods;
-//    }
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    /**
+     * @param foods the foods to set
+     */
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
     
 }

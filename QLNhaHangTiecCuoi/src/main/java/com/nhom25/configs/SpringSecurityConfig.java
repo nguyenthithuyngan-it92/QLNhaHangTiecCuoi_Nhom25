@@ -87,7 +87,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/admin/")
-                .access("hasAnyAuthority('ADMIN', 'EMPLOYEE')");
+                .access("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
+                .antMatchers("/**/booking-wedding").authenticated();
         http.csrf().disable(); 
     }
 

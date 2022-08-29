@@ -5,16 +5,15 @@
  */
 package com.nhom25.services;
 
-import com.nhom25.pojo.Category;
-import com.nhom25.pojo.Food;
+import com.nhom25.pojo.Paymentmethods;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author LENOVO
  */
-public interface CategoryService {
-    List<Category> getCategories();
-    Category getCategoryById(int cateId);
-    List<Food> getFoodsByCategory(int cateId);
+public interface PaymentmethodsService {
+    List<Paymentmethods> getListPaymentmethods();
+    Paymentmethods getPaymentmethodsById(int id);
 }

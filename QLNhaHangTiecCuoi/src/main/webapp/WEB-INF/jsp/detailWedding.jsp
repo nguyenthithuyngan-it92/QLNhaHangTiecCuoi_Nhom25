@@ -19,7 +19,7 @@
         <h1>${wedding.name}</h1>
         <h3><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${wedding.weddinghallId.price}" /> VND</h3>
         <div>
-            <a href="#" class="btn btn-danger" onclick="#">Đặt tiệc</a>
+            <a href="<c:url value="/wedding/${wedding.weddingId}/booking-wedding" />" class="btn btn-danger" onclick="#">Đặt tiệc</a>
         </div>
     </div>
 </div>
