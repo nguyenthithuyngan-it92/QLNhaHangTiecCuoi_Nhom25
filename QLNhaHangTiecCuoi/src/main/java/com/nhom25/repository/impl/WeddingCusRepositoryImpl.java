@@ -34,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 @PropertySource("classpath:databases.properties")
 @Transactional
 public class WeddingCusRepositoryImpl implements WeddingCusRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
@@ -68,7 +69,7 @@ public class WeddingCusRepositoryImpl implements WeddingCusRepository {
                 Predicate p = builder.lessThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(tp));
                 predicates.add(p);
             }
-            query.where(predicates.toArray(new Predicate[] {}));
+            query.where(predicates.toArray(new Predicate[]{}));
         }
         Query q = session.createQuery(query);
         if (page > 0) {
@@ -94,39 +95,43 @@ public class WeddingCusRepositoryImpl implements WeddingCusRepository {
         return session.get(Wedding.class, weddingId);
     }
 
-//    @Override
-//    public int feedbackCounter() {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        Query query = session.createQuery("SELECT COUNT(*) FROM Feedback");
-//
-//        return Integer.parseInt(query.getSingleResult().toString());
-//    }
-//
-//    @Override
-//    public List<Feedback> getFeedbacks(int weddingId) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<Feedback> query = builder.createQuery(Feedback.class);
-//        Root root = query.from(Feedback.class);
-//        query = query.select(root);
-//
-//        query.where(builder.equal(root.get("weddingId"), weddingId));
-//
-//        Query q = session.createQuery(query);
-//        return q.getResultList();
-//    }
-//
-//    @Override
-//    public Feedback addFeedback(String content, int weddingId, User user) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        Feedback f = new Feedback();
-//        
-//        f.setContent(content);
-//        f.setWeddingId(this.getWeddingById(weddingId));
-//        f.setUserId(user);
-//        
-//        session.save(f);
-//        
-//        return f;
-//    }
+    @Override
+    public int feedbackCounter() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query query = session.createQuery("SELECT COUNT(*) FROM Feedback");
+
+        return Integer.parseInt(query.getSingleResult().toString());
+    }
+
+    @Override
+    public List<Feedback> getFeedbacks(int weddingId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Feedback> query = builder.createQuery(Feedback.class);
+        Root root = query.from(Feedback.class);
+        query = query.select(root);
+
+        query.where(builder.equal(root.get("weddingId"), weddingId));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public Feedback addFeedback(String content, int weddingId, User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Feedback f = new Feedback();
+        try {
+            f.setContent(content);
+            f.setWeddingId(this.getWeddingById(weddingId));
+            f.setUserId(user);
+            session.save(f);
+            
+            return f;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return null;
+    }
 }

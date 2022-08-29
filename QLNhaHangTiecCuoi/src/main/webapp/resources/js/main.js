@@ -22,6 +22,7 @@ window.onload = () => {
     let textValidatePhone = document.getElementById('invalid-feedback-phone');
     let textValidateCMND = document.getElementById('invalid-feedback-cmnd');
     
+    //kiểm tra chọn ngày sinh
     if (dateOfBirth) {
         const currentDate = new Date();
         let year = currentDate.getFullYear() - 18;

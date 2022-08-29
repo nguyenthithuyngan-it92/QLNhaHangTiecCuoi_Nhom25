@@ -39,19 +39,18 @@ public class WeddingCusServiceImpl implements WeddingCusService {
         return this.weddingCusRepository.getWeddingById(weddingId);
     }
 
-//    @Override
-//    public List<Feedback> getFeedbacks(int weddingId) {
-//        return this.weddingCusRepository.getFeedbacks(weddingId);
-//    }
-//
-//    @Override
-//    public Feedback addFeedback(String content, int weddingId, User user) {
-//        return this.weddingCusRepository.addFeedback(content, weddingId, user);
-//    }
-//
-//    @Override
-//    public int feedbackCounter() {
-//        return this.weddingCusRepository.feedbackCounter();
-//    }
-    
+    @Override
+    public List<Feedback> getFeedbacks(int weddingId) {
+        return this.weddingCusRepository.getFeedbacks(weddingId);
+    }
+
+    @Override
+    public Feedback addFeedback(String content, int weddingId, User user) {
+        return this.weddingCusRepository.addFeedback(content, weddingId, user);
+    }
+
+    @Override
+    public int feedbackCounter() {
+        return this.weddingCusRepository.feedbackCounter();
+    }
 }

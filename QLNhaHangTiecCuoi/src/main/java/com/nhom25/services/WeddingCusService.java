@@ -19,7 +19,7 @@ public interface WeddingCusService {
     List<Wedding> getList(Map<String, String> params, int page);
     int countWedding();
     Wedding getWeddingById(int weddingId);
-//    List<Feedback> getFeedbacks(int weddingId);
-//    Feedback addFeedback(String content, int weddingId, User user);
-//    int feedbackCounter();
+    List<Feedback> getFeedbacks(int weddingId);
+    Feedback addFeedback(String content, int weddingId, User user);
+    int feedbackCounter();
 }
