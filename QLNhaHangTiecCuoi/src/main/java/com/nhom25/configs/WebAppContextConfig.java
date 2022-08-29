@@ -6,6 +6,7 @@
 package com.nhom25.configs;
 
 import com.nhom25.formatters.CategoryFormatter;
+import com.nhom25.formatters.PaymentmethodsFormatter;
 import com.nhom25.formatters.WeddingFormatter;
 import com.nhom25.formatters.WeddingHallFormatter;
 import com.nhom25.formatters.WeddingServicesFormatter;
@@ -104,6 +105,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new WeddingHallFormatter());
         registry.addFormatter(new WeddingServicesFormatter());
         registry.addFormatter(new WeddingFormatter());
+        registry.addFormatter(new PaymentmethodsFormatter());
     }
 
     @Bean

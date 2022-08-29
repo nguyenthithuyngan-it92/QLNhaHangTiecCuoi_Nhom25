@@ -11,6 +11,7 @@ import com.nhom25.pojo.Weddinghall;
 import com.nhom25.pojo.Weddingservices;
 import com.nhom25.services.CategoryService;
 import com.nhom25.services.FoodService;
+import com.nhom25.services.PaymentmethodsService;
 import com.nhom25.services.WeddingHallService;
 import com.nhom25.services.WeddingService;
 import com.nhom25.services.WeddingServicesService;
@@ -50,9 +51,13 @@ public class WeddingManagementController {
     @Autowired
     private FoodService foodService;
     
+    @Autowired
+    private PaymentmethodsService paymentmethodsService;
+    
     @ModelAttribute
     public void commontAttribute(Model model){
         model.addAttribute("categories", this.categoryService.getCategories());
+        model.addAttribute("paymentmethod", this.paymentmethodsService.getListPaymentmethods());
         model.addAttribute("services", this.weddingServicesService.getWeddingServices(""));
         model.addAttribute("wdhall", this.weddingHallService.getWeddingHalls(""));
     }

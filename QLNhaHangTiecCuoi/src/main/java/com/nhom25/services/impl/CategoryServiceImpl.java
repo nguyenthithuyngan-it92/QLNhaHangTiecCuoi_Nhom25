@@ -32,9 +32,9 @@ public class CategoryServiceImpl implements CategoryService{
         return this.categoryRepository.getCategoryById(cateId);
     }
 
-//    @Override
-//    public List<Food> getFoodsByCategory(int cateId) {
-//        return this.categoryRepository.getFoodsByCategory(cateId);
-//    }
+    @Override
+    public List<Food> getFoodsByCategory(int cateId) {
+        return this.categoryRepository.getFoodsByCategory(cateId);
+    }
     
 }

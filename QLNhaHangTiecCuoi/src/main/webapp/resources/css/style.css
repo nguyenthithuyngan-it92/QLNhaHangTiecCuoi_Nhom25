@@ -3,6 +3,10 @@
     scroll-behavior: smooth;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 .site-heading {
     display: block;
     margin-top: 10px;
@@ -212,100 +216,100 @@ p {
 }
 /*Thiết Lập Cho Thành Phần Nội Dung Giới Thiệu*/
 .jumbotron .noi-dung{
-     margin-right: 30px;
- }
- .jumbotron .noi-dung.about{
-     width:40%;
- }
- .jumbotron .noi-dung.about h2{
-     position: relative;
-     color: #fff;
-     font-weight: 500;
-     margin-bottom: 15px;
- }
- .jumbotron .noi-dung.about h2:before{
-     content: '';
-     position: absolute;
-     bottom: -5px;
-     left: 0;
-     width: 50px;
-     height: 2px;
-     background: #f00;
- }
- .jumbotron .noi-dung.about p{
-     color: black;
- }
- /*Thiết Lập Cho Thành Phần Đường Dẫn*/
+    margin-right: 30px;
+}
+.jumbotron .noi-dung.about{
+    width:40%;
+}
+.jumbotron .noi-dung.about h2{
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.jumbotron .noi-dung.about h2:before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #f00;
+}
+.jumbotron .noi-dung.about p{
+    color: black;
+}
+/*Thiết Lập Cho Thành Phần Đường Dẫn*/
 .links h2{
-     position: relative;
-     color: #fff;
-     font-weight: 500;
-     margin-bottom: 15px;
- }
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
 .links h2::before{
-     content: '';
-     position: absolute;
-     bottom: -5px;
-     left: 0;
-     width: 50px;
-     height: 2px;
-     background: #f00;
- }
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #f00;
+}
 .links{
     position: relative;
     width: 25%;
- }
- .links ul li{
-     list-style: none;
- }
- .links ul li a{
-     color: black;
-     text-decoration: none;
-     margin-bottom: 10px;
-     display: inline-block;
- }
+}
+.links ul li{
+    list-style: none;
+}
+.links ul li a{
+    color: black;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
 .links ul li a:hover{
-     color: black;
- }
- /*Thiết Lập Cho Thành Phần Liên Hệ*/
+    color: black;
+}
+/*Thiết Lập Cho Thành Phần Liên Hệ*/
 .contact h2{
-     position: relative;
-     color: #fff;
-     font-weight: 500;
-     margin-bottom: 15px;
- }
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
 .contact h2::before{
-     content: '';
-     position: absolute;
-     bottom: -5px;
-     left: 0;
-     width: 50px;
-     height: 2px;
-     background: #f00;
- }
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #f00;
+}
 .contact{
-     width: calc(35% - 60px);
-     margin-right: 0 !important;
- }
+    width: calc(35% - 60px);
+    margin-right: 0 !important;
+}
 .contact .info{
-     position: relative;
- }
- .contact .info li{
-     display: flex;
-     margin-bottom: 16px;
- }
- .contact .info li span:nth-child(1) {
-     color: black;
-     font-size: 20px;
-     margin-right: 10px;
- }
+    position: relative;
+}
+.contact .info li{
+    display: flex;
+    margin-bottom: 16px;
+}
+.contact .info li span:nth-child(1) {
+    color: black;
+    font-size: 20px;
+    margin-right: 10px;
+}
 .contact .info li span{
-     color: black;
- }
+    color: black;
+}
 .contact .info li a{
-     color: black;
-     text-decoration: none;
- }
+    color: black;
+    text-decoration: none;
+}
 
 iframe{
     width: 90%;
@@ -371,4 +375,95 @@ a.nav-link.text-info img {
     background-position: right calc(0.375em + 0.1875rem) center;
     background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
+
+
+/*TRANG ĐẶT TIỆC - BOOKINGWEDDING*/
+.booking{
+    width: 95%;
+    margin: auto;
+    border: 1px #ccc solid;
+    box-shadow: 0 0 8px rgb(223, 223, 223);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.booking h1 {
+    font-size: 4vw !important;
+    font-weight: bold;
+    padding: 10px;
+    text-shadow: 3px 3px 1px #120364;
+}
+
+.booking .info-user,
+.booking .info-wedding{
+    margin-left: 30px;
+}
+
+.booking .info-user .left,
+.booking .info-user .right{
+    align-items: center;
+}
+
+.booking .info-user h6,
+.booking .info-wedding h6{
+    font-weight: bold;
+}
+
+.booking .formOrders {
+    width: 90%;
+    margin: auto;
+}
+.booking .info-user form,
+.booking .info-wedding form{
+    display: flex;
+    margin: 20px;
+}
+
+.booking .info-user form label{
+    font-style: italic;
+}
+
+.booking .option{
+    width: 100%;
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.booking .option .form-check{
+    margin: auto;
+}
+
+.btnBooking {
+    margin-left: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.btnBooking:hover{
+    opacity: 0.8;
+}
+
+.d-flex .form-group{
+    margin: 10px 10px 10px 10px;
+    width: 380px;
+}
+
+.headerCate {
+    font-size: 13px;
+    text-align: center;
+    width: fit-content;
+    background-color: lightsteelblue;
+}
+
+.wrapper-foods {
+    display: flex;
+    flex-wrap: wrap;
+    width: 260px;
+}
+
+.wrapper-foods .form-check {
+    width: 100%;
+}
+
 
