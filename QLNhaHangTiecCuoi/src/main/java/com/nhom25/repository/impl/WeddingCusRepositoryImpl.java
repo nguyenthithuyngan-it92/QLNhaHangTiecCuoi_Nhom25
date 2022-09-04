@@ -8,6 +8,7 @@ package com.nhom25.repository.impl;
 import com.nhom25.pojo.Feedback;
 import com.nhom25.pojo.User;
 import com.nhom25.pojo.Wedding;
+import com.nhom25.pojo.Weddinghall;
 import com.nhom25.repository.UserRepository;
 import com.nhom25.repository.WeddingCusRepository;
 import java.util.ArrayList;

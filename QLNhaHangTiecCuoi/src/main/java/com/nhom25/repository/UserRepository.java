@@ -25,4 +25,7 @@ public interface UserRepository {
     boolean addEmployee(User emp);
     Account getAccountById(int id);
     boolean addAccountEmp(Account accEmp);
+    
+    //Booking
+    boolean addCusOrder(User cus);
 }

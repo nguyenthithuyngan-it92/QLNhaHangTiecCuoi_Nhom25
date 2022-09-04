@@ -5,6 +5,7 @@
  */
 package com.nhom25.services;
 
+import com.nhom25.pojo.ListFood;
 import com.nhom25.pojo.Orders;
 import java.util.List;
 import java.util.Map;
@@ -16,4 +17,9 @@ import java.util.Map;
 public interface OrdersService {
     List<Orders> getListOrders(Map<String, String> params);
     Orders getOrdersById(int orderId);
+    
+    //Booking
+    Orders addOrders(Orders od);
+    Orders saveOrders(ListFood lf, int orderId);
+    boolean confirmBooking(int orderId);
 }

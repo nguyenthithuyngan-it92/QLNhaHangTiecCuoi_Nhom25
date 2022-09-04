@@ -123,7 +123,7 @@ body{
 }
 .section-heading .section-heading-lower {
     display: block;
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-weight: 100;
 }
 .mb-4 {
@@ -466,4 +466,53 @@ a.nav-link.text-info img {
     width: 100%;
 }
 
+/*DETAIL WEDDING*/
+.titleWd {
+    font-size: 4vw !important;
+    font-weight: bold;
+    padding: 10px;
+    text-shadow: 3px 3px 1px #120364;
+}
 
+.wdname {
+    font-weight: bold;
+}
+
+.wdname:hover{
+    font-size: 40px !important;
+    font-style: italic;
+    text-shadow: 1px 1px 0px #120364;
+}
+
+.wdHall:hover {
+    font-weight: bold;
+}
+.imgWedding {
+    margin: 20px;
+}
+.imgWedding .img-thumbnail.card-img-top.img-fluid {
+    box-shadow: 0 0 8px rgb(223, 223, 223);
+}
+
+.imgWedding .img-thumbnail.card-img-top.img-fluid:hover{
+    transform: scale(1.1);
+}
+
+.btnOrder {
+    width: 100px;
+}
+
+.col-md-4.col-xs-12 .card.Wd{
+    margin: 10px;
+    height: 350px;
+}
+
+.col-md-4.col-xs-12 .card:hover{
+    box-shadow: 0 0 8px rgb(223, 223, 223);
+    border-color: #e6a756;
+}
+
+.col-md-4.col-xs-12 .card{
+    margin: 10px;
+    height: 415px;
+}

@@ -54,8 +54,8 @@ public class Feedback implements Serializable {
     @Column(name = "content")
     private String content;
     @Column(name = "created_date")
-    @Temporal(TemporalType.DATE)
-    private Date createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate = new Date();
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
     @JsonProperty("user")

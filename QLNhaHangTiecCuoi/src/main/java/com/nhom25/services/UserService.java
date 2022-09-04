@@ -27,4 +27,7 @@ public interface UserService extends UserDetailsService {
     boolean addEmployee(User emp);
     Account getAccountById(int id);
     boolean addAccountEmp(Account accEmp);
+    
+    //Booking
+    boolean addCusOrder(User cus);
 }

@@ -41,7 +41,18 @@
         
         <tiles:insertAttribute name="footer" />
         
-<!--        <script src="<c:url value="/js/main.js"/>"></script>-->
+        <div id="toastMessage" class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <!--<img src="..." class="rounded me-2" alt="...">-->
+                <strong class="me-auto">Thông báo</strong>
+                <small class="toastMessage-date">...</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body"></div>
+            </div>
+        </div>
+        
         <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
     </body>
 </html>
