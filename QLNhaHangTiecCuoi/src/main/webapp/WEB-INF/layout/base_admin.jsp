@@ -51,6 +51,6 @@
             <tiles:insertAttribute name="contentAdmin" />
         </div>
         
-        <script src="<c:url value="/js/admin.js"/>"></script>
+        <!--<script src="<c:url value="/js/admin.js"/>"></script>-->
     </body>
 </html>

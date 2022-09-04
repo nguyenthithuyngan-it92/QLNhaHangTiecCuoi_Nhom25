@@ -40,5 +40,27 @@ public class WeddingServiceImpl implements WeddingService{
     public boolean deleteWedding(int weddingId) {
         return this.weddingRepository.deleteWedding(weddingId);
     }
+
+    @Override
+    public List<Object[]> densityStats(int year) {
+        return this.weddingRepository.densityStats(year);
+    }
+    
+    @Override
+    public List<Object[]> revenueStats(int quarter, int year) {
+        return this.weddingRepository.revenueStats(quarter, year);
+    }
+
+    @Override
+    public List<Object[]> monthStats(int m, int y) {
+        return this.weddingRepository.monthStats(m, y);
+    }
+
+    @Override
+    public List<Object[]> yearStats(int y) {
+        return this.weddingRepository.yearStats(y);
+    }
+
+    
     
 }

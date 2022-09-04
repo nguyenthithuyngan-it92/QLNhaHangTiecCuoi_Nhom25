@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<c:url value="/admin/statistical" />" class="link-wrapper">
+                    <a href="<c:url value="/admin/stats" />" class="link-wrapper">
                         <span><i class="fas fa-chart-bar"></i></span>
                         <span class="nav-link">Thống kê</span>
                     </a>

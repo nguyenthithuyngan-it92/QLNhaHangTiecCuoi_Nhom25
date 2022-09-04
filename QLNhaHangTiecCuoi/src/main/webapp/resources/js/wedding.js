@@ -11,7 +11,7 @@ function loadFeedback(endpoint) {
         let h = '';
         for (let d of data)
             h += `
-                <li class="list-group-item"><em>${d.content}</em> - được phản hồi bởi <strong>${d.user.name}</strong> - vào <strong>${moment(d.createDate).locale("vi").fromNow()}</strong></li>
+                <li class="list-group-item"><em>${d.content}</em> - được phản hồi bởi <strong>${d.user.name}</strong> - vào <strong>${moment(d.createdDate).locale("vi").fromNow()}</strong></li>
             `
         f.innerHTML = h;
     });
@@ -35,7 +35,7 @@ function addFeedback(endpoint, weddingId) {
     }).then(function(data) {
         let d = document.querySelector("#feedbacks");
         let h = `
-                <li class="list-group-item"><em>${data.content}</em> - được phản hồi bởi <strong>${data.user.name}</strong> - vào <strong>${moment(data.createDate).locale("vi").fromNow()}</strong></li>
+                <li class="list-group-item"><em>${data.content}</em> - được phản hồi bởi <strong>${data.user.name}</strong> - vào <strong>${moment(data.createdDate).locale("vi").fromNow()}</strong></li>
             `;
         d.insertAdjacentHTML("beforebegin", h);
     })
