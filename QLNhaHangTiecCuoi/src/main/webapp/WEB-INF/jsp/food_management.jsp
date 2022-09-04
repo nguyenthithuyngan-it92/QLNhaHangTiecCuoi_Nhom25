@@ -97,14 +97,14 @@
 
                                 <!--XÓA-->
                                 <c:choose>
-                                    <c:when test="${food.ordersSet.isEmpty() || food.ordersSet == null}">
+                                    <c:when test="${food.orders.isEmpty() || food.orders == null}">
                                         <a class="user-delete" href="javascript:;" 
                                            onclick="deleteFood(${food.foodId})">
                                             <i class="fa-solid fa-trash-can text-danger"
                                                data-bs-toggle="tooltip" title="Xóa"></i>
                                         </a>
                                     </c:when>
-                                    <c:when test="${!food.ordersSet.isEmpty() || food.ordersSet != null}">
+                                    <c:when test="${!food.orders.isEmpty() || food.orders != null}">
                                         <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
                                             <i class="fa-solid fa-trash-can text-danger"
                                                data-bs-toggle="tooltip" title="Không thể xóa!"></i>

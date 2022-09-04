@@ -98,7 +98,7 @@
                                                data-bs-toggle="tooltip" title="Xóa"></i>
                                         </a>
                                     </c:when>
-                                    <c:when test="${wd.ordersSet.isEmpty() || wd.ordersSet == null || !wd.feedbackSet.isEmpty() || wd.feedbackSet != null}">
+                                    <c:when test="${!wd.ordersSet.isEmpty() || wd.ordersSet != null || !wd.feedbackSet.isEmpty() || wd.feedbackSet != null}">
                                         <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
                                             <i class="fa-solid fa-trash-can text-danger"
                                                data-bs-toggle="tooltip" title="Không thể xóa!"></i>

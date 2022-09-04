@@ -65,7 +65,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     
     <definition name="admin" extends="baseAdminLayout">
-        <put-attribute name="titleAdmin" value="Quản lý" />
+        <put-attribute name="titleAdmin" value="Trang quản lý" />
         <put-attribute name="contentAdmin"
                        value="/WEB-INF/jsp/admin.jsp" />
     </definition>
@@ -141,6 +141,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Đặt tiệc cưới" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/booking_wedding.jsp" />
+        <put-attribute name="footer" value="" />
     </definition>
 
 </tiles-definitions>

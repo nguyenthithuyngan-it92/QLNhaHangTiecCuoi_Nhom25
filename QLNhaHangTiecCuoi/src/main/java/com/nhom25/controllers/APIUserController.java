@@ -41,15 +41,18 @@ public class APIUserController {
             String email = params.get("email");
             String phone = params.get("phone");
             String sex = params.get("sex");
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfBirth);
             
             User newUser = new User();
+            
+            if(!dateOfBirth.isEmpty()) {
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfBirth);
+                newUser.setDateOfBirth(date);
+            }
             newUser.setEmail(email);
             newUser.setName(name);
             newUser.setPhone(phone);
             newUser.setIdentityCard(identityCard);
             newUser.setSex(sex);
-            newUser.setDateOfBirth(date);
             
             User u = this.userService.addUser(newUser);
 

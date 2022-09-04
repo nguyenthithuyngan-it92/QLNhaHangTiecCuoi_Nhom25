@@ -28,7 +28,7 @@
         <c:forEach items="${food}" var="f">
             <div class="col-md-4 col-xs-12" style="padding: 5px;">
                 <div class="card">
-                    <img class="card-img-top" class="img-thumbnail card-img-top img-fluid" src="${f.image}" alt="Card image" style="width: auto; height: 300px; object-fit: cover;">
+                    <img class="card-img-top" class="img-thumbnail card-img-top img-fluid" src="${f.image}" alt="Card image" style="width: auto; height: 225px; object-fit: cover;">
                     <div class="card-body">
                         <h4 class="card-title">${f.name}</h4>
                         <p class="card-text">
