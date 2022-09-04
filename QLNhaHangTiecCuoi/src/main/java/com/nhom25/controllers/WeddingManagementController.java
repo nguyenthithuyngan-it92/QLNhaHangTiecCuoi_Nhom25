@@ -200,4 +200,18 @@ public class WeddingManagementController {
 
         return "weddingServicesManagement";
     }
+    
+    //THỐNG KÊ BÁO CÁO
+    @GetMapping("/stats")
+    public String stats(Model model, 
+            @RequestParam(value = "quarter", defaultValue = "1") int quarter,
+            @RequestParam(value = "year", defaultValue = "2022") int year,
+            @RequestParam(value = "month", defaultValue = "1") int month) {
+        model.addAttribute("densityStats", this.weddingService.densityStats(year));
+        model.addAttribute("monthStats", this.weddingService.monthStats(month, year));
+        model.addAttribute("revenueStats", this.weddingService.revenueStats(quarter, year));
+        model.addAttribute("yearStats", this.weddingService.yearStats(year));
+        
+        return "stats";
+    }
 }

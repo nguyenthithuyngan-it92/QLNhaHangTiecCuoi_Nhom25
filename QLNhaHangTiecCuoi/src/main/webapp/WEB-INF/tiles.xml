@@ -82,10 +82,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/pay.jsp" />
     </definition>
     
-    <definition name="statistical" extends="baseAdminLayout">
+    <definition name="stats" extends="baseAdminLayout">
         <put-attribute name="titleAdmin" value="Thống kê" />
         <put-attribute name="contentAdmin"
-                       value="/WEB-INF/jsp/statistical.jsp" />
+                       value="/WEB-INF/jsp/stats.jsp" />
     </definition>
     
     <definition name="employeeManagement" extends="baseAdminLayout">
