@@ -9,10 +9,12 @@
 window.onload = () => {
     const form = document.getElementById("submitFormAccount");
     const uploadBtn = document.getElementById("upload_widget");
+    const spinnerRegister = document.querySelector('.spinner-register');
     let userId;
 
     let dateOfBirth = document.getElementById('dateOfBirth');
     let phoneInput = document.getElementById('phone');
+    let emailInput = document.getElementById('email');
     let cmndInput = document.getElementById('identityCard');
     let passwordInput = document.getElementById('password');
     let confirmPasswordInput = document.getElementById('confirmPassword');
@@ -21,7 +23,8 @@ window.onload = () => {
     let textValidateCFPass = document.getElementById('invalid-feedback-cfpassword');
     let textValidatePhone = document.getElementById('invalid-feedback-phone');
     let textValidateCMND = document.getElementById('invalid-feedback-cmnd');
-    
+    let textValidateEmail = document.getElementById('invalid-feedback-mail');
+
     //kiểm tra chọn ngày sinh
     if (dateOfBirth) {
         const currentDate = new Date();
@@ -57,6 +60,14 @@ window.onload = () => {
                     event.target.classList.remove('is-invalid');
                 }
                 break;
+            case 'email':
+                if (!isValidMail(event.target.value)) {
+                    event.target.classList.add('is-invalid');
+                    textValidateEmail.textContent = 'Địa chỉ mail bạn nhập không đúng định dạng!';
+                } else {
+                    event.target.classList.remove('is-invalid');
+                }
+                break;
             case 'password':
             case 'confirmPassword':
                 if (event.target.value.length < 4) {
@@ -76,6 +87,8 @@ window.onload = () => {
     };
 
     phoneInput.addEventListener('change', (event) => handleValidateForm(event, 'phone'));
+    
+    emailInput.addEventListener('change', (event) => handleValidateForm(event, 'email'));
 
     cmndInput.addEventListener('change', (event) => handleValidateForm(event, 'cmnd'));
 
@@ -91,6 +104,7 @@ window.onload = () => {
 
     function handleSubmitUserAccount(e) {
         e.preventDefault();
+        spinnerRegister.classList.remove('visually-hidden');
         console.log(form.checkValidity());
         form.classList.add('was-validated');
         let formData = new FormData(form);
@@ -156,11 +170,13 @@ window.onload = () => {
                 return res.json();
             }).then(data => {
                 if (data && data.userId > 0) {
+                    spinnerRegister.classList.add('visually-hidden');
                     document.location.href = "/QLNhaHangTiecCuoi/login";
                 } else {
                     throw Error("Có lỗi xảy ra, vui lòng quay lại sau!!");
                 }
             }).catch((error) => {
+                spinnerRegister.classList.add('visually-hidden');
                 const errEle = document.getElementById('error-message');
                 errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
                 console.error(error);
@@ -173,3 +189,5 @@ const isValidPhone = phone =>
     /(([03+[2-9]|05+[6|8|9]|07+[0|6|7|8|9]|08+[1-9]|09+[1-4|6-9]]){3})+[0-9]{7}\b/g.test(phone);
 
 const isValidCMND = id => /^\d{9}$/.test(id) || /^\d{12}$/.test(id);
+
+const isValidMail = email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);

@@ -52,7 +52,7 @@
                 <label for="sex">
                     <spring:message code="user.sex" />
                 </label>
-                
+
                 <div class="selected">
                     <select class="form-select" name="sex" id="sex">
                         <option value="NAM">NAM</option>
@@ -65,6 +65,9 @@
                     <spring:message code="user.email" />
                 </label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Nhập địa chỉ mail..."/>
+                <div id="invalid-feedback-mail" class="invalid-feedback">
+                    <spring:message code="notNullMsg" />
+                </div>
             </div>
         </div>
         <div class="right">
@@ -126,8 +129,14 @@
             </div>
         </div>
 
-        <div class="form-group mt-3 btnregister">
+<!--        <div class="form-group mt-3 btnregister">
             <button class="btn btn-primary float-md-end bg-primary" type="submit">ĐĂNG KÝ</button>
+        </div>-->
+        <div class="form-group mt-3 btnregister">
+            <button class="btn btn-primary float-md-end bg-primary" type="submit">
+                <span class="spinner-register spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
+                ĐĂNG KÝ
+            </button> 
         </div>
     </form>
 </div>

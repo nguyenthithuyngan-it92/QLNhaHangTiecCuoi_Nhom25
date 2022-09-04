@@ -9,17 +9,39 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-danger">CHI TIẾT TIỆC CƯỚI</h1>
+<h1 class="text-center text-danger titleWd">CHI TIẾT TIỆC CƯỚI</h1>
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5 imgWedding">
         <img src="${wedding.weddinghallId.image}" alt="${wedding.name}" class="img-thumbnail card-img-top img-fluid" />
     </div>
-    <div class="col-md-7">
-        <h1>${wedding.name}</h1>
-        <h3><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${wedding.weddinghallId.price}" /> VND</h3>
+    <div class="col-md-6">
+        <h1 class="wdname">${wedding.name}</h1>
+        <div class="d-flex" style="margin: auto;">
+            <p style="margin-right: 10px;">Giá sảnh <h4 class="text-info wdHall" style="font-style: italic;">
+                <fmt:formatNumber type = "number" maxFractionDigits = "3" 
+                                  value = "${wedding.weddinghallId.price}" /> VNĐ</h4>
+            </p>
+        </div>
+        <div class="d-flex" style="margin: auto;">
+            <p style="margin-right: 10px;">Sảnh tổ chức tiệc cưới
+            <h5 class="wdHall" style="padding: 0px;"> ${wedding.weddinghallId.name}</h5>
+            </p>
+        </div>
+        <div class="d-flex" style="margin: auto;">
+            <p style="margin-right: 10px;">Gói dịch vụ cưới
+            <h5 class="wdHall" style="padding: 0px;"> ${wedding.weddingservicesId.name}</h5>
+            </p>
+        </div>
+        <div class="d-flex" style="margin: auto;">
+            <p style="margin-right: 10px;">Giá dịch vụ cưới
+            <h5 class="wdHall" style="padding: 0px;"><fmt:formatNumber type = "number" maxFractionDigits = "3" 
+                              value = "${wedding.weddingservicesId.price}" /> VNĐ </h5>
+            </p>
+        </div>
         <div>
-            <a href="<c:url value="/wedding/${wedding.weddingId}/booking-wedding" />" class="btn btn-danger" onclick="#">Đặt tiệc</a>
+            <a href="<c:url value="/wedding/${wedding.weddingId}/booking-wedding" />" 
+               class="btn btn-danger btnOrder" onclick="#">Đặt tiệc</a>
         </div>
     </div>
 </div>
@@ -36,8 +58,8 @@
     <button class="btn btn-danger" onclick="addFeedback('${endpoint}', ${wedding.weddingId})">Thêm phản hồi</button>
     <br><br>
 </sec:authorize>
-    
-    
+
+
 <ul id="feedbacks" class="list-group">
 
 </ul>
@@ -46,9 +68,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/wedding.js" />"></script>
 <script>
-    window.onload = function () {
-        loadFeedback('${endpoint}');
-    }
+        window.onload = function () {
+            loadFeedback('${endpoint}');
+        }
 </script>
 
 <div>
