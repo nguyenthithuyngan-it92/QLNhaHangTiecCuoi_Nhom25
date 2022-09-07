@@ -7,6 +7,10 @@ body{
     overflow-x: hidden;
 }
 
+a {
+    text-decoration: none;
+}
+
 .site-heading {
     display: block;
     margin-top: 10px;

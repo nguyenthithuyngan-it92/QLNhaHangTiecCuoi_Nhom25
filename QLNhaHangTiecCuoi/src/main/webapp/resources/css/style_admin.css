@@ -755,7 +755,8 @@ header, .main-content {
     color: #ffffff;
 }
 
-.accordion-button.link-wrapper .fas.fa-solid.fa-utensils {
+.accordion-button.link-wrapper .fas.fa-solid.fa-utensils,
+.accordion-button.link-wrapper .fas.fa-solid.fa-chart-bar{
     color: black;
     font-size: 18px;
 }
@@ -878,4 +879,22 @@ header, .main-content {
     width: 50%;
     font-weight: bold;
     font-style: italic;
+}
+
+/*THỐNG KÊ*/
+.canvasStats{
+    width: 75%;
+    margin: auto;
+    padding: 40px;
+}
+
+.table.stats {
+    font-size: 15px;
+    text-align: center;
+}
+
+.searchStats input,
+.searchStats button,
+.searchStats select{
+    font-size: 15px;
 }
