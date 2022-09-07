@@ -7,8 +7,12 @@ package com.nhom25.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -76,11 +80,12 @@ public class Food implements Serializable {
     @Column(name = "description")
     private String description;
     
-    @JoinTable(name = "orderdetails", joinColumns = {
-        @JoinColumn(name = "food_id", referencedColumnName = "food_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "order_id", referencedColumnName = "order_id")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Orders> ordersSet;
+    @JoinTable(name = "orderdetails", 
+        joinColumns = @JoinColumn(name = "food_id"), 
+        inverseJoinColumns = @JoinColumn(name = "order_id"))
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Orders> orders = new HashSet<>();
     
     @JsonIgnore
     @JoinColumn(name = "category_id")
@@ -140,15 +145,6 @@ public class Food implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
-    public Set<Orders> getOrdersSet() {
-        return ordersSet;
-    }
-
-    public void setOrdersSet(Set<Orders> ordersSet) {
-        this.ordersSet = ordersSet;
-    }
-
     public Category getCategoryId() {
         return categoryId;
     }
@@ -196,4 +192,18 @@ public class Food implements Serializable {
         this.img = img;
     }
 
+    /**
+     * @return the orders
+     */
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    /**
+     * @param orders the orders to set
+     */
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
+    }
+   
 }

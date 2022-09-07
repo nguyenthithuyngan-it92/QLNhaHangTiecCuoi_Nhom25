@@ -6,6 +6,42 @@
 
 /* global fetch */
 
+//XÁC NHẬN THANH TOÁN
+let confirmPay = (orderId) => {
+    const inputOrderId = document.getElementById('inputOrderId');
+    var totalPrice = document.getElementById('totalPrice' + orderId).innerText;
+
+    let payWedding = document.getElementById('payWedding');
+    let myModal = document.getElementById('myModal');
+    let spinnerConfirmWd = document.querySelector('.spinner-confirm-wd');
+
+    if (inputOrderId) {
+        inputOrderId.innerText = orderId;
+        document.getElementById("inputTotalPrice").innerText = totalPrice;
+    }
+
+    // Pay wedding
+    payWedding.onclick = () => {
+        spinnerConfirmWd.classList.remove('visually-hidden');
+
+        fetch(`/QLNhaHangTiecCuoi/api/confirm-booking/${orderId}`, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                myModal.style.display = 'none';
+                alert("Thanh toán thành công!");
+                spinnerConfirmWd.classList.add('visually-hidden');
+                location.reload();
+            } else
+                alert("Đã có lỗi xảy ra!!!");
+        }).catch(error => {
+            spinnerConfirmWd.classList.add('visually-hidden');
+        });
+    };
+};
 //////////////////////CHỨC NĂNG XÓA///////////////////////////////////////
 //xóa món ăn
 function deleteFood(foodId) {
@@ -136,8 +172,6 @@ function getWdHallInfo(id) {
         document.getElementById("activeCheck").checked = true;
     else
         document.getElementById("activeCheck").checked = false;
-
-//    document.getElementById("inputImage").required = false;
 
 //    var image = document.getElementById("image" + id).innerText;
 //    document.getElementById("inputImage").value = image;

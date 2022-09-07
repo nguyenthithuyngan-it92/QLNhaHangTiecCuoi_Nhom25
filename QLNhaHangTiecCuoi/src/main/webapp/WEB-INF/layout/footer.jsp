@@ -30,15 +30,19 @@
         <h2>Thông Tin Liên Hệ</h2>
         <ul class="info">
             <li>
-                <p><a href="#">&#128204; 371 Nguyễn Kiệm, Quận Gò Vấp, Thành Phố Hồ Chí Minh</a></p>
-
+                <a><i class="bi bi-geo-alt-fill"></i> 371 Nguyễn Kiệm, Quận Gò Vấp, TP. Hồ Chí Minh</a>
             </li>
             <li>
-                <p><a href="#">&#128222; 0123456789</a></p>
+                <a><i class="bi bi-telephone-fill"></i> 0123 456 789</a>
             </li>
             <li>
-
-                <p><a href="#">&#128231; diachiemail@gmail.com</a></p>
+                <a><i class="bi bi-telephone-inbound-fill"></i> (848) 3456 7891</a>
+            </li>
+            <li>
+                <a href="mailto:diachiemail@gmail.com"><i class="bi bi-envelope-fill"></i> diachiemail@gmail.com</a>
+            </li>
+            <li>
+                <a href="https://facebook.com/whitepalacehvt"><i class="bi bi-facebook"></i> facebook.com/whitepalacehvt</a>
             </li>
         </ul>
     </div>

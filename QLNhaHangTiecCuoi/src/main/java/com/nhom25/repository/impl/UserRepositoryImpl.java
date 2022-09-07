@@ -154,5 +154,20 @@ public class UserRepositoryImpl implements  UserRepository {
         
         return session.get(Account.class, id);
     }
+
+    @Override
+    public boolean addCusOrder(User cus) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.saveOrUpdate(cus);
+//            session.flush();
+            return true;
+        } catch (HibernateException e) {
+            session.clear();
+            System.err.println("==Add customer error==" + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
     
 }

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : weddings
-    Created on : Aug 25, 2022, 2:12:27 PM
-    Author     : ASUS
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -15,6 +9,8 @@
 <div class="container">
     <form action="${action}" class="d-flex" style="width: 100%; height: 50px">
         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa để tìm...">
+<!--        <input class="form-control me-2" type="text" name="fromPrice" placeholder="Nhập giá để tìm...">
+        <input class="form-control me-2" type="text" name="toPrice" placeholder="Nhập giá để tìm...">-->
         <button type="submit" class="btn btn-primary" type="button" style="width: 100px; height: 50px">Tìm kiếm</button>
     </form>
 </div>
@@ -27,7 +23,7 @@
     <div class="row">
         <c:forEach items="${wedding}" var="w">
             <div class="col-md-4 col-xs-12" style="padding: 5px;">
-                <div class="card">
+                <div class="card Wd">
                     <img class="card-img-top" class="img-thumbnail card-img-top img-fluid" src="${w.weddinghallId.image}" alt="Card image" style="width: auto; height: 200px;object-fit: cover;">
                     <div class="card-body">
                         <h4 class="card-title">${w.name}</h4>

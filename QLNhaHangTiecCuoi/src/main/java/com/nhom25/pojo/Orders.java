@@ -5,13 +5,18 @@
  */
 package com.nhom25.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,16 +66,27 @@ public class Orders implements Serializable {
     private Integer quantityTable;
     @Column(name = "total_price")
     private Long totalPrice;
-    @ManyToMany(mappedBy = "ordersSet")
-    private Set<Food> foodSet;
+    @Column(name = "payment_date")
+    @Temporal(TemporalType.DATE)
+    private Date paymentDate;
+    
+    @ManyToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Food> foods = new HashSet<>();
+    
     @JoinColumn(name = "paymentmethods_id", referencedColumnName = "paymentmethods_id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Paymentmethods paymentmethodsId;
+    
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User userId;
+    
     @JoinColumn(name = "wedding_id", referencedColumnName = "wedding_id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Wedding weddingId;
 
     public Orders() {
@@ -128,15 +144,6 @@ public class Orders implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    @XmlTransient
-    public Set<Food> getFoodSet() {
-        return foodSet;
-    }
-
-    public void setFoodSet(Set<Food> foodSet) {
-        this.foodSet = foodSet;
-    }
-
     public Paymentmethods getPaymentmethodsId() {
         return paymentmethodsId;
     }
@@ -185,5 +192,33 @@ public class Orders implements Serializable {
     public String toString() {
         return "com.nhom25.pojo.Orders[ orderId=" + orderId + " ]";
     }
-    
+
+    /**
+     * @return the foods
+     */
+    public Set<Food> getFoods() {
+        return foods;
+    }
+
+    /**
+     * @param foods the foods to set
+     */
+    public void setFoods(Set<Food> foods) {
+        this.foods = foods;
+    }
+
+    /**
+     * @return the paymentDate
+     */
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    /**
+     * @param paymentDate the paymentDate to set
+     */
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
 }

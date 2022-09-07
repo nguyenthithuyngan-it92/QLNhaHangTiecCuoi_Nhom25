@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/* global fetch */
+
 function loadFeedback(endpoint) {
     fetch(endpoint).then(function(res) {
         return res.json();

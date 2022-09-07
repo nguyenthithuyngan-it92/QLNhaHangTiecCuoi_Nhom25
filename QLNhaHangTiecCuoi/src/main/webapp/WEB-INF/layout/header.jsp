@@ -26,11 +26,6 @@
                     <a class="nav-link" href="<c:url value="/" />">
                         <i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/introduce" />">
-                        Giới thiệu
-                    </a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="<c:url value="" />" role="button" data-bs-toggle="dropdown">Dịch vụ</a>
                     <ul class="dropdown-menu">
@@ -41,7 +36,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/contact" />">
-                        Liên lạc
+                        Liên hệ
                     </a>
                 </li>
 

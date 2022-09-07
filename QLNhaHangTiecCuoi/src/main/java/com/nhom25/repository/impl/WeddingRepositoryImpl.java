@@ -104,7 +104,7 @@ public class WeddingRepositoryImpl implements WeddingRepository{
         Root rO = cr.from(Orders.class);
         
         cr.where(builder.equal(rO.get("weddingId"), rW.get("weddingId")),
-                builder.equal(builder.function("YEAR", Integer.class, rO.get("partyDate")), year));
+                builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), year));
         
         cr.multiselect(rW.get("weddingId"), rW.get("name"), builder.count(rO.get("weddingId")));
         cr.groupBy(rW.get("weddingId"));
@@ -114,7 +114,7 @@ public class WeddingRepositoryImpl implements WeddingRepository{
     }
     
     @Override
-    public List<Object[]> revenueStats(int quarter, int year) {
+    public List<Object[]> quarterStats(int quarter, int year) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> cr = builder.createQuery(Object[].class);
@@ -124,9 +124,9 @@ public class WeddingRepositoryImpl implements WeddingRepository{
         
         
         cr.where(builder.equal(rO.get("weddingId"), rW.get("weddingId")),
-                builder.equal(rO.get("status"), 0),
-                builder.equal(builder.function("QUARTER", Integer.class, rO.get("partyDate")), quarter),
-                builder.equal(builder.function("YEAR", Integer.class, rO.get("partyDate")), year));
+                builder.equal(rO.get("status"), 1),
+                builder.equal(builder.function("QUARTER", Integer.class, rO.get("paymentDate")), quarter),
+                builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), year));
         
         cr.multiselect(rW.get("weddingId"), rW.get("name"), builder.sum(rO.get("totalPrice")));
         cr.groupBy(rW.get("weddingId"));
@@ -145,9 +145,9 @@ public class WeddingRepositoryImpl implements WeddingRepository{
         Root rO = cr.from(Orders.class);
         
         cr.where(builder.equal(rO.get("weddingId"), rW.get("weddingId")),
-                builder.equal(rO.get("status"), 0),
-                builder.equal(builder.function("MONTH", Integer.class, rO.get("partyDate")), m),
-                builder.equal(builder.function("YEAR", Integer.class, rO.get("partyDate")), y));
+                builder.equal(rO.get("status"), 1),
+                builder.equal(builder.function("MONTH", Integer.class, rO.get("paymentDate")), m),
+                builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), y));
         
         cr.multiselect(rW.get("weddingId"), rW.get("name"), builder.sum(rO.get("totalPrice")));
         cr.groupBy(rW.get("weddingId"));
@@ -166,8 +166,8 @@ public class WeddingRepositoryImpl implements WeddingRepository{
         Root rO = cr.from(Orders.class);
         
         cr.where(builder.equal(rO.get("weddingId"), rW.get("weddingId")),
-                builder.equal(rO.get("status"), 0),
-                builder.equal(builder.function("YEAR", Integer.class, rO.get("partyDate")), y));
+                builder.equal(rO.get("status"), 1),
+                builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), y));
         
         cr.multiselect(rW.get("weddingId"), rW.get("name"), builder.sum(rO.get("totalPrice")));
         cr.groupBy(rW.get("weddingId"));

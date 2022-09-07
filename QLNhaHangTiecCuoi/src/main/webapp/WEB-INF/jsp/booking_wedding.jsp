@@ -27,12 +27,12 @@
                         <input type="radio" class="form-check-input" id="bookingOffline" name="optradio" value="offline" disabled="true">Nhân viên đặt hộ khách hàng
                     </div>
                 </div>
-                <div class="info-user">
+                <div class="info-user" data-userId="${currentUser.user.userId}" id="${currentUser.user.userRole == 'CUSTOMER' ? 'has-user-info' : ''}">
                     <h6>1. Thông tin khách hàng</h6>
                     <div class="left">
                         <div class="form-group">
                             <label for="name">
-                                <spring:message code="user.name" />
+                                <spring:message code="user.nameBooking" />
                             </label>
                             <input type="text" name="name" class="form-control" id="name" 
                                    value="${currentUser.user.name}" readonly="true"/>
@@ -64,7 +64,7 @@
                 </div>
 
                 <hr>   
-                <div class="info-wedding">
+                <div class="info-wedding" data-weddingId="${wedding.weddingId}">
                     <h6>2. Thông tin tiệc cưới</h6>
                     <div class="left">
                         <div class="form-group">
@@ -75,14 +75,12 @@
                                    value="${wedding.name}" readonly="true"/>
                         </div>
                         <div class="form-group">
-                            <label for="coefficient">
-                                <spring:message code="wd.coefficient" />
+                            <label for="wdhall">
+                                <spring:message code="wdhall.name" />
                             </label>
-                            <input name="coefficient" type="text" id="coefficient" class="form-control" 
-                                   value="${wedding.coefficient}" readonly="true"/>
+                            <input type="text" name="weddinghallId" id="weddinghallId" class="form-control" 
+                                   value="${wedding.weddinghallId.name}" readonly="true"/>
                         </div>
-                    </div>
-                    <div class="right">
                         <div class="form-group">
                             <label for="wdservices">
                                 <spring:message code="service.name" />
@@ -90,20 +88,44 @@
                             <input type="text" name="weddingservicesId" id="weddingservicesId" class="form-control" 
                                    value="${wedding.weddingservicesId.name}" readonly="true"/>
                         </div>
-
+                    </div>
+                    <div class="right">
+                        <div class="form-group">
+                            <label for="coefficient">
+                                <spring:message code="wd.coefficient" />
+                            </label>
+                            <input name="coefficient" type="text" id="coefficient" class="form-control" 
+                                   value="${wedding.coefficient}" readonly="true"/>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="wdhall">
-                                <spring:message code="wdhall.name" />
+                                <spring:message code="wdhall.price" />
                             </label>
-                            <input type="text" name="weddinghallId" id="weddinghallId" class="form-control" 
-                                   value="${wedding.weddinghallId.name}" readonly="true"/>
-                        </div>         
+                            <input type="text" name="weddinghallPrice" class="form-control" 
+                                   value="<fmt:formatNumber type="number" maxFractionDigits="3" 
+                                                                 value="${wedding.weddinghallId.price}" />  VNĐ" readonly="true"/>
+                            <input type="text" name="weddinghallPrice" id="weddinghallPrice" class="form-control" 
+                                   value="${wedding.weddinghallId.price}" hidden="true"/>
+                        </div> 
+                        
+                        <div class="form-group">
+                            <label for="wdservices">
+                                <spring:message code="service.price" />
+                            </label>
+                            <input type="text" name="weddingservicesPrice" class="form-control" 
+                                   value="<fmt:formatNumber type="number" maxFractionDigits="3" 
+                                                                 value="${wedding.weddingservicesId.price}" />  VNĐ" readonly="true"/>
+                            <input type="text" name="weddingservicesPrice" id="weddingservicesPrice" class="form-control" 
+                                   value="${wedding.weddingservicesId.price}" hidden="true"/>
+                        </div>
+
+                        
+                        
                     </div>
                 </div>
 
                 <div class="formOrders">
-                    <input name="userId" class="form-control" id="userId" 
-                           value="${currentUser.user.userId}" hidden="true" />
                     <input name="weddingId" class="form-control" id="weddingId" 
                            value="${wedding.weddingId}" hidden="true"/>
                     <div class="d-flex">
@@ -112,7 +134,7 @@
                                 <spring:message code="od.partyDate" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <input type="date" path="partyDate" id="partyDateId" class="form-control"/>
+                                <input type="date" required path="partyDate" id="partyDateId" class="form-control"/>
                         </div>
 
                         <div class="form-group">
@@ -120,10 +142,10 @@
                                 <spring:message code="od.quantityTable" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <input type="number" name="quantityTable" 
+                            <input type="number" required name="quantityTable" 
                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                    title="Số bàn tối đa không vượt quá ${wedding.weddinghallId.maxTable}!" 
-                                   max="" id="quantityTableId" class="form-control"/>
+                                   max="${wedding.weddinghallId.maxTable}" id="quantityTableId" class="form-control"/>
                         </div>
                     </div>
                     <div class="form-group payments">
@@ -134,8 +156,8 @@
                         <div class="option">
                             <c:forEach items="${paymentmethod}" var="p">
                                 <div class="form-check">
-                                    <input type="radio" name="paymentmethodsId" class="form-check-input" 
-                                           id="paymentmethodsId" value="${p.paymentmethodsId}" checked="true"/>
+                                    <input type="radio" name="paymentmethodsId" class="form-check-input paymentmethodsId" 
+                                           id="paymentmethodsId" data-discount="${p.discount}" value="${p.paymentmethodsId}"/>
                                     <label class="form-check-label">${p.payments} - Hệ số ${p.discount}</label>
                                 </div>
                             </c:forEach>
@@ -174,9 +196,15 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="form-group mt-3">
+                        <span class="ml-auto">Tổng tiền: <strong class="text-primary" style="font-size: 20px;" id="total-price-wedding">0</strong></span>
+                    </div>
                 </div>
                 <div class="form-group mt-3 ">
-                    <button type="submit" class="btn btn-primary bg-primary btnBooking">XÁC NHẬN ĐẶT TIỆC</button>
+                    <button id="submit-form-wd-user" class="btn btn-primary bg-primary btnBooking" type="button">
+                        <span class="spinner-wd-user spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
+                        XÁC NHẬN ĐẶT TIỆC
+                    </button>
                 </div>
             </c:when>
 
@@ -197,7 +225,7 @@
                     <div class="left">
                         <div class="form-group">
                             <label for="name">
-                                <spring:message code="user.name" />
+                                <spring:message code="user.nameBooking" />
                                 <span class="text-danger">(*)</span>
                             </label>
                             <input type="text" name="name" class="form-control" id="name" placeholder="Nhập họ và tên..."/>
@@ -228,7 +256,7 @@
                 </div>
 
                 <hr>   
-                <div class="info-wedding">
+                <div class="info-wedding" data-weddingId="${wedding.weddingId}">
                     <h6>2. Thông tin tiệc cưới</h6>
                     <div class="left">
                         <div class="form-group">
@@ -239,14 +267,12 @@
                                    value="${wedding.name}" readonly="true"/>
                         </div>
                         <div class="form-group">
-                            <label for="coefficient">
-                                <spring:message code="wd.coefficient" />
+                            <label for="wdhall">
+                                <spring:message code="wdhall.name" />
                             </label>
-                            <input name="coefficient" type="text" id="coefficient" class="form-control" 
-                                   value="${wedding.coefficient}" readonly="true"/>
+                            <input type="text" name="weddinghallId" id="weddinghallId" class="form-control" 
+                                   value="${wedding.weddinghallId.name}" readonly="true"/>
                         </div>
-                    </div>
-                    <div class="right">
                         <div class="form-group">
                             <label for="wdservices">
                                 <spring:message code="service.name" />
@@ -254,20 +280,44 @@
                             <input type="text" name="weddingservicesId" id="weddingservicesId" class="form-control" 
                                    value="${wedding.weddingservicesId.name}" readonly="true"/>
                         </div>
-
+                    </div>
+                    <div class="right">
+                        <div class="form-group">
+                            <label for="coefficient">
+                                <spring:message code="wd.coefficient" />
+                            </label>
+                            <input name="coefficient" type="text" id="coefficient" class="form-control" 
+                                   value="${wedding.coefficient}" readonly="true"/>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="wdhall">
-                                <spring:message code="wdhall.name" />
+                                <spring:message code="wdhall.price" />
                             </label>
-                            <input type="text" name="weddinghallId" id="weddinghallId" class="form-control" 
-                                   value="${wedding.weddinghallId.name}" readonly="true"/>
-                        </div>         
+                            <input type="text" name="weddinghallPrice" class="form-control" 
+                                   value="<fmt:formatNumber type="number" maxFractionDigits="3" 
+                                                                 value="${wedding.weddinghallId.price}" />  VNĐ" readonly="true"/>
+                            <input type="text" name="weddinghallPrice" id="weddinghallPrice" class="form-control" 
+                                   value="${wedding.weddinghallId.price}" hidden="true"/>
+                        </div> 
+                        
+                        <div class="form-group">
+                            <label for="wdservices">
+                                <spring:message code="service.price" />
+                            </label>
+                            <input type="text" name="weddingservicesPrice" class="form-control" 
+                                   value="<fmt:formatNumber type="number" maxFractionDigits="3" 
+                                                                 value="${wedding.weddingservicesId.price}" />  VNĐ" readonly="true"/>
+                            <input type="text" name="weddingservicesPrice" id="weddingservicesPrice" class="form-control" 
+                                   value="${wedding.weddingservicesId.price}" hidden="true"/>
+                        </div>
+
+                        
+                        
                     </div>
                 </div>
 
-                <form class="formOrders">
-                    <input name="userId" class="form-control" id="userId" 
-                           value="${currentUser.user.userId}" hidden="true" />
+                <div class="formOrders">
                     <input name="weddingId" class="form-control" id="weddingId" 
                            value="${wedding.weddingId}" hidden="true"/>
                     <div class="d-flex">
@@ -276,7 +326,7 @@
                                 <spring:message code="od.partyDate" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <input type="date" path="partyDate" id="partyDateId" class="form-control"/>
+                                <input type="date" required path="partyDate" id="partyDateId" class="form-control"/>
                         </div>
 
                         <div class="form-group">
@@ -284,29 +334,74 @@
                                 <spring:message code="od.quantityTable" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <input type="number" name="quantityTable" id="quantityTableId" 
-                                   class="form-control"/>
+                            <input type="number" required name="quantityTable" 
+                                   data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                   title="Số bàn tối đa không vượt quá ${wedding.weddinghallId.maxTable}!" 
+                                   max="${wedding.weddinghallId.maxTable}" id="quantityTableId" class="form-control"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group payments">
                         <label for="paymentmethodsId" class="form-label">
                             <spring:message code="od.paymentMethod" />
                             <span class="text-danger">(*)</span>
                         </label>
-
-                        <c:forEach items="${paymentmethod}" var="p">
-                            <div class="form-check">
-                                <input type="radio" name="paymentmethodsId" class="form-check-input" 
-                                       id="paymentmethodsId" value="${p.paymentmethodsId}" checked="true"/>
-                                <label class="form-check-label">${p.payments} - Giảm ${p.discount}</label>
-                            </div>
-                        </c:forEach>
+                        <div class="option">
+                            <c:forEach items="${paymentmethod}" var="p">
+                                <div class="form-check">
+                                    <input type="radio" name="paymentmethodsId" class="form-check-input paymentmethodsId" 
+                                           id="paymentmethodsId" data-discount="${p.discount}" value="${p.paymentmethodsId}"/>
+                                    <label class="form-check-label">${p.payments} - Hệ số ${p.discount}</label>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
+                </div>
+                <hr>   
+                <div class="info-wedding">
+                    <h6>3. Chọn món ăn theo danh mục</h6>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered tbFoodOd">
+                            <thead>
+                                <tr class="headerCate">
+                                    <c:forEach items="${categories}" var="c">
+                                        <th>${c.name}   (Chọn tối đa ${c.countFood})</th>
+                                        </c:forEach>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <c:forEach items="${categories}" var="c">
+                                        <td>
+                                            <div class="wrapper-foods wrapper-foods-${c.categoryId}"
+                                                 idCate="${c.categoryId}" name-data="${c.name}" maxcheckfood="${c.countFood}">
+                                                <div class="d-flex justify-content-center spinner-food" style="margin-top: 10px;">
+                                                    <div class="spinner-border text-info" role="status">
+                                                        <span class="visually-hidden">Loading...</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        </div>
+                                    </c:forEach>
+                                </tr>
 
-                    <div class="form-group mt-3 ">
-                        <button type="submit" class="btn btn-primary bg-primary btnBooking">XÁC NHẬN ĐẶT TIỆC</button>
+                            </tbody>
+                        </table>
                     </div>
-                </form>
+                    <div class="form-group mt-3">
+                        <span class="ml-auto">Tổng tiền: <strong class="text-primary" style="font-size: 20px;" id="total-price-wedding">0</strong></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3 ">
+                    <button id="submit-form-wd-user" class="btn btn-primary bg-primary btnBooking" type="button">
+                        <span class="spinner-wd-user spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
+                        XÁC NHẬN ĐẶT TIỆC
+                    </button>
+                    
+                </div>
+            </c:when>
+            <c:when test="${currentUser.user.userRole == 'ADMIN'}">
+                <strong class="text-danger text-center">Bạn vui lòng đăng nhập với tài khoản nhân viên để thực hiện đặt tiệc!!! <a href="<c:url value="/logout" />">Đăng xuất tại đây!!</a></strong>
             </c:when>
         </c:choose>
     </div>
@@ -315,8 +410,8 @@
 <script src="<c:url value="/js/booking.js"/>"></script>
 
 <script>
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 </script>

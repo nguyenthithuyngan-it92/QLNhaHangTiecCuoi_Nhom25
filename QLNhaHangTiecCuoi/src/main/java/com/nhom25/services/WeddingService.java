@@ -19,6 +19,6 @@ public interface WeddingService {
     boolean deleteWedding(int weddingId);
     List<Object[]> densityStats(int year);
     List<Object[]> monthStats(int month, int year);
-    List<Object[]> revenueStats(int quarter, int year);
+    List<Object[]> quarterStats(int quarter, int year);
     List<Object[]> yearStats(int year);
 }

@@ -16,4 +16,9 @@ import java.util.Map;
 public interface OrdersRepository {
     List<Orders> getListOrders(Map<String, String> params);
     Orders getOrdersById(int orderId);
+    
+    //Booking
+    Orders addOrders(Orders od);
+    Orders saveOrders(Orders ord);
+    boolean confirmBooking(Orders orderId);
 }
