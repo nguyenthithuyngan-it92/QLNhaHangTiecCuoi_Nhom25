@@ -22,10 +22,12 @@ window.onload = () => {
     const userEle = document.getElementById("has-user-info");
     const wdEle = document.querySelector(".info-wedding");
     const toastMessageDate = document.querySelector(".toastMessage-date");
+    
     const name = document.getElementById("name");
     const identityCard = document.getElementById("identityCard");
     const phone = document.getElementById("phone");
     const email = document.getElementById("email");
+    
     const totalPriceBookingWeddingText = document.getElementById("total-price-wedding");
     
     const spinnerAddWedding = document.querySelector('.spinner-wd-user'); 

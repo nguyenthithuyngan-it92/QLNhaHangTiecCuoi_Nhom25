@@ -5,11 +5,9 @@
  */
 package com.nhom25.repository.impl;
 
-import com.nhom25.pojo.Category;
 import com.nhom25.pojo.Paymentmethods;
 import com.nhom25.repository.PaymentmethodsRepository;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;

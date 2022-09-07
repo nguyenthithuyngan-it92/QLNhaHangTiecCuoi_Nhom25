@@ -54,6 +54,7 @@ public class Weddingservices implements Serializable {
     private String name;
     
     @Column(name = "price")
+    @NotNull(message = "{services.price.notNullMsg}")
     @Max(value = 100000000, message = "{services.maxPrices.error}")
     private Long price;
     @Lob
