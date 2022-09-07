@@ -80,7 +80,7 @@ function monthStats(labels, data) {
     });
 }
 
-function revenueStats(labels, data) {
+function quarterStats(labels, data) {
     const ctx = document.getElementById('myChart3').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',

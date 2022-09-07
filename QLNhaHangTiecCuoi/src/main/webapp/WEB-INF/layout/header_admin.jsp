@@ -55,12 +55,46 @@
                         <span class="nav-link">Thanh toán</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<c:url value="/admin/stats" />" class="link-wrapper">
-                        <span><i class="fas fa-chart-bar"></i></span>
-                        <span class="nav-link">Thống kê</span>
-                    </a>
-                </li>
+                <div class="accordion" id="accordionPanelsStayStatsExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingStats">
+                            <a class="accordion-button link-wrapper" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStats" 
+                               aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" 
+                               href="<c:url value="/admin/stats" />">
+                                <span class="wrap-icon"><i class="fas fa-solid fa-chart-bar"></i></span>
+                                <span class="nav-link">Thống kê</span>
+                            </a>
+                        </h2>
+                        <div id="panelsStayOpen-collapseStats" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingStats">
+                            <div class="accordion-body">
+                                <div class="accordion-item-custom">
+                                    <a href="<c:url value="/admin/stats"/>">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        <span class="hide-nav">Mật độ tiệc cưới</span>
+                                    </a> 
+                                </div>
+                                <div class="accordion-item-custom">
+                                    <a href="<c:url value="/admin/monthStats"/>">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        <span class="hide-nav">Doanh thu theo tháng</span>
+                                    </a> 
+                                </div>
+                                <div class="accordion-item-custom">
+                                    <a href="<c:url value="/admin/quarterStats"/>">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        <span class="hide-nav">Doanh thu theo quý</span>
+                                    </a>
+                                </div>
+                                <div class="accordion-item-custom">
+                                    <a href="<c:url value="/admin/yearStats"/>">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        <span class="hide-nav">Doanh thu theo năm</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
+                </div>
 
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">

@@ -47,8 +47,8 @@ public class WeddingServiceImpl implements WeddingService{
     }
     
     @Override
-    public List<Object[]> revenueStats(int quarter, int year) {
-        return this.weddingRepository.revenueStats(quarter, year);
+    public List<Object[]> quarterStats(int quarter, int year) {
+        return this.weddingRepository.quarterStats(quarter, year);
     }
 
     @Override

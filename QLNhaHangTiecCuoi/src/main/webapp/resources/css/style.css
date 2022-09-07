@@ -516,3 +516,21 @@ a.nav-link.text-info img {
     margin: 10px;
     height: 415px;
 }
+
+/*LIÊN HỆ*/
+@media screen and (max-width: 767px) {
+    .c_info {
+        float: none;
+    }
+}
+@media screen and (max-width: 1023px) {
+    .c_info {
+        width: 100%;
+        padding-top: 0;
+    }
+}
+
+.c_info {
+    position: relative;
+    z-index: 2;
+}

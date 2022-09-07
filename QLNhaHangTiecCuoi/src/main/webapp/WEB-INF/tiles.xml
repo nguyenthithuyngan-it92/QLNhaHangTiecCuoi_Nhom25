@@ -52,7 +52,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="introduce" extends="baseLayout">
         <put-attribute name="title" value="Giới thiệu" />
         <put-attribute name="content"
-                       value="/WEB-INF/jsp/introduce.jsp" />
+                       value="/WEB-INF/jsp/index.jsp" />
     </definition>
     
     <!--TRANG QUẢN LÝ-->
@@ -83,9 +83,27 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     
     <definition name="stats" extends="baseAdminLayout">
-        <put-attribute name="titleAdmin" value="Thống kê" />
+        <put-attribute name="titleAdmin" value="Thống kê mật độ tiệc cưới" />
         <put-attribute name="contentAdmin"
                        value="/WEB-INF/jsp/stats.jsp" />
+    </definition>
+    
+    <definition name="monthStats" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Thống kê doanh thu tháng" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/monthStats.jsp" />
+    </definition>
+    
+    <definition name="quarterStats" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Thống kê doanh thu quý" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/quarterStats.jsp" />
+    </definition>
+    
+    <definition name="yearStats" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Thống kê doanh thu năm" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/yearStats.jsp" />
     </definition>
     
     <definition name="employeeManagement" extends="baseAdminLayout">
