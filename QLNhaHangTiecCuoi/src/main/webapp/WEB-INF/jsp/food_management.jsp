@@ -140,8 +140,6 @@
                 <!--Modal body--> 
                 <div class="modal-body wedding">
 
-                    <form:errors path="*" cssClass="alert alert-danger" element="div" />
-
                     <div class="form-group">
                         <label for="inputName">
                             <spring:message code="food.name" />
@@ -149,7 +147,7 @@
                         </label>
                         <form:input name="name" path="name" id="inputName" 
                                     cssClass="form-control" placeholder="Nhập tên món ăn..."/>
-                        <%--<form:errors path="name" cssClass="text-danger" />--%>
+                        <form:errors path="name" cssClass="text-danger" />
                     </div>
 
                     <div class="form-group select">
@@ -172,17 +170,15 @@
                         </label>
                         <form:input name="price" type="number" path="price" id="inputPrice" 
                                     cssClass="form-control" placeholder="Nhập giá..."/>
-                        <%--<form:errors path="identityCard" cssClass="text-danger" />--%>
+                        <form:errors path="price" cssClass="text-danger" />
                     </div>
 
                     <div class="form-group">
                         <label for="inputDescription">
                             <spring:message code="food.description" />
-                            <span class="text-danger">(*)</span>
                         </label>
                         <form:textarea name="description" path="description" id="inputDescription" 
                                        cssClass="form-control" placeholder="Nhập mô tả..."/>
-                        <%--<form:errors path="dateOfBirth" cssClass="text-danger" />--%>
                     </div>
 
                     <div class="form-group">

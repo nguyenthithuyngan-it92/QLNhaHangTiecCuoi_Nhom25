@@ -106,7 +106,7 @@ public class OrdersRepositoryImpl implements OrdersRepository{
 //            session.flush();
             return ord;
         } catch (HibernateException e) {
-            System.err.println("==Add orders error==" + e.getMessage());
+            System.err.println("==Add orders food error==" + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -120,7 +120,7 @@ public class OrdersRepositoryImpl implements OrdersRepository{
 //            session.flush();
             return true;
         } catch (HibernateException e) {
-            System.err.println("==Add orders error==" + e.getMessage());
+            System.err.println("==Confirm paid orders error==" + e.getMessage());
             e.printStackTrace();
         }
         return false;

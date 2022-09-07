@@ -147,9 +147,6 @@
 
                 <!--Modal body--> 
                 <div class="modal-body wedding">
-
-                    <%--<form:errors path="*" cssClass="alert alert-danger" element="div" />--%>
-
                     <div class="form-group">
                         <label for="inputName">
                             <spring:message code="wdhall.name" />
@@ -182,7 +179,6 @@
                     <div class="form-group">
                         <label for="inputDescription">
                             <spring:message code="wdhall.description" />
-                            <span class="text-danger">(*)</span>
                         </label>
                         <form:textarea name="description" path="description" id="inputDescription" 
                                        cssClass="form-control" placeholder="Nhập mô tả..."/>

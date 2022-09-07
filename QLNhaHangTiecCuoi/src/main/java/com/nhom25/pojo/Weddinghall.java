@@ -70,6 +70,7 @@ public class Weddinghall implements Serializable {
     private int maxTable;
     
     @Column(name = "price")
+    @NotNull(message = "{hall.price.notNullMsg}")
     @Min(value = 1000000, message = "{hall.prices.minError}")
     @Max(value = 100000000, message = "{hall.prices.maxError}")
     private Long price;

@@ -132,9 +132,4 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getAccountById(id);
     }
 
-    @Override
-    public boolean addCusOrder(User cus) {
-        cus.setUserRole(User.CUSTOMER);
-        return this.userRepository.addCusOrder(cus);
-    }
 }

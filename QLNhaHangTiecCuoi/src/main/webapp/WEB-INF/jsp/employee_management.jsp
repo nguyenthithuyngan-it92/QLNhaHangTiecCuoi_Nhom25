@@ -153,8 +153,7 @@
 
                 <!--Modal body--> 
                 <div class="modal-body user-employee">
-
-                    <form:errors path="*" cssClass="alert alert-danger" element="div" />
+                    
                     <div class="left">
                         <div class="form-group">
                             <label for="nameId">

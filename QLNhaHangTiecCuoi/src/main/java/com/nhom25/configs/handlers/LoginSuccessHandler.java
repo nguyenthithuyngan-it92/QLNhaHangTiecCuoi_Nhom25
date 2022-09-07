@@ -6,7 +6,6 @@
 package com.nhom25.configs.handlers;
 
 import com.nhom25.pojo.Account;
-import com.nhom25.pojo.User;
 import com.nhom25.services.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Component;
 
 /**
  *

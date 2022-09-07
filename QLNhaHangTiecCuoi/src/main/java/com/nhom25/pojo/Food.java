@@ -58,8 +58,8 @@ public class Food implements Serializable {
     private Integer foodId;
     
     @Basic(optional = false)
-    @NotNull(message="{food.name.notNullMsg}")
-    @Size(min = 1, max = 255)
+    @NotNull
+    @Size(min = 1, max = 255, message="{food.name.notNullMsg}")
     @Column(name = "name")
     private String name;
     
