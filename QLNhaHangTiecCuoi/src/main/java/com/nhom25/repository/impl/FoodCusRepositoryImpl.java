@@ -54,13 +54,13 @@ public class FoodCusRepositoryImpl implements FoodCusRepository {
             }
 
             String fp = params.get("fromPrice");
-            if (fp != null) {
+            if (fp != null && !fp.isEmpty()) {
                 Predicate p = builder.greaterThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(fp));
                 predicates.add(p);
             }
 
             String tp = params.get("toPrice");
-            if (tp != null) {
+            if (tp != null && !tp.isEmpty()) {
                 Predicate p = builder.lessThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(tp));
                 predicates.add(p);
             }

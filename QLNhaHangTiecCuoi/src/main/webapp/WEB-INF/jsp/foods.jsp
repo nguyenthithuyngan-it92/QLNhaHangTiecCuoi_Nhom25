@@ -14,8 +14,25 @@
 <c:url value="/foods" var="action" />
 <div class="container">
     <form action="${action}" class="d-flex" style="width: 100%; height: 50px">
-        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa để tìm...">
-        <button type="submit" class="btn btn-primary" type="button" style="width: 100px; height: 50px">Tìm kiếm</button>
+        <div class="dropdown" style="margin-right: 10px;">
+            <button type="button" class="btn btn-primary dropdown-toggle form-control me-2" style="height: 50px;" data-bs-toggle="dropdown">
+                Chọn danh mục
+            </button>
+            <ul class="dropdown-menu">
+                <c:forEach items="${categories}" var="cate">
+                    <c:url value="/foods" var="cUrl">
+                        <c:param name="cateID" value="${cate.categoryId}" />
+                    </c:url>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${cUrl}"">${cate.name}</a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+        <input class="form-control me-2" type="text" name="kw" value="" placeholder="Nhập từ khóa để tìm...">
+        <input class="form-control me-2" type="text" name="fromPrice" value="" placeholder="Món giá tối thiểu từ...">
+        <input class="form-control me-2" type="text" name="toPrice" value="" placeholder="Món giá tối đa đến...">
+        <button type="submit" class="btn btn-primary" type="button" style="width: 40%; height: 50px">Tìm kiếm</button>
     </form>
 </div>
 
@@ -41,13 +58,13 @@
         </c:forEach>
     </div>
 </div>
-    
+
 <ul class="pagination justify-content-end">
     <c:forEach begin="1" end="${Math.ceil(foodCounter/9)}" var="i">
         <c:url value="/foods" var="c">
             <c:param value="${i}" name="page" />
         </c:url>
         <li class="page-item"><a class="page-link" href="${c}">${i}</a></li>
-    </c:forEach>
+        </c:forEach>
 </ul>
 
