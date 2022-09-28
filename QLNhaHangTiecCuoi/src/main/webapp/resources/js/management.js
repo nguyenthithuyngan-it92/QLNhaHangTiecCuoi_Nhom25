@@ -39,6 +39,7 @@ let confirmPay = (orderId) => {
                 alert("Đã có lỗi xảy ra!!!");
         }).catch(error => {
             spinnerConfirmWd.classList.add('visually-hidden');
+            console.error(error);
         });
     };
 };
@@ -125,30 +126,6 @@ function getUserId(id) {
     document.getElementById("userId").value = id;
 }
 
-//Lấy thông tin Wedding
-function getWeddingInfo(id) {
-
-    var name = document.getElementById("name" + id).innerText;
-    document.getElementById("inputName").value = name;
-
-    var coefficient = document.getElementById("coefficient" + id).innerText;
-    document.getElementById("inputCoefficient").value = coefficient;
-
-    var description = document.getElementById("description" + id).innerText;
-    document.getElementById("inputDescription").value = description;
-
-    var wdhall = document.getElementById("wdhall" + id).innerText;
-    document.getElementById("inputWdHall").value = wdhall;
-
-    var wdservices = document.getElementById("wdservices" + id).innerText;
-    document.getElementById("inputWdServices").value = wdservices;
-
-    document.getElementById("inputWdId").value = id;
-
-    document.getElementById("title").innerText = "Cập nhật tiệc cưới";
-    document.getElementById("button").innerText = "Cập nhật";
-}
-
 //Lấy thông tin WeddingHall
 function getWdHallInfo(id) {
     var name = document.getElementById("name" + id).innerText;
@@ -196,6 +173,12 @@ function getWdServiceInfo(id) {
 
     var description = document.getElementById("description" + id).innerText;
     document.getElementById("inputDescription").value = description;
+    
+    var active = document.getElementById("active" + id).innerText;
+    if (active === 'true')
+        document.getElementById("activeCheck").checked = true;
+    else
+        document.getElementById("activeCheck").checked = false;
 
     document.getElementById("inputWdServicesId").value = id;
 
@@ -221,7 +204,7 @@ function getFoodInfo(id) {
     var cate = document.getElementById("cate" + id).innerText;
     document.getElementById("inputCate").value = cate;
 
-    document.getElementById("inputImage").required = false;
+//    document.getElementById("inputImage").required = false;
 
 //    var image = document.getElementById("image" + id).innerText;
 //    document.getElementById("inputImage").value = image;

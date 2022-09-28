@@ -8,7 +8,7 @@
 
 window.onload = () => {
     const form = document.getElementById("submitFormAccount");
-    const uploadBtn = document.getElementById("upload_widget");
+//    const uploadBtn = document.getElementById("upload_widget");
     const spinnerRegister = document.querySelector('.spinner-register');
     let userId;
 

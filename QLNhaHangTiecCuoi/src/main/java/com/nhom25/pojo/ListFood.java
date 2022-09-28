@@ -14,20 +14,19 @@ import java.util.Map;
  * @author LENOVO
  */
 public class ListFood {
-    private List<Map<String, String>> foods = new ArrayList<>();
+    private List<Map<String,String>> foods = new ArrayList<>();
 
     /**
      * @return the foods
      */
-    public List<Map<String, String>> getFoods() {
+    public List<Map<String,String>> getFoods() {
         return foods;
     }
 
     /**
      * @param foods the foods to set
      */
-    public void setFoods(List<Map<String, String>> foods) {
+    public void setFoods(List<Map<String,String>> foods) {
         this.foods = foods;
     }
-
 }

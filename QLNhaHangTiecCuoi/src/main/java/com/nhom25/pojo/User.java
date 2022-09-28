@@ -84,7 +84,7 @@ public class User implements Serializable {
 //    @Pattern(regexp = "\\d{10}", message = "{user.phone.error.invalidMsg}")
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 11, message = "{user.phone.notNullMsg}")
+    @Size(min = 1, max = 10, message = "{user.phone.notNullMsg}")
     @Column(name = "phone")
     @JsonIgnore
     private String phone;

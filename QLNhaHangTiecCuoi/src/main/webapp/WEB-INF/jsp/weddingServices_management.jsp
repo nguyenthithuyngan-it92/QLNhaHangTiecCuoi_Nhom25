@@ -57,6 +57,7 @@
                     <th class="name">Tên dịch vụ</th>
                     <th>Giá</th>
                     <th>Mô tả</th>
+                    <th>Trạng thái</th>
                         <sec:authorize access="hasAuthority('ADMIN')">
                         <th>Hành động</th>
                         </sec:authorize>
@@ -72,7 +73,18 @@
                                               value="${services.price}" />  VNĐ
                         </td>
                         <td id="description${services.weddingservicesId}">${services.description}</td>
-
+                        <td id="active${services.weddingservicesId}" hidden="true">${services.active}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${services.active == true}">
+                                    <i class="fa-solid fa-circle-check text-success"></i>
+                                </c:when>
+                                <c:when test="${services.active == false || services.active == null}">
+                                    <i class="fa-solid fa-circle-xmark text-danger"></i>
+                                </c:when>
+                            </c:choose>
+                        </td>
+                        
                         <sec:authorize access="hasAuthority('ADMIN')">
                             <td class="d-flex">
                                 <a class="user-edit" href="javascript:;" 
@@ -83,13 +95,13 @@
                                 </a>
                                    
                                 <c:choose>
-                                    <c:when test="${services.weddingSet.isEmpty() || services.weddingSet == null}">
+                                    <c:when test="${services.ordersSet.isEmpty() || services.ordersSet == null}">
                                         <a class="user-delete" href="javascript:;" onclick="deleteWdService(${services.weddingservicesId})">
                                             <i class="fa-solid fa-trash-can text-danger"
                                                data-bs-toggle="tooltip" title="Xóa"></i>
                                         </a>
                                     </c:when>
-                                    <c:when test="${!services.weddingSet.isEmpty() || services.weddingSet != null}">
+                                    <c:when test="${!services.ordersSet.isEmpty() || services.ordersSet != null}">
                                         <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
                                             <i class="fa-solid fa-trash-can text-danger" 
                                                data-bs-toggle="tooltip" title="Không thể xóa!"></i>
@@ -151,6 +163,14 @@
                         <form:textarea name="description" path="description" id="inputDescription" 
                                        cssClass="form-control" placeholder="Nhập mô tả..."/>
                     </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" name="active" type="checkbox" id="activeCheck" checked="true">
+                        <label class="form-check-label" for="activeCheck">
+                            Trạng thái
+                        </label>
+                    </div>
+                    
                     <form:input path="weddingservicesId" name="weddingservicesId" hidden="true" id="inputWdServicesId" value="0" />
                 </div>
 

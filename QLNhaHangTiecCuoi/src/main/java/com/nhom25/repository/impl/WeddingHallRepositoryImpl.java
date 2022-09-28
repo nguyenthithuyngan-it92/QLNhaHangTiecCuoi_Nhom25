@@ -5,6 +5,7 @@
  */
 package com.nhom25.repository.impl;
 
+import com.nhom25.pojo.Orders;
 import com.nhom25.pojo.Weddinghall;
 import com.nhom25.repository.WeddingHallRepository;
 import java.util.List;
@@ -87,4 +88,85 @@ public class WeddingHallRepositoryImpl implements WeddingHallRepository{
         return false;
     }
     
+    @Override
+        public List<Object[]> densityStats(int year) {
+            Session session = this.sessionFactory.getObject().getCurrentSession();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Object[]> cr = builder.createQuery(Object[].class);
+            
+            Root rW = cr.from(Weddinghall.class);
+            Root rO = cr.from(Orders.class);
+            
+            cr.where(builder.equal(rO.get("weddinghallId"), rW.get("weddinghallId")),
+                    builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), year));
+            
+            cr.multiselect(rW.get("weddinghallId"), rW.get("name"), builder.count(rO.get("weddinghallId")));
+            cr.groupBy(rW.get("weddinghallId"));
+            
+            Query query = session.createQuery(cr);
+            return query.getResultList();
+        }
+        
+        @Override
+        public List<Object[]> quarterStats(int quarter, int year) {
+            Session session = this.sessionFactory.getObject().getCurrentSession();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Object[]> cr = builder.createQuery(Object[].class);
+            
+            Root rW = cr.from(Weddinghall.class);
+            Root rO = cr.from(Orders.class);
+            
+            
+            cr.where(builder.equal(rO.get("weddinghallId"), rW.get("weddinghallId")),
+                    builder.equal(rO.get("status"), 1),
+                    builder.equal(builder.function("QUARTER", Integer.class, rO.get("paymentDate")), quarter),
+                    builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), year));
+            
+            cr.multiselect(rW.get("weddinghallId"), rW.get("name"), builder.sum(rO.get("totalPrice")));
+            cr.groupBy(rW.get("weddinghallId"));
+            
+            Query query = session.createQuery(cr);
+            return query.getResultList();
+        }
+    
+        @Override
+        public List<Object[]> monthStats(int m, int y) {
+            Session session = this.sessionFactory.getObject().getCurrentSession();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Object[]> cr = builder.createQuery(Object[].class);
+            
+            Root rW = cr.from(Weddinghall.class);
+            Root rO = cr.from(Orders.class);
+            
+            cr.where(builder.equal(rO.get("weddinghallId"), rW.get("weddinghallId")),
+                    builder.equal(rO.get("status"), 1),
+                    builder.equal(builder.function("MONTH", Integer.class, rO.get("paymentDate")), m),
+                    builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), y));
+            
+            cr.multiselect(rW.get("weddinghallId"), rW.get("name"), builder.sum(rO.get("totalPrice")));
+            cr.groupBy(rW.get("weddinghallId"));
+            
+            Query query = session.createQuery(cr);
+            return query.getResultList();
+        }
+    
+        @Override
+        public List<Object[]> yearStats(int y) {
+            Session session = this.sessionFactory.getObject().getCurrentSession();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Object[]> cr = builder.createQuery(Object[].class);
+            
+            Root rW = cr.from(Weddinghall.class);
+            Root rO = cr.from(Orders.class);
+            
+            cr.where(builder.equal(rO.get("weddinghallId"), rW.get("weddinghallId")),
+                    builder.equal(rO.get("status"), 1),
+                    builder.equal(builder.function("YEAR", Integer.class, rO.get("paymentDate")), y));
+            
+            cr.multiselect(rW.get("weddinghallId"), rW.get("name"), builder.sum(rO.get("totalPrice")));
+            cr.groupBy(rW.get("weddinghallId"));
+            
+            Query query = session.createQuery(cr);
+            return query.getResultList();
+        }
 }

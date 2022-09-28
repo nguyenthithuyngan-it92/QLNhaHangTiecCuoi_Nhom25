@@ -16,12 +16,14 @@ window.onload = () => {
     let discount = 0;
     
     const submitFormWdUser = document.getElementById("submit-form-wd-user");
+    
     const toastMessage = document.getElementById("liveToast");
     const closeBtn = document.querySelector(".btn-close");
     const toastBody = document.querySelector(".toast-body");
+    const toastMessageDate = document.querySelector(".toastMessage-date");
+    
     const userEle = document.getElementById("has-user-info");
     const wdEle = document.querySelector(".info-wedding");
-    const toastMessageDate = document.querySelector(".toastMessage-date");
     
     const name = document.getElementById("name");
     const identityCard = document.getElementById("identityCard");

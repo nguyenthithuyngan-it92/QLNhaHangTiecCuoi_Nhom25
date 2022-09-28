@@ -7,7 +7,7 @@ package com.nhom25.repository;
 
 import com.nhom25.pojo.Feedback;
 import com.nhom25.pojo.User;
-import com.nhom25.pojo.Wedding;
+import com.nhom25.pojo.Weddinghall;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +16,10 @@ import java.util.Map;
  * @author ASUS
  */
 public interface WeddingCusRepository {
-    List<Wedding> getList(Map<String, String> params, int page);
+    List<Weddinghall> getList(Map<String, String> params, int page);
     int countWedding();
-    Wedding getWeddingById(int weddingId);
-    List<Feedback> getFeedbacks(int weddingId);
-    Feedback addFeedback(String content, int weddingId, User user);
+    Weddinghall getWeddingHallById(int weddinghallId);
+    List<Feedback> getFeedbacks(int weddinghallId);
+    Feedback addFeedback(String content, int weddinghallId, User user);
     int feedbackCounter();
 }

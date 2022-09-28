@@ -34,12 +34,12 @@ public class ApiFeedbackController {
     @Autowired
     private WeddingCusService weddingCusService;
 
-    @GetMapping("/wedding/{weddingId}/feedbacks")
-    public ResponseEntity<List<Feedback>> getFeedbacks(@PathVariable(value = "weddingId") int id) {
+    @GetMapping("/wedding/{weddinghallId}/feedbacks")
+    public ResponseEntity<List<Feedback>> getFeedbacks(@PathVariable(value = "weddinghallId") int id) {
         return new ResponseEntity<>(this.weddingCusService.getFeedbacks(id), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/wedding/{weddingId}/feedbacks", produces = {
+    @PostMapping(path = "/wedding/{weddinghallId}/feedbacks", produces = {
         MediaType.APPLICATION_JSON_VALUE
     })
     public ResponseEntity<Feedback> addFeedback(@RequestBody Map<String, String> params, HttpSession session) {
@@ -48,7 +48,7 @@ public class ApiFeedbackController {
         if (accountId != null && user != null) {
             try {
                 String content = params.get("content");
-                int wedddingId = Integer.parseInt(params.get("weddingId"));
+                int wedddingId = Integer.parseInt(params.get("weddinghallId"));
                 Feedback f = this.weddingCusService.addFeedback(content, wedddingId, user);
                 
                 return new ResponseEntity<>(f, HttpStatus.CREATED);

@@ -5,7 +5,6 @@
  */
 package com.nhom25.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -27,6 +26,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 /**
  *
  * @author LENOVO
@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Weddingservices.findAll", query = "SELECT w FROM Weddingservices w"),
     @NamedQuery(name = "Weddingservices.findByWeddingservicesId", query = "SELECT w FROM Weddingservices w WHERE w.weddingservicesId = :weddingservicesId"),
     @NamedQuery(name = "Weddingservices.findByName", query = "SELECT w FROM Weddingservices w WHERE w.name = :name"),
-    @NamedQuery(name = "Weddingservices.findByPrice", query = "SELECT w FROM Weddingservices w WHERE w.price = :price")})
+    @NamedQuery(name = "Weddingservices.findByPrice", query = "SELECT w FROM Weddingservices w WHERE w.price = :price"),
+    @NamedQuery(name = "Weddingservices.findByActive", query = "SELECT w FROM Weddingservices w WHERE w.active = :active")})
 public class Weddingservices implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,9 +63,10 @@ public class Weddingservices implements Serializable {
     @Column(name = "description")
     private String description;
     
-    @JsonIgnore
+    @Column(name = "active")
+    private Boolean active;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "weddingservicesId")
-    private Set<Wedding> weddingSet;
+    private Set<Orders> ordersSet;
 
     public Weddingservices() {
     }
@@ -110,13 +112,21 @@ public class Weddingservices implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
-    public Set<Wedding> getWeddingSet() {
-        return weddingSet;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setWeddingSet(Set<Wedding> weddingSet) {
-        this.weddingSet = weddingSet;
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @XmlTransient
+    public Set<Orders> getOrdersSet() {
+        return ordersSet;
+    }
+
+    public void setOrdersSet(Set<Orders> ordersSet) {
+        this.ordersSet = ordersSet;
     }
 
     @Override
