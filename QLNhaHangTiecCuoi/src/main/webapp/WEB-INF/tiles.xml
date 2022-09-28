@@ -70,6 +70,18 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/admin.jsp" />
     </definition>
     
+    <definition name="customerInSystem" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Danh sách khách hàng trong hệ thống" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/cusInSystem.jsp" />
+    </definition>
+    
+    <definition name="customerOutsideSystem" extends="baseAdminLayout">
+        <put-attribute name="titleAdmin" value="Danh sách khách hàng ngoài hệ thống" />
+        <put-attribute name="contentAdmin"
+                       value="/WEB-INF/jsp/cusOutsideSystem.jsp" />
+    </definition>
+    
     <definition name="foodManagement" extends="baseAdminLayout">
         <put-attribute name="titleAdmin" value="Quản lý món ăn" />
         <put-attribute name="contentAdmin"
@@ -111,6 +123,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="contentAdmin"
                        value="/WEB-INF/jsp/employee_management.jsp" />
     </definition>
+    
     
     <definition name="weddingHallManagement" extends="baseAdminLayout">
         <put-attribute name="titleAdmin" value="Quản lý sảnh cưới" />

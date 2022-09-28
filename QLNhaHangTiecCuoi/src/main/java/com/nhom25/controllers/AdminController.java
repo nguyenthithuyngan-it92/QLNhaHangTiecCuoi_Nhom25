@@ -44,11 +44,29 @@ public class AdminController {
     public String admin(Model model, @RequestParam(required = false) Map<String, String> params, HttpSession session){
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
         
-        //Danh sách khách hàng
-        String name = params.getOrDefault("name", null);
-        model.addAttribute("user", this.userService.getUsers(name));
+        //Danh sách tài khoản 
+        String username = params.getOrDefault("username", null);
+        model.addAttribute("accounts", this.userService.getAccounts(username));
         
         return "admin";
+    }
+    
+    @GetMapping("/customer-in-system")
+    public String listCustomerInSystem(Model model, ModelMap map, @RequestParam(required = false) Map<String, String> params){
+        //Danh sách khách hàng trong hệ thống
+        String name = params.getOrDefault("name", null);
+        model.addAttribute("usersInSystem", this.userService.getUsers(name));
+        
+        return "customerInSystem";
+    }
+    
+    @GetMapping("/customer-outside-system")
+    public String listCustomerOutsideSystem(Model model, ModelMap map, @RequestParam(required = false) Map<String, String> params){
+        //Danh sách khách hàng trong hệ thống
+        String name = params.getOrDefault("name", null);
+        model.addAttribute("usersOutsideSystem", this.userService.getUsers(name));
+        
+        return "customerOutsideSystem";
     }
     
     @GetMapping("/employee-management")

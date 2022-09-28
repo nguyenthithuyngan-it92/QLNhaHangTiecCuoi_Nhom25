@@ -111,15 +111,15 @@ public class User implements Serializable {
     private String userRole;
     
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(mappedBy = "userId")
     private Set<Feedback> feedbackSet;
     
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(mappedBy = "userId")
     private Set<Orders> ordersSet;
     
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     private Account account;
 
     public User() {
