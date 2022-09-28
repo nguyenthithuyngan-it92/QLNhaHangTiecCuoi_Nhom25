@@ -90,7 +90,10 @@ public class Weddinghall implements Serializable {
     
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "weddinghallId")
-    private Set<Wedding> weddingSet;
+    private Set<Feedback> feedbackSet;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "weddinghallId")
+    private Set<Orders> ordersSet;
 
     public Weddinghall() {
     }
@@ -162,12 +165,21 @@ public class Weddinghall implements Serializable {
     }
 
     @XmlTransient
-    public Set<Wedding> getWeddingSet() {
-        return weddingSet;
+    public Set<Feedback> getFeedbackSet() {
+        return feedbackSet;
     }
 
-    public void setWeddingSet(Set<Wedding> weddingSet) {
-        this.weddingSet = weddingSet;
+    public void setFeedbackSet(Set<Feedback> feedbackSet) {
+        this.feedbackSet = feedbackSet;
+    }
+
+    @XmlTransient
+    public Set<Orders> getOrdersSet() {
+        return ordersSet;
+    }
+
+    public void setOrdersSet(Set<Orders> ordersSet) {
+        this.ordersSet = ordersSet;
     }
 
     @Override

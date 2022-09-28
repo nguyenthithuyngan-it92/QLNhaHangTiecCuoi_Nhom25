@@ -37,7 +37,7 @@
 </div>
 
 <c:if test="${food.size() == 0}">
-    <p><em>KHÔNG CÓ MÓN ĂN NÀO</em></p>
+    <p><em>HIỆN TẠI NHÀ HÀNG KHÔNG CÓ MÓN ĂN NÀO!!</em></p>
 </c:if>
 
 <div class="container">

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/* global fetch */
+/* global fetch, moment */
 
 function loadFeedback(endpoint) {
     fetch(endpoint).then(function(res) {
@@ -14,20 +14,20 @@ function loadFeedback(endpoint) {
         for (let d of data)
             h += `
                 <li class="list-group-item"><em>${d.content}</em> - được phản hồi bởi <strong>${d.user.name}</strong> - vào <strong>${moment(d.createdDate).locale("vi").fromNow()}</strong></li>
-            `
+            `;
         f.innerHTML = h;
     });
 }
 
 
-function addFeedback(endpoint, weddingId) {
+function addFeedback(endpoint, weddinghallId) {
     console.log({"content": document.getElementById("feedbackId").value,
-            "weddingId": weddingId})
+            "weddinghallId": weddinghallId});
     fetch(endpoint, {
         method: "post",
         body: JSON.stringify({
             "content": document.getElementById("feedbackId").value,
-            "weddingId": weddingId
+            "weddinghallId": weddinghallId
         }),
         headers: {
             "Content-Type": "application/json"

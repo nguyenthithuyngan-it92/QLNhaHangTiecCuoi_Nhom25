@@ -5,7 +5,7 @@
  */
 package com.nhom25.formatters;
 
-import com.nhom25.pojo.Wedding;
+import com.nhom25.pojo.Shift;
 import java.text.ParseException;
 import java.util.Locale;
 import org.springframework.format.Formatter;
@@ -14,18 +14,18 @@ import org.springframework.format.Formatter;
  *
  * @author LENOVO
  */
-public class WeddingFormatter implements Formatter<Wedding>{
+public class ShiftFormatter implements Formatter<Shift>{
 
     @Override
-    public String print(Wedding object, Locale locale) {
-        return String.valueOf(object.getWeddingId());
+    public String print(Shift object, Locale locale) {
+        return String.valueOf(object.getShiftId());
     }
 
     @Override
-    public Wedding parse(String id, Locale locale) throws ParseException {
-        Wedding w = new Wedding();
-        w.setWeddingId(Integer.parseInt(id));
-        return w;
+    public Shift parse(String shiftId, Locale locale) throws ParseException {
+        Shift s = new Shift();
+        s.setShiftId(Integer.parseInt(shiftId));
+        return s;
     }
     
 }

@@ -7,8 +7,6 @@ package com.nhom25.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +27,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -45,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Orders.findByStatus", query = "SELECT o FROM Orders o WHERE o.status = :status"),
     @NamedQuery(name = "Orders.findByPartyDate", query = "SELECT o FROM Orders o WHERE o.partyDate = :partyDate"),
     @NamedQuery(name = "Orders.findByQuantityTable", query = "SELECT o FROM Orders o WHERE o.quantityTable = :quantityTable"),
-    @NamedQuery(name = "Orders.findByTotalPrice", query = "SELECT o FROM Orders o WHERE o.totalPrice = :totalPrice")})
+    @NamedQuery(name = "Orders.findByTotalPrice", query = "SELECT o FROM Orders o WHERE o.totalPrice = :totalPrice"),
+    @NamedQuery(name = "Orders.findByPaymentDate", query = "SELECT o FROM Orders o WHERE o.paymentDate = :paymentDate")})
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,16 +82,31 @@ public class Orders implements Serializable {
     @JsonIgnore
     private User userId;
     
-    @JoinColumn(name = "wedding_id", referencedColumnName = "wedding_id")
+    @JoinColumn(name = "shift_id", referencedColumnName = "shift_id")
+    @ManyToOne(optional = false)
+    private Shift shiftId;
+    
+    @JoinColumn(name = "weddinghall_id", referencedColumnName = "weddinghall_id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Wedding weddingId;
+    private Weddinghall weddinghallId;
+    
+    @JoinColumn(name = "weddingservices_id", referencedColumnName = "weddingservices_id")
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Weddingservices weddingservicesId;
 
     public Orders() {
     }
 
     public Orders(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Orders(Integer orderId, Date partyDate, int quantityTable) {
+        this.orderId = orderId;
+        this.partyDate = partyDate;
+        this.quantityTable = quantityTable;
     }
 
     public Integer getOrderId() {
@@ -128,11 +141,11 @@ public class Orders implements Serializable {
         this.partyDate = partyDate;
     }
 
-    public Integer getQuantityTable() {
+    public int getQuantityTable() {
         return quantityTable;
     }
 
-    public void setQuantityTable(Integer quantityTable) {
+    public void setQuantityTable(int quantityTable) {
         this.quantityTable = quantityTable;
     }
 
@@ -142,6 +155,28 @@ public class Orders implements Serializable {
 
     public void setTotalPrice(Long totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    /**
+     * @return the foods
+     */
+    public Set<Food> getFoods() {
+        return foods;
+    }
+
+    /**
+     * @param foods the foods to set
+     */
+    public void setFoods(Set<Food> foods) {
+        this.foods = foods;
     }
 
     public Paymentmethods getPaymentmethodsId() {
@@ -160,12 +195,28 @@ public class Orders implements Serializable {
         this.userId = userId;
     }
 
-    public Wedding getWeddingId() {
-        return weddingId;
+    public Shift getShiftId() {
+        return shiftId;
     }
 
-    public void setWeddingId(Wedding weddingId) {
-        this.weddingId = weddingId;
+    public void setShiftId(Shift shiftId) {
+        this.shiftId = shiftId;
+    }
+
+    public Weddinghall getWeddinghallId() {
+        return weddinghallId;
+    }
+
+    public void setWeddinghallId(Weddinghall weddinghallId) {
+        this.weddinghallId = weddinghallId;
+    }
+
+    public Weddingservices getWeddingservicesId() {
+        return weddingservicesId;
+    }
+
+    public void setWeddingservicesId(Weddingservices weddingservicesId) {
+        this.weddingservicesId = weddingservicesId;
     }
 
     @Override
@@ -192,33 +243,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "com.nhom25.pojo.Orders[ orderId=" + orderId + " ]";
     }
-
-    /**
-     * @return the foods
-     */
-    public Set<Food> getFoods() {
-        return foods;
-    }
-
-    /**
-     * @param foods the foods to set
-     */
-    public void setFoods(Set<Food> foods) {
-        this.foods = foods;
-    }
-
-    /**
-     * @return the paymentDate
-     */
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    /**
-     * @param paymentDate the paymentDate to set
-     */
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
+    
 }

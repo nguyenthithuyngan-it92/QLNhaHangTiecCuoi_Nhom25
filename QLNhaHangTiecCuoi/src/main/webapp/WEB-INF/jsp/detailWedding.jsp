@@ -9,44 +9,38 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-danger titleWd">CHI TIẾT TIỆC CƯỚI</h1>
+<h1 class="text-center text-danger titleWd">CHI TIẾT SẢNH CƯỚI</h1>
 
 <div class="row">
     <div class="col-md-5 imgWedding">
-        <img src="${wedding.weddinghallId.image}" alt="${wedding.name}" class="img-thumbnail card-img-top img-fluid" />
+        <img src="${weddinghall.image}" alt="${weddinghall.name}" class="img-thumbnail card-img-top img-fluid" />
     </div>
     <div class="col-md-6">
-        <h1 class="wdname">${wedding.name}</h1>
+        <h1 class="wdname">${weddinghall.name}</h1>
         <div class="d-flex" style="margin: auto;">
             <p style="margin-right: 10px;">Giá sảnh <h4 class="text-info wdHall" style="font-style: italic;">
                 <fmt:formatNumber type = "number" maxFractionDigits = "3" 
-                                  value = "${wedding.weddinghallId.price}" /> VNĐ</h4>
+                                  value = "${weddinghall.price}" /> VNĐ</h4>
             </p>
         </div>
         <div class="d-flex" style="margin: auto;">
-            <p style="margin-right: 10px;">Sảnh tổ chức tiệc cưới
-            <h5 class="wdHall" style="padding: 0px;"> ${wedding.weddinghallId.name}</h5>
+            <p style="margin-right: 10px;">Sức chứa tối đa <h4 class="text-info wdHall" style="font-style: italic;">
+                ${weddinghall.maxTable} bàn</h4>
             </p>
         </div>
         <div class="d-flex" style="margin: auto;">
-            <p style="margin-right: 10px;">Gói dịch vụ cưới
-            <h5 class="wdHall" style="padding: 0px;"> ${wedding.weddingservicesId.name}</h5>
-            </p>
-        </div>
-        <div class="d-flex" style="margin: auto;">
-            <p style="margin-right: 10px;">Giá dịch vụ cưới
-            <h5 class="wdHall" style="padding: 0px;"><fmt:formatNumber type = "number" maxFractionDigits = "3" 
-                              value = "${wedding.weddingservicesId.price}" /> VNĐ </h5>
+            <p style="margin-right: 10px;">Mô tả 
+                <b style="font-size: 13px;"> ${weddinghall.description} </b>
             </p>
         </div>
         <div>
-            <a href="<c:url value="/wedding/${wedding.weddingId}/booking-wedding" />" 
+            <a href="<c:url value="/wedding/${weddinghall.weddinghallId}/booking-wedding" />" 
                class="btn btn-danger btnOrder" onclick="#">Đặt tiệc</a>
         </div>
     </div>
 </div>
 <br><br>
-<c:url value="/api/wedding/${wedding.weddingId}/feedbacks" var="endpoint" />
+<c:url value="/api/wedding/${weddinghall.weddinghallId}/feedbacks" var="endpoint" />
 <sec:authorize access="!isAuthenticated()">
     <strong>Vui lòng <a href="<c:url value="/login" />">đăng nhập</a> để phản hồi!!!</strong>
 </sec:authorize>
@@ -55,7 +49,7 @@
         <textarea class="form-control" placeholder="Nhập nội dung để phản hồi..." id="feedbackId"></textarea>
     </div>
     <br><br>
-    <button class="btn btn-danger" onclick="addFeedback('${endpoint}', ${wedding.weddingId})">Thêm phản hồi</button>
+    <button class="btn btn-danger" onclick="addFeedback('${endpoint}', ${weddinghall.weddinghallId})">Thêm phản hồi</button>
     <br><br>
 </sec:authorize>
 
@@ -76,7 +70,7 @@
 <div>
     <ul class="pagination justify-content-center">
         <c:forEach begin="1" end="${Math.ceil(feedbackCounter/max)}" var="i">
-            <c:url value="/wedding/${weddingId}" var="path">
+            <c:url value="/wedding/${weddinghallId}" var="path">
                 <c:param value="${i}" name="page"  />
             </c:url>
             <li class="page-item"><a  class="page-link" href="${path}">${i}</a></li>

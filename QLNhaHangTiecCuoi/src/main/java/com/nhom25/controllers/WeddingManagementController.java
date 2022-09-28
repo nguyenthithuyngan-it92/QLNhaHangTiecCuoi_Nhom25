@@ -6,14 +6,13 @@
 package com.nhom25.controllers;
 
 import com.nhom25.pojo.Food;
-import com.nhom25.pojo.Wedding;
 import com.nhom25.pojo.Weddinghall;
 import com.nhom25.pojo.Weddingservices;
 import com.nhom25.services.CategoryService;
 import com.nhom25.services.FoodService;
 import com.nhom25.services.PaymentmethodsService;
 import com.nhom25.services.WeddingHallService;
-import com.nhom25.services.WeddingService;
+//import com.nhom25.services.WeddingService;
 import com.nhom25.services.WeddingServicesService;
 import java.util.Map;
 import javax.validation.Valid;
@@ -36,8 +35,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ControllerAdvice
 @RequestMapping("/admin")
 public class WeddingManagementController {
-    @Autowired
-    private WeddingService weddingService;
+//    @Autowired
+//    private WeddingService weddingService;
 
     @Autowired
     private WeddingHallService weddingHallService;
@@ -93,44 +92,9 @@ public class WeddingManagementController {
 
         return "foodManagement";
     }
-    
-    @GetMapping("/wedding-management")
-    public String listWeddings(Model model, @RequestParam(required = false) Map<String, String> params) {
-        String kw = params.getOrDefault("kw", null);
-        model.addAttribute("weddings", this.weddingService.getWeddings(kw));
-        
-        model.addAttribute("wedding", new Wedding());
-
-        return "weddingManagement";
-    }
-    
-    //THÊM TIỆC CƯỚI
-    @PostMapping("/wedding-management")
-    public String addWedding(Model model, @Valid @ModelAttribute(value = "wedding") Wedding wedding,
-                                            BindingResult result) {
-        //Thêm tiệc cưới
-        String errMsg = "";
-        String successMsg = "";
-        if (!result.hasErrors()) {
-            if (this.weddingService.addOrUpdateWedding(wedding)) {
-                successMsg = "Thao tác thành công!";
-                model.addAttribute("successMsg", successMsg);
-
-                return "redirect:/admin/wedding-management";
-            } else {
-                errMsg = "Đã có lỗi xảy ra khi thao tác!!!";
-            }
-        } else {
-            errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
-        }
-
-        model.addAttribute("errMsg", errMsg);
-
-        return "weddingManagement";
-    }
 
     @GetMapping("/weddingHall-management")
-    public String listWeddingHall(Model model, @RequestParam(required = false) Map<String, String> params) {
+    public String listWeddingHalls(Model model, @RequestParam(required = false) Map<String, String> params) {
         String name = params.getOrDefault("name", null);
         model.addAttribute("weddinghalls", this.weddingHallService.getWeddingHalls(name));
         
@@ -166,7 +130,7 @@ public class WeddingManagementController {
     }
 
     @GetMapping("/weddingService-management")
-    public String listWeddingService(Model model, @RequestParam(required = false) Map<String, String> params) {
+    public String listWeddingServices(Model model, @RequestParam(required = false) Map<String, String> params) {
         //Tìm kiếm dịch vụ theo tên
         String name = params.getOrDefault("name", null);
         model.addAttribute("wdservices", this.weddingServicesService.getWeddingServices(name));
@@ -205,7 +169,7 @@ public class WeddingManagementController {
     @GetMapping("/stats")
     public String stats(Model model,
             @RequestParam(value = "year", defaultValue = "2022") int year) {
-        model.addAttribute("densityStats", this.weddingService.densityStats(year));
+        model.addAttribute("densityStats", this.weddingHallService.densityStats(year));
         
         return "stats";
     }
@@ -214,7 +178,7 @@ public class WeddingManagementController {
     public String monthStats(Model model,
             @RequestParam(value = "year", defaultValue = "2022") int year,
             @RequestParam(value = "month", defaultValue = "1") int month) {
-        model.addAttribute("monthStats", this.weddingService.monthStats(month, year));
+        model.addAttribute("monthStats", this.weddingHallService.monthStats(month, year));
         
         return "monthStats";
     }
@@ -223,7 +187,7 @@ public class WeddingManagementController {
     public String quarterStats(Model model, 
             @RequestParam(value = "quarter", defaultValue = "1") int quarter,
             @RequestParam(value = "year", defaultValue = "2022") int year) {
-        model.addAttribute("quarterStats", this.weddingService.quarterStats(quarter, year));
+        model.addAttribute("quarterStats", this.weddingHallService.quarterStats(quarter, year));
         
         return "quarterStats";
     }
@@ -231,7 +195,7 @@ public class WeddingManagementController {
     @GetMapping("/yearStats")
     public String yearStats(Model model,
             @RequestParam(value = "year", defaultValue = "2022") int year) {
-        model.addAttribute("yearStats", this.weddingService.yearStats(year));
+        model.addAttribute("yearStats", this.weddingHallService.yearStats(year));
         
         return "yearStats";
     }

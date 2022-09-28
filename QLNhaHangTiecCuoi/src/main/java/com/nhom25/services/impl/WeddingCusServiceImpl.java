@@ -7,7 +7,7 @@ package com.nhom25.services.impl;
 
 import com.nhom25.pojo.Feedback;
 import com.nhom25.pojo.User;
-import com.nhom25.pojo.Wedding;
+import com.nhom25.pojo.Weddinghall;
 import com.nhom25.repository.WeddingCusRepository;
 import com.nhom25.services.WeddingCusService;
 import java.util.List;
@@ -25,7 +25,7 @@ public class WeddingCusServiceImpl implements WeddingCusService {
     private WeddingCusRepository weddingCusRepository;
     
     @Override
-    public List<Wedding> getList(Map<String, String> params, int page) {
+    public List<Weddinghall> getList(Map<String, String> params, int page) {
         return this.weddingCusRepository.getList(params, page);
     }
 
@@ -35,18 +35,18 @@ public class WeddingCusServiceImpl implements WeddingCusService {
     }
 
     @Override
-    public Wedding getWeddingById(int weddingId) {
-        return this.weddingCusRepository.getWeddingById(weddingId);
+    public Weddinghall getWeddingHallById(int weddinghallId) {
+        return this.weddingCusRepository.getWeddingHallById(weddinghallId);
     }
 
     @Override
-    public List<Feedback> getFeedbacks(int weddingId) {
-        return this.weddingCusRepository.getFeedbacks(weddingId);
+    public List<Feedback> getFeedbacks(int weddinghallId) {
+        return this.weddingCusRepository.getFeedbacks(weddinghallId);
     }
 
     @Override
-    public Feedback addFeedback(String content, int weddingId, User user) {
-        return this.weddingCusRepository.addFeedback(content, weddingId, user);
+    public Feedback addFeedback(String content, int weddinghallId, User user) {
+        return this.weddingCusRepository.addFeedback(content, weddinghallId, user);
     }
 
     @Override

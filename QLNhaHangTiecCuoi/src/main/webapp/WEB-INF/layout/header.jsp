@@ -29,7 +29,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="<c:url value="" />" role="button" data-bs-toggle="dropdown">Dịch vụ</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<c:url value="/weddings" />">Tiệc cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/weddings" />">Sảnh cưới</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/foods" />">Món ăn</a></li>
                         <li><a class="dropdown-item" href="#">Dịch vụ khác</a></li>
                     </ul>

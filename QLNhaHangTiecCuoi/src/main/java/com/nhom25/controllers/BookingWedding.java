@@ -26,9 +26,9 @@ public class BookingWedding {
     @Autowired
     private WeddingCusService weddingCusService;
     
-    @GetMapping(value = "/wedding/{weddingId}/booking-wedding")
-    public String bookingWedding(Model model, @PathVariable(value="weddingId") int id) {
-        model.addAttribute("wedding", this.weddingCusService.getWeddingById(id));
+    @GetMapping(value = "/wedding/{weddinghallId}/booking-wedding")
+    public String bookingWedding(Model model, @PathVariable(value="weddinghallId") int id) {
+        model.addAttribute("weddinghall", this.weddingCusService.getWeddingHallById(id));
         
         model.addAttribute("bookingCustomer", new Orders());
 

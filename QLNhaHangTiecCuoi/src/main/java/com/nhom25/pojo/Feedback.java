@@ -5,7 +5,6 @@
  */
 package com.nhom25.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -46,25 +45,28 @@ public class Feedback implements Serializable {
     @Basic(optional = false)
     @Column(name = "feedback_id")
     private Integer feedbackId;
+    
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 16777215)
     @Column(name = "content")
     private String content;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
+    
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
     @JsonProperty("user")
     private User userId;
-    @JoinColumn(name = "wedding_id", referencedColumnName = "wedding_id")
+    
+    @JoinColumn(name = "weddinghall_id", referencedColumnName = "weddinghall_id")
     @ManyToOne(optional = false)
-    @JsonIgnore
-    private Wedding weddingId;
+    private Weddinghall weddinghallId;
 
     public Feedback() {
     }
@@ -110,12 +112,13 @@ public class Feedback implements Serializable {
         this.userId = userId;
     }
 
-    public Wedding getWeddingId() {
-        return weddingId;
+
+    public Weddinghall getWeddinghallId() {
+        return weddinghallId;
     }
 
-    public void setWeddingId(Wedding weddingId) {
-        this.weddingId = weddingId;
+    public void setWeddinghallId(Weddinghall weddinghallId) {
+        this.weddinghallId = weddinghallId;
     }
 
     @Override

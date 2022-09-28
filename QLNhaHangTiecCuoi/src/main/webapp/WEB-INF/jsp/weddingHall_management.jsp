@@ -107,13 +107,15 @@
 
                                 <!--XÓA-->
                                 <c:choose>
-                                    <c:when test="${hall.weddingSet.isEmpty() || hall.weddingSet == null}">
+                                    <c:when test="${hall.ordersSet.isEmpty() || hall.ordersSet == null 
+                                                    || hall.feedbackSet.isEmpty() || hall.feedbackSet == null}">
                                         <a class="user-delete" href="javascript:;" onclick="deleteWdHall(${hall.weddinghallId})">
                                             <i class="fa-solid fa-trash-can text-danger"
                                                data-bs-toggle="tooltip" title="Xóa"></i>
                                         </a>
                                     </c:when>
-                                    <c:when test="${!hall.weddingSet.isEmpty() || hall.weddingSet != null}">
+                                    <c:when test="${!hall.ordersSet.isEmpty() || hall.ordersSet != null
+                                                || !hall.feedbackSet.isEmpty() || hall.feedbackSet != null}">
                                         <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
                                             <i class="fa-solid fa-trash-can text-danger" 
                                                data-bs-toggle="tooltip" title="Không thể xóa!"></i>

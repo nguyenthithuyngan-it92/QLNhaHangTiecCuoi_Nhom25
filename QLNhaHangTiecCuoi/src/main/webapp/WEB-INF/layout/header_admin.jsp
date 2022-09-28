@@ -109,12 +109,6 @@
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="accordion-item-custom">
-                                    <a href="<c:url value="/admin/wedding-management"/>">
-                                        <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Tiệc cưới</span>
-                                    </a> 
-                                </div>
-                                <div class="accordion-item-custom">
                                     <a href="<c:url value="/admin/weddingHall-management"/>">
                                         <i class="fas fa-plus mr-2"></i>
                                         <span class="hide-nav">Sảnh cưới</span>

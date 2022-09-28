@@ -10,12 +10,13 @@ import com.nhom25.pojo.ListFood;
 import com.nhom25.pojo.Orders;
 import com.nhom25.pojo.Paymentmethods;
 import com.nhom25.pojo.User;
-import com.nhom25.pojo.Wedding;
+import com.nhom25.pojo.Weddinghall;
 import com.nhom25.services.CategoryService;
 import com.nhom25.services.OrdersService;
 import com.nhom25.services.PaymentmethodsService;
 import com.nhom25.services.UserService;
-import com.nhom25.services.WeddingService;
+import com.nhom25.services.WeddingHallService;
+//import com.nhom25.services.WeddingService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class ApiBookingWedding {
     private OrdersService ordersService;
     
     @Autowired
-    private WeddingService weddingService;
+    private WeddingHallService weddingHallService;
     
     @Autowired
     private UserService userService;
@@ -78,21 +79,21 @@ public class ApiBookingWedding {
         try {
             String userId = params.get("userId");
             String paymentId = params.get("paymentId");
-            String weddingId = params.get("weddingId");
+            String weddinghallId = params.get("weddinghallId");
             String totalPrice = params.get("totalPrice");
             String quantityTable = params.get("quantityTable");
             String partyDate = params.get("partyDate");
             
             Date partyDateTransform = new SimpleDateFormat("yyyy-MM-dd").parse(partyDate);
             
-            Wedding wd = this.weddingService.getWeddingById(Integer.parseInt(weddingId));
+            Weddinghall wd = this.weddingHallService.getWeddingHallById(Integer.parseInt(weddinghallId));
             User user = this.userService.getUserById(Integer.parseInt(userId));
             Paymentmethods payMt = this.paymentmethodsService
                     .getPaymentmethodsById(Integer.parseInt(paymentId));
             
             Orders orderTemp = new Orders();
             orderTemp.setTotalPrice(Long.parseLong(totalPrice));
-            orderTemp.setWeddingId(wd);
+            orderTemp.setWeddinghallId(wd);
             orderTemp.setUserId(user);
             orderTemp.setPaymentmethodsId(payMt);
             orderTemp.setPartyDate(partyDateTransform);

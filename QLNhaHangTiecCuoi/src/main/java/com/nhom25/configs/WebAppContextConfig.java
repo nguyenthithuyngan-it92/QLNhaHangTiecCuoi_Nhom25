@@ -9,7 +9,7 @@ import com.nhom25.formatters.CategoryFormatter;
 import com.nhom25.formatters.FoodFormatter;
 import com.nhom25.formatters.OrdersFormatter;
 import com.nhom25.formatters.PaymentmethodsFormatter;
-import com.nhom25.formatters.WeddingFormatter;
+import com.nhom25.formatters.ShiftFormatter;
 import com.nhom25.formatters.WeddingHallFormatter;
 import com.nhom25.formatters.WeddingServicesFormatter;
 import com.nhom25.validator.PassValidator;
@@ -106,7 +106,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new CategoryFormatter());
         registry.addFormatter(new WeddingHallFormatter());
         registry.addFormatter(new WeddingServicesFormatter());
-        registry.addFormatter(new WeddingFormatter());
+        registry.addFormatter(new ShiftFormatter());
         registry.addFormatter(new PaymentmethodsFormatter());
         registry.addFormatter(new FoodFormatter());
         registry.addFormatter(new OrdersFormatter());

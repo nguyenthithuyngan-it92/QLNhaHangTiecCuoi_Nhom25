@@ -7,8 +7,7 @@ package com.nhom25.repository.impl;
 
 import com.nhom25.pojo.Feedback;
 import com.nhom25.pojo.User;
-import com.nhom25.pojo.Wedding;
-import com.nhom25.repository.UserRepository;
+import com.nhom25.pojo.Weddinghall;
 import com.nhom25.repository.WeddingCusRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,15 +38,13 @@ public class WeddingCusRepositoryImpl implements WeddingCusRepository {
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
     private Environment env;
-    @Autowired
-    private UserRepository userRepository;
 
     @Override
-    public List<Wedding> getList(Map<String, String> params, int page) {
+    public List<Weddinghall> getList(Map<String, String> params, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Wedding> query = builder.createQuery(Wedding.class);
-        Root root = query.from(Wedding.class);
+        CriteriaQuery<Weddinghall> query = builder.createQuery(Weddinghall.class);
+        Root root = query.from(Weddinghall.class);
         query = query.select(root);
 
         if (params != null) {
@@ -84,15 +81,15 @@ public class WeddingCusRepositoryImpl implements WeddingCusRepository {
     @Override
     public int countWedding() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query query = session.createQuery("SELECT COUNT(*) FROM Wedding");
+        Query query = session.createQuery("SELECT COUNT(*) FROM Weddinghall");
 
         return Integer.parseInt(query.getSingleResult().toString());
     }
 
     @Override
-    public Wedding getWeddingById(int weddingId) {
+    public Weddinghall getWeddingHallById(int weddinghallId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        return session.get(Wedding.class, weddingId);
+        return session.get(Weddinghall.class, weddinghallId);
     }
 
     @Override
@@ -104,26 +101,26 @@ public class WeddingCusRepositoryImpl implements WeddingCusRepository {
     }
 
     @Override
-    public List<Feedback> getFeedbacks(int weddingId) {
+    public List<Feedback> getFeedbacks(int weddinghallId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Feedback> query = builder.createQuery(Feedback.class);
         Root root = query.from(Feedback.class);
         query = query.select(root);
 
-        query.where(builder.equal(root.get("weddingId"), weddingId));
+        query.where(builder.equal(root.get("weddinghallId"), weddinghallId));
 
         Query q = session.createQuery(query);
         return q.getResultList();
     }
 
     @Override
-    public Feedback addFeedback(String content, int weddingId, User user) {
+    public Feedback addFeedback(String content, int weddinghallId, User user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Feedback f = new Feedback();
         try {
             f.setContent(content);
-            f.setWeddingId(this.getWeddingById(weddingId));
+            f.setWeddinghallId(this.getWeddingHallById(weddinghallId));
             f.setUserId(user);
             session.save(f);
             

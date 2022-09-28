@@ -887,7 +887,11 @@ header, .main-content {
     margin: auto;
     padding: 40px;
 }
-
+.canvasStats2{
+    width: 60%;
+    margin: auto;
+    padding: 40px;
+}
 .table.stats {
     font-size: 15px;
     text-align: center;
