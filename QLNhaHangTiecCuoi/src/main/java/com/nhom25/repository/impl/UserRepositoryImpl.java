@@ -74,7 +74,7 @@ public class UserRepositoryImpl implements  UserRepository {
         CriteriaQuery<Account> query = builder.createQuery(Account.class);
         Root root = query.from(Account.class);
         query.select(root);
-        if(!username.isEmpty()){
+        if(username != null){
             Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
             query = query.where(p); 
         }

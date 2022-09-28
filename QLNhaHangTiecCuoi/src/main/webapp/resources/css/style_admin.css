@@ -756,7 +756,8 @@ header, .main-content {
 }
 
 .accordion-button.link-wrapper .fas.fa-solid.fa-utensils,
-.accordion-button.link-wrapper .fas.fa-solid.fa-chart-bar{
+.accordion-button.link-wrapper .fas.fa-solid.fa-chart-bar,
+.accordion-button.link-wrapper .fa-solid.fa-users-between-lines{
     color: black;
     font-size: 18px;
 }
