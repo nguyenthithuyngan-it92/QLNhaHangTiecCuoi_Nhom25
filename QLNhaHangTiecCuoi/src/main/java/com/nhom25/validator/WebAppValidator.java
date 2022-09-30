@@ -35,12 +35,14 @@ public class WebAppValidator implements Validator{
         Set<ConstraintViolation<Object>> constraintViolations 
                 = beanValidator.validate(target);
         
-        for (ConstraintViolation<Object> obj: constraintViolations) 
+        constraintViolations.forEach(obj -> {
             errors.rejectValue(obj.getPropertyPath().toString(), 
                     obj.getMessageTemplate(), obj.getMessage());
+        });
         
-        for (Validator obj: springValidators)
+        springValidators.forEach(obj -> {
             obj.validate(target, errors);
+        });
     }
     
     public void setSpringValidators(Set<Validator> springValidators) {

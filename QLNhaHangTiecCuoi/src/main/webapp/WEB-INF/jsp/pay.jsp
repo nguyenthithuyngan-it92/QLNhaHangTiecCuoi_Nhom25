@@ -38,7 +38,8 @@
                     <tr class="text-uppercase text-center">
                         <th class="min">Mã HĐ</th>
                         <th class="name">Tên KH</th>
-                        <th class="name">Tiệc cưới</th>
+                        <th class="name">Sảnh cưới</th>
+                        <th class="name">Gói dịch vụ</th>
                         <th>Ngày tạo</th>
                         <th>Ngày tổ chức tiệc cưới</th>
                         <th class="min">Số bàn</th>
@@ -55,7 +56,8 @@
                             <tr>
                                 <td id="orderId">${o.orderId}</td>
                                 <td>${o.userId.name}</td>
-                                <td>${o.weddingId.name}</td>
+                                <td>${o.weddinghallId.name}</td>
+                                <td>${o.weddingservicesId.name}</td>
 
                                 <td><fmt:formatDate pattern="dd-MM-yyyy" value="${o.createdDate}"/></td>
                                 <td><fmt:formatDate pattern="dd-MM-yyyy" value="${o.partyDate}"/></td>
@@ -107,7 +109,8 @@
                 <tr class="text-uppercase text-center">
                     <th class="min">Mã HĐ</th>
                     <th class="name">Tên KH</th>
-                    <th class="name">Tiệc cưới</th>
+                    <th class="name">Sảnh cưới</th>
+                    <th class="name">Gói dịch vụ</th>
                     <th>Ngày tạo</th>
                     <th>Ngày thanh toán</th>
                     <th>Ngày tổ chức tiệc cưới</th>
@@ -123,7 +126,8 @@
                         <tr>
                             <td>${o.orderId}</td>
                             <td>${o.userId.name}</td>
-                            <td>${o.weddingId.name}</td>
+                            <td>${o.weddinghallId.name}</td>
+                            <td>${o.weddingservicesId.name}</td>
 
                             <td><fmt:formatDate pattern="dd-MM-yyyy" value="${o.createdDate}"/></td>
                             <td><fmt:formatDate pattern="dd-MM-yyyy" value="${o.paymentDate}"/></td>

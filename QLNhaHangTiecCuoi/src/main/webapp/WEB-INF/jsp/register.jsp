@@ -14,6 +14,11 @@
     <h1 class="text-center text-uppercase text-primary">
         <spring:message code="user.register" />
     </h1>
+    <c:if test="${errMsg != null}">
+        <div class="form-group">
+            <span class="form-message-login">Đăng ký không thành công ${errMsg}</span>
+        </div>
+    </c:if>
     <p id="error-message" class="text-danger text-uppercase text-center my-3 alert-danger"></p>
     <form id="submitFormAccount" class="needs-validation" novalidate >
         <div class="left">
@@ -129,9 +134,9 @@
             </div>
         </div>
 
-<!--        <div class="form-group mt-3 btnregister">
-            <button class="btn btn-primary float-md-end bg-primary" type="submit">ĐĂNG KÝ</button>
-        </div>-->
+        <!--        <div class="form-group mt-3 btnregister">
+                    <button class="btn btn-primary float-md-end bg-primary" type="submit">ĐĂNG KÝ</button>
+                </div>-->
         <div class="form-group mt-3 btnregister">
             <button class="btn btn-primary float-md-end bg-primary" type="submit">
                 <span class="spinner-register spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>

@@ -25,6 +25,8 @@ public class PassValidator implements Validator{
     @Override
     public void validate(Object target, Errors errors) {
         Account a = (Account) target;
+        if (a.getUsername().contains(" "))
+            errors.reject("username", "user.username.spaceErr");
         
         if (!a.getPassword().trim().equals(a.getConfirmPassword().trim()))
             errors.rejectValue("password", "account.password.error.notMatchMsg");
