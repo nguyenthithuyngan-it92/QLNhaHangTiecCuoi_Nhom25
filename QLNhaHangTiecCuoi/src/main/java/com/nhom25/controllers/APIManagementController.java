@@ -6,8 +6,8 @@
 package com.nhom25.controllers;
 
 import com.nhom25.services.FoodService;
+import com.nhom25.services.UserService;
 import com.nhom25.services.WeddingHallService;
-//import com.nhom25.services.WeddingService;
 import com.nhom25.services.WeddingServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +25,8 @@ public class APIManagementController {
     @Autowired
     private FoodService foodService;
     
-//    @Autowired
-//    private WeddingService weddingService;
+    @Autowired
+    private UserService userService;
     
     @Autowired
     private WeddingHallService weddingHallService;
@@ -40,11 +40,11 @@ public class APIManagementController {
         this.foodService.deleteFood(foodId);
     }
     
-//    @DeleteMapping("/api/admin/wedding-management/{weddingId}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void deleteWedding(@PathVariable(name = "weddingId") int weddingId) {
-//        this.weddingService.deleteWedding(weddingId);
-//    }
+    @DeleteMapping("/api/admin/employee-management/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteEmployee(@PathVariable(name = "userId") int userId) {
+        this.userService.deleteEmployee(userId);
+    }
     
     @DeleteMapping("/api/admin/weddingHall-management/{weddinghallId}")
     @ResponseStatus(HttpStatus.OK)

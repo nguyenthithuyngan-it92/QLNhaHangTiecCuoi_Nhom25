@@ -121,8 +121,11 @@ public class UserRepositoryImpl implements  UserRepository {
     public boolean addEmployee(User emp) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.saveOrUpdate(emp);
-//            session.flush();
+            if(emp.getUserId() == 0){
+                session.save(emp);
+            } else {
+                session.update(emp);
+            }
             return true;
         } catch (HibernateException e) {
             session.clear();
@@ -152,6 +155,21 @@ public class UserRepositoryImpl implements  UserRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         return session.get(Account.class, id);
+    }
+
+    @Override
+    public boolean deleteEmployee(int userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            User e = session.get(User.class, userId);
+            session.delete(e);
+            
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
     }
 
 }

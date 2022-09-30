@@ -43,14 +43,14 @@
                         <span class="nav-link">Trang chủ</span>
                     </a>
                 </li>
-                                        
+
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingCus">
                             <a class="accordion-button link-wrapper" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseCus"
                                aria-expanded="true" aria-controls="panelsStayOpen-collapseCus"/>
-                                <span><i class="fa-solid fa-users-between-lines"></i></span>
-                                <span class="nav-link">Quản lý khách hàng</span>
+                            <span><i class="fa-solid fa-users-between-lines"></i></span>
+                            <span class="nav-link">Quản lý khách hàng</span>
                             </a>
                         </h2>
                         <div id="panelsStayOpen-collapseCus" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingCus">
@@ -58,73 +58,77 @@
                                 <div class="accordion-item-custom">
                                     <a href="<c:url value="/admin/customer-in-system"/>">
                                         <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Danh sách khách hàng trong hệ thống</span>
+                                        <span class="hide-nav">Khách hàng trong hệ thống</span>
                                     </a> 
                                 </div>
                                 <div class="accordion-item-custom">
                                     <a href="<c:url value="/admin/customer-outside-system"/>">
                                         <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Danh sách khách hàng ngoài hệ thống</span>
+                                        <span class="hide-nav">Khách hàng ngoài hệ thống</span>
                                     </a>
                                 </div>               
                             </div>
                         </div>
                     </div>           
                 </div>
-                                        
-                <li>
-                    <a href="<c:url value="/admin/employee-management" />" class="link-wrapper">
-                        <span><i class="fas fa-users"></i></span>
-                        <span class="nav-link">Quản lý nhân viên</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<c:url value="/admin/pay" />" class="link-wrapper">
-                        <span><i class="fa-solid fa-wallet"></i></span>
-                        <span class="nav-link">Thanh toán</span>
-                    </a>
-                </li>
-                <div class="accordion" id="accordionPanelsStayStatsExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingStats">
-                            <a class="accordion-button link-wrapper" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStats" 
-                               aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" 
-                               href="<c:url value="/admin/stats" />">
-                                <span class="wrap-icon"><i class="fas fa-solid fa-chart-bar"></i></span>
-                                <span class="nav-link">Thống kê</span>
-                            </a>
-                        </h2>
-                        <div id="panelsStayOpen-collapseStats" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingStats">
-                            <div class="accordion-body">
-                                <div class="accordion-item-custom">
-                                    <a href="<c:url value="/admin/stats"/>">
-                                        <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Mật độ tiệc cưới</span>
-                                    </a> 
-                                </div>
-                                <div class="accordion-item-custom">
-                                    <a href="<c:url value="/admin/monthStats"/>">
-                                        <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Doanh thu theo tháng</span>
-                                    </a> 
-                                </div>
-                                <div class="accordion-item-custom">
-                                    <a href="<c:url value="/admin/quarterStats"/>">
-                                        <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Doanh thu theo quý</span>
-                                    </a>
-                                </div>
-                                <div class="accordion-item-custom">
-                                    <a href="<c:url value="/admin/yearStats"/>">
-                                        <i class="fas fa-plus mr-2"></i>
-                                        <span class="hide-nav">Doanh thu theo năm</span>
-                                    </a>
+                <sec:authorize access="hasAuthority('ADMIN')">                        
+                    <li>
+                        <a href="<c:url value="/admin/employee-management" />" class="link-wrapper">
+                            <span><i class="fas fa-users"></i></span>
+                            <span class="nav-link">Quản lý nhân viên</span>
+                        </a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="hasAuthority('EMPLOYEE')">
+                    <li>
+                        <a href="<c:url value="/admin/pay" />" class="link-wrapper">
+                            <span><i class="fa-solid fa-wallet"></i></span>
+                            <span class="nav-link">Thanh toán</span>
+                        </a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="hasAuthority('ADMIN')">
+                    <div class="accordion" id="accordionPanelsStayStatsExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingStats">
+                                <a class="accordion-button link-wrapper" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStats" 
+                                   aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" 
+                                   href="<c:url value="/admin/stats" />">
+                                    <span class="wrap-icon"><i class="fas fa-solid fa-chart-bar"></i></span>
+                                    <span class="nav-link">Thống kê</span>
+                                </a>
+                            </h2>
+                            <div id="panelsStayOpen-collapseStats" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingStats">
+                                <div class="accordion-body">
+                                    <div class="accordion-item-custom">
+                                        <a href="<c:url value="/admin/stats"/>">
+                                            <i class="fas fa-plus mr-2"></i>
+                                            <span class="hide-nav">Mật độ tiệc cưới</span>
+                                        </a> 
+                                    </div>
+                                    <div class="accordion-item-custom">
+                                        <a href="<c:url value="/admin/monthStats"/>">
+                                            <i class="fas fa-plus mr-2"></i>
+                                            <span class="hide-nav">Doanh thu theo tháng</span>
+                                        </a> 
+                                    </div>
+                                    <div class="accordion-item-custom">
+                                        <a href="<c:url value="/admin/quarterStats"/>">
+                                            <i class="fas fa-plus mr-2"></i>
+                                            <span class="hide-nav">Doanh thu theo quý</span>
+                                        </a>
+                                    </div>
+                                    <div class="accordion-item-custom">
+                                        <a href="<c:url value="/admin/yearStats"/>">
+                                            <i class="fas fa-plus mr-2"></i>
+                                            <span class="hide-nav">Doanh thu theo năm</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>           
-                </div>
-
+                        </div>           
+                    </div>
+                </sec:authorize>
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">

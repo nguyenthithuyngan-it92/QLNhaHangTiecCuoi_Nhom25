@@ -25,5 +25,5 @@ public interface UserRepository {
     boolean addEmployee(User emp);
     Account getAccountById(int id);
     boolean addAccountEmp(Account accEmp);
-    
+    boolean deleteEmployee(int userId);
 }

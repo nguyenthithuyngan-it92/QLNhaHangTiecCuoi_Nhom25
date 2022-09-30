@@ -19,15 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @ControllerAdvice
 public class UserController {
-
-//    @Autowired
-//    private WebAppValidator userValidator;
-//
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        binder.setValidator(userValidator);
-//    }
-
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("account", new Account());

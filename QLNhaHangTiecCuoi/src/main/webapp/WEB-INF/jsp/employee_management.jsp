@@ -63,9 +63,9 @@
                     <th>Chức vụ</th>
                     <th>Vai trò</th>
                     <th>Trạng thái</th>
-                    <sec:authorize access="hasAuthority('ADMIN')">
+                        <sec:authorize access="hasAuthority('ADMIN')">
                         <th>Hành động</th>
-                    </sec:authorize>
+                        </sec:authorize>
                 </tr>
             </thead>
             <tbody>
@@ -144,17 +144,16 @@
                     <th>Email</th>
                     <th>Chức vụ</th>
                     <th>Vai trò</th>
-                    <th>Trạng thái</th>
-                    <sec:authorize access="hasAuthority('ADMIN')">
+                        <sec:authorize access="hasAuthority('ADMIN')">
                         <th>Hành động</th>
-                    </sec:authorize>
+                        </sec:authorize>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${users}" var="user">
                     <c:if test="${(user.userRole == 'ADMIN' || user.userRole == 'EMPLOYEE') && user.account.userId != user.userId}">
                         <tr>
-                            <td>${user.name}</td>
+                            <td id="name${user.userId}">${user.name}</td>
                             <td>
                                 <c:if test="${user.account.userId == user.userId}">
                                     <p>${user.account.username}</p>
@@ -163,11 +162,11 @@
                                     <i>Chưa có tài khoản</i>
                                 </c:if>
                             </td>
-                            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
-                            <td>${user.sex}</td>
-                            <td>${user.identityCard}</td>
-                            <td>${user.phone}</td>
-                            <td>
+                            <td id="birthDay${user.userId}"><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
+                            <td id="sex${user.userId}">${user.sex}</td>
+                            <td id="identityCard${user.userId}">${user.identityCard}</td>
+                            <td id="phone${user.userId}">${user.phone}</td>
+                            <td id="mail${user.userId}">
                                 <c:if test="${user.email != null}">
                                     <p>${user.email}</p>
                                 </c:if>
@@ -175,16 +174,8 @@
                                     <i>Không có dữ liệu</i>
                                 </c:if>
                             </td>
-                            <td>${user.position}</td>
-                            <td>${user.userRole}</td>
-                            <td> 
-                                <c:if test="${user.account.userId == user.userId && user.account.active == true}">
-                                    <i class="fa-solid fa-user-large text-success"></i>
-                                </c:if>
-                                <c:if test="${user.account.userId != user.userId || user.account.active == false}">
-                                    <i class="fa-solid fa-user-large-slash text-danger"></i>
-                                </c:if>
-                            </td>
+                            <td id="position${user.userId}">${user.position}</td>
+                            <td id="role${user.userId}">${user.userRole}</td>
 
                             <sec:authorize access="hasAuthority('ADMIN')">
                                 <td class="d-flex">
@@ -196,17 +187,30 @@
                                                data-bs-toggle="tooltip" title="Tạo tài khoản"></i>
                                         </a>
                                     </c:if>
-                                    
-                                    <a class="user-edit" href="javascript:;" onclick="">
+
+                                    <a class="user-edit" href="javascript:;" 
+                                       onclick="getEmployeeUserInfo(${user.userId})"
+                                       data-bs-toggle="modal" data-bs-target="#myModal">
                                         <i class="fas fa-user-edit text-info" 
                                            data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
                                     </a>
-                                    <%--<c:if test="${user.orders.isEmpty()}">--%>
-                                    <a class="user-delete" href="javascript:;" onclick="">
-                                        <i class="fa-solid fa-user-xmark text-warning"
-                                           data-bs-toggle="tooltip" title="Xóa"></i>
-                                    </a>
-                                    <%--</c:if>--%>
+
+                                    <!--XÓA-->
+                                    <c:choose>
+                                        <c:when test="${user.feedbackSet.isEmpty() || user.feedbackSet == null}">
+                                                <a class="user-delete" href="javascript:;" onclick="deleteEmployee(${user.userId})">
+                                                    <i class="fa-solid fa-user-xmark text-danger"
+                                                       data-bs-toggle="tooltip" title="Xóa"></i>
+                                                </a>
+                                        </c:when>
+                                        <c:when test="${!user.feedbackSet.isEmpty() || user.feedbackSet != null}">
+                                                <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
+                                                    <i class="fa-solid fa-user-xmark text-danger" 
+                                                       data-bs-toggle="tooltip" title="Không thể xóa!"></i>
+                                                </a>
+                                        </c:when>
+                                    </c:choose>
+
                                 </td>
                             </sec:authorize>
                         </tr>
@@ -216,6 +220,7 @@
         </table>
     </div>
 </div>
+<!--END TABLE NHÂN VIÊN CỦA NHÀ HÀNG-->
 
 <!-- The Modal THÊM NHÂN VIÊN -->
 <div class="modal" id="myModal">
@@ -226,51 +231,51 @@
                        method="post" enctype="multipart/form-data">
                 <!--Modal Header--> 
                 <div class="modal-header">
-                    <h2 class="modal-title text-primary">
+                    <h2 class="modal-title text-primary" value="Thêm thông tin nhân viên" id="title">
                         <i class="fa-solid fa-user-plus"></i>
-                        Thêm nhân viên
+                        Thêm thông tin nhân viên
                     </h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <!--Modal body--> 
                 <div class="modal-body user-employee">
-                    
+
                     <div class="left">
                         <div class="form-group">
-                            <label for="nameId">
+                            <label for="inputName">
                                 <spring:message code="user.name" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <form:input path="name" id="nameId" 
+                            <form:input path="name" id="inputName" 
                                         cssClass="form-control" placeholder="Nhập họ và tên..."/>
                             <form:errors path="name" cssClass="text-danger" />
                         </div>
 
                         <div class="form-group">
-                            <label for="identityCardId">
+                            <label for="inputIdentityCard">
                                 <spring:message code="user.identityCard" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <form:input type="number" path="identityCard" id="identityCardId" 
+                            <form:input type="number" path="identityCard" id="inputIdentityCard" 
                                         cssClass="form-control" placeholder="Nhập CMND/CCCD..."/>
                             <form:errors path="identityCard" cssClass="text-danger" />
                         </div>
 
                         <div class="form-group">
-                            <label for="dateOfBirthId">
+                            <label for="inputBirthDay">
                                 <spring:message code="user.dateOfBirth" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <form:input type="date" path="dateOfBirth" id="dateOfBirthId" cssClass="form-control" />
+                            <form:input type="date" path="dateOfBirth" id="inputBirthDay" cssClass="form-control" />
                         </div>
 
                         <div class="form-group select">
-                            <label for="sexId">
+                            <label for="inputSex">
                                 <spring:message code="user.sex" />
                             </label>
                             <div class="selected">
-                                <form:select class="form-select" path="sex" id="sexId">
+                                <form:select class="form-select" path="sex" id="inputSex">
                                     <option value="NAM">NAM</option>
                                     <option value="NỮ">NỮ</option>
                                 </form:select>
@@ -279,53 +284,125 @@
                     </div>
                     <div class="right">
                         <div class="form-group">
-                            <label for="emailId">
+                            <label for="inputmail">
                                 <spring:message code="user.email" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <form:input type="email" path="email" id="emailId" 
+                            <form:input type="email" path="email" id="inputmail" 
                                         cssClass="form-control" placeholder="Nhập địa chỉ email..."/>
                             <form:errors path="email" cssClass="text-danger" />
                         </div>
 
                         <div class="form-group">
-                            <label for="phoneId">
+                            <label for="inputPhone">
                                 <spring:message code="user.phone" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <form:input type="number" path="phone" id="phoneId" 
+                            <form:input type="number" path="phone" id="inputPhone" 
                                         cssClass="form-control" placeholder="Nhập số điện thoại..."/>
                             <form:errors path="phone" cssClass="text-danger" />
                         </div>
 
                         <div class="form-group">
-                            <label for="positionId">
+                            <label for="inputPosition">
                                 <spring:message code="user.position" />
                                 <span class="text-danger">(*)</span>
                             </label>
-                            <form:input path="position" id="positionId" 
+                            <form:input path="position" id="inputPosition" 
                                         cssClass="form-control" placeholder="Nhập chức vụ..."/>
                             <%--<form:errors path="position" cssClass="text-danger" />--%>
                         </div>
 
                         <div class="form-group select">
-                            <label for="userRoleId">
+                            <label for="inputRole">
                                 <spring:message code="user.userRole" />
                                 <span class="text-danger">(*)</span>
                             </label>
                             <div class="selected">
-                                <form:select class="form-select" path="userRole" id="userRoleId">
+                                <form:select class="form-select" path="userRole" id="inputRole">
                                     <option value="ADMIN">ADMIN</option>
                                     <option value="EMPLOYEE">EMPLOYEE</option>
                                 </form:select>
                             </div>
                         </div>
                     </div>
+                    <form:input path="userId" name="userId" hidden="true" id="inputUserId" value="0" />
                 </div>
 
                 <!--Modal footer--> 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Thêm</button>
+                    <button type="submit" id="button" class="btn btn-success">Thêm</button>
+                    <button type="reset" onclick="setButtonEmployee()" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form:form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal TẠO TÀI KHOẢN-->
+<div class="modal" id="myModalAccount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <c:url value="/admin/employee-management" var="actionAccount" />
+            <form:form action="${actionAccount}" modelAttribute="accountEmp" 
+                       method="post" enctype="multipart/form-data">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title text-primary">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Thêm tài khoản
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+
+
+                <!-- Modal body -->
+                <div class="modal-body wedding">
+                    <div class="form-group">
+                        <label for="userId">Mã</label>
+                        <form:input id="userId" path="userId" readonly="true" cssClass="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">
+                            <spring:message code="user.username" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="username" name="username" id="username" 
+                                    cssClass="form-control" placeholder="Nhập tên tài khoản..."/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <spring:message code="user.password" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="password" type="password" name="password" id="password" 
+                                    cssClass="form-control" placeholder="Nhập mật khẩu..."/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <spring:message code="user.confirmPassword" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="confirmPassword" name="confirmPassword" type="password"
+                                    id="confirmPassword" cssClass="form-control" 
+                                    placeholder="Nhập mật khẩu xác nhận..."
+                                    data-bs-toggle="tooltip" data-bs-placement="right" title="Bạn phải nhập mật khẩu xác nhận!"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="avt">
+                            <spring:message code="user.avatar" />
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <form:input path="avt" class="form-control" type="file" id="upload_avatar"/>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" style="width: 150px;">Tạo tài khoản</button>
                     <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </form:form>

@@ -34,6 +34,13 @@ public class WeddingCusController {
         return "weddings";
     }
     
+    @GetMapping("/combo-services")
+    public String listWeddingServices(Model model, @RequestParam Map<String, String> params) {
+//        model.addAttribute("weddinghall", this.weddingCusService.getList(params, page));
+        
+        return "servicesWedding";
+    }
+    
     @GetMapping("/wedding/{weddinghallId}")
     public String weddingHallDetails(Model model ,@PathVariable(value="weddinghallId") int id){
         model.addAttribute("weddinghall", this.weddingCusService.getWeddingHallById(id));

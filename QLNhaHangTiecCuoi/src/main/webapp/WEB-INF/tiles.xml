@@ -157,6 +157,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/weddings.jsp" />
     </definition>
     
+    <definition name="servicesWedding" extends="baseLayout">
+        <put-attribute name="title" value="Các gói dịch vụ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/services_wedding.jsp" />
+    </definition>
+    
     <definition name="detailWedding" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết sảnh cưới" />
         <put-attribute name="content"

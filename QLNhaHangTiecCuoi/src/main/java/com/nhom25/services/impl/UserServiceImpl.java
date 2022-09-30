@@ -132,4 +132,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getAccountById(id);
     }
 
+    @Override
+    public boolean deleteEmployee(int userId) {
+        return this.userRepository.deleteEmployee(userId);
+    }
+
 }

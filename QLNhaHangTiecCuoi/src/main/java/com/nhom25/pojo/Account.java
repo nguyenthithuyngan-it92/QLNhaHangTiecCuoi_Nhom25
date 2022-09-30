@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -75,7 +76,7 @@ public class Account implements Serializable {
     
     @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     private User user;
 
     public Account() {

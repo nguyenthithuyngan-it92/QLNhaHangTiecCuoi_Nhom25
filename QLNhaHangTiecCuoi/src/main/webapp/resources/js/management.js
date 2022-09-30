@@ -55,7 +55,7 @@ function deleteFood(foodId) {
             }
         }).then(res => {
             if (res.status === 200) {
-                alert("Xóa thành công!");
+                alert("Xóa món ăn thành công!");
                 location.reload();
             } else
                 alert("Đã có lỗi xảy ra!!!");
@@ -64,17 +64,17 @@ function deleteFood(foodId) {
 }
 
 //xóa tiệc cưới
-function deleteWedding(weddingId) {
-    var name = document.getElementById("name" + weddingId).innerText;
-    if (confirm("Bạn chắc chắn xóa tiệc cưới " + name + " có mã số " + weddingId + " không?") === true) {
-        fetch(`/QLNhaHangTiecCuoi/api/admin/wedding-management/${weddingId}`, {
+function deleteEmployee(userId) {
+    var name = document.getElementById("name" + userId).innerText;
+    if (confirm("Bạn chắc chắn xóa nhân viên " + name + " có mã số " + userId + " không?") === true) {
+        fetch(`/QLNhaHangTiecCuoi/api/admin/employee-management/${userId}`, {
             method: "delete",
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(res => {
             if (res.status === 200) {
-                alert("Xóa thành công!");
+                alert("Xóa nhân viên thành công!");
                 location.reload();
             } else
                 alert("Đã có lỗi xảy ra!!!");
@@ -93,7 +93,7 @@ function deleteWdHall(weddinghallId) {
             }
         }).then(res => {
             if (res.status === 200) {
-                alert("Xóa thành công!");
+                alert("Xóa sảnh cưới thành công!");
                 location.reload();
             } else
                 alert("Đã có lỗi xảy ra!!!");
@@ -112,18 +112,59 @@ function deleteWdService(weddingservicesId) {
             }
         }).then(res => {
             if (res.status === 200) {
-                alert("Xóa thành công!");
+                alert("Xóa gói dịch vụ thành công!");
                 location.reload();
             } else
                 alert("Đã có lỗi xảy ra!!!");
         });
     }
 }
+//format dd/MM/yyyy to yyyy-MM-dd
+function formatDate(str){
+    let day = str.slice(0, 2);
+    let month = str.slice(3, 5);
+    let year = str.slice(6, 10);
+    str = year + '-' + month + '-' + day;
+    return str;
+}
 
 //////////////////////CHỨC NĂNG SỬA - LẤY THÔNG TIN///////////////////////////////////////
 //Lấy UserId để tạo Account
 function getUserId(id) {
     document.getElementById("userId").value = id;
+}
+
+//Lấy thông tin NHÂN VIÊN(USER)
+function getEmployeeUserInfo(id) {
+    var name = document.getElementById("name" + id).innerText;
+    document.getElementById("inputName").value = name;
+
+    var birthDay = document.getElementById("birthDay" + id).innerText;
+    //format date
+    document.getElementById("inputBirthDay").value = formatDate(birthDay);
+
+    var sex = document.getElementById("sex" + id).innerText;
+    document.getElementById("inputSex").value = sex;
+    
+    var identityCard = document.getElementById("identityCard" + id).innerText;
+    document.getElementById("inputIdentityCard").value = identityCard;
+    
+    var phone = document.getElementById("phone" + id).innerText;
+    document.getElementById("inputPhone").value = phone;
+    
+    var mail = document.getElementById("mail" + id).innerText;
+    document.getElementById("inputmail").value = mail;
+    
+    var position = document.getElementById("position" + id).innerText;
+    document.getElementById("inputPosition").value = position;
+
+    var role = document.getElementById("role" + id).innerText;
+    document.getElementById("inputRole").value = role;
+
+    document.getElementById("inputUserId").value = id;
+
+    document.getElementById("title").innerText = "Chỉnh sửa thông tin nhân viên";
+    document.getElementById("button").innerText = "Cập nhật";
 }
 
 //Lấy thông tin WeddingHall
@@ -221,8 +262,8 @@ function setButtonFood() {
     document.getElementById("button").innerText = "Thêm";
 }
 
-function setButtonWedding() {
-    document.getElementById("title").innerText = "Thêm tiệc cưới";
+function setButtonEmployee() {
+    document.getElementById("title").innerText = "Thêm thông tin nhân viên";
     document.getElementById("button").innerText = "Thêm";
 }
 

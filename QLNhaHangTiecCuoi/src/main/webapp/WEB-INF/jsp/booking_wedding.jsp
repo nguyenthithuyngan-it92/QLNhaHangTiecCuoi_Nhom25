@@ -173,7 +173,7 @@
                                 <tr class="headerCate">
                                     <c:forEach items="${categories}" var="c">
                                         <th>${c.name}   (Chọn tối đa ${c.countFood})</th>
-                                        </c:forEach>
+                                    </c:forEach>
                                 </tr>
                             </thead>
                             <tbody>

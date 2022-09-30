@@ -27,11 +27,11 @@
                         <i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="<c:url value="" />" role="button" data-bs-toggle="dropdown">Dịch vụ</a>
+                    <a class="nav-link dropdown-toggle" href="<c:url value="" />" role="button" data-bs-toggle="dropdown">Tiệc cưới</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value="/weddings" />">Sảnh cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/combo-services" />">Gói dịch vụ</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/foods" />">Món ăn</a></li>
-                        <li><a class="dropdown-item" href="#">Dịch vụ khác</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

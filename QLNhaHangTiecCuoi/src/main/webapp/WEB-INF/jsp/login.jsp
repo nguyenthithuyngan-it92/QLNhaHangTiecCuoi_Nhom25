@@ -25,7 +25,6 @@
             <spring:message code="user.login.error2" />
         </div>
     </c:if>
-
     <form:form action="${action}" modelAttribute="account" method="POST" >
         <div class="form-group">
             <label for="username">

@@ -87,12 +87,12 @@ public class Orders implements Serializable {
     private Shift shiftId;
     
     @JoinColumn(name = "weddinghall_id", referencedColumnName = "weddinghall_id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JsonIgnore
     private Weddinghall weddinghallId;
     
     @JoinColumn(name = "weddingservices_id", referencedColumnName = "weddingservices_id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JsonIgnore
     private Weddingservices weddingservicesId;
 

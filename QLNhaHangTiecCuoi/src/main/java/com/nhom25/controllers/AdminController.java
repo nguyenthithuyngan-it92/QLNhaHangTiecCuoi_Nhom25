@@ -94,12 +94,12 @@ public class AdminController {
         String successMsg = "";
         if (!resultUser.hasErrors()) {
             if (this.userService.addEmployee(emp) == true) {
-                successMsg = "Thêm nhân viên thành công!";
+                successMsg = "Thao tác thành công!";
                 model.addAttribute("successMsg", successMsg);
 
                 return "redirect:/admin/employee-management";
             } else {
-                errMsg = "Đã có lỗi xảy ra khi thêm!!!";
+                errMsg = "Đã có lỗi xảy ra khi thực hiện thao tác!!!";
             }
         } else {
             errMsg = "Đã có lỗi xảy ra!! Vui lòng thử lại sau!!!";
