@@ -21,5 +21,5 @@ public interface WeddingCusService {
     Weddinghall getWeddingHallById(int weddinghallId);
     List<Feedback> getFeedbacks(int weddinghallId);
     Feedback addFeedback(String content, int weddinghallId, User user);
-    int feedbackCounter();
+    int feedbackCounter(int wdhallId);
 }

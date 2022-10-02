@@ -21,7 +21,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto menubar">
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/" />">
                         <i class="fa-solid fa-house" aria-hidden="true"></i> Trang chủ</a>
@@ -63,7 +63,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-info" href="#">
                                 <c:if test="${currentUser.avatar != null}">
-                                    <img style="width:30px;" src="${currentUser.avatar}" class="rounded-circle" />
+                                    <img src="${currentUser.avatar}" class="rounded-circle" />
                                 </c:if>
                                 <c:if test="${currentUser.avatar == null}">
                                     <img src="<c:url value="/img/avt.png"/>" class="rounded-circle" style="width: 30px;"/>

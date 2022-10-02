@@ -9,10 +9,13 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.nhom25.configs.handlers.LoginSuccessHandler;
 import com.nhom25.configs.handlers.LogoutHandler;
+import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -68,6 +71,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "api_secret", "Tpb6bk0-oTQf7B1o6wcwJU68c1Q",
                         "secure", true));
         return cloudinary;
+    }
+    
+    @Bean
+    public JavaMailSender getMailSender(){
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("1951052129ngan@ou.edu.vn");
+        mailSender.setPassword("_Nttn06092020");
+        
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.starttls.enable", "true");
+        javaMailProperties.put("mail.smtp.auth", "true");
+        javaMailProperties.put("mail.transport.protocol", "smtp");
+        javaMailProperties.put("mail.debug", "true");
+        
+        mailSender.setJavaMailProperties(javaMailProperties);
+        return mailSender;
     }
     
     @Override

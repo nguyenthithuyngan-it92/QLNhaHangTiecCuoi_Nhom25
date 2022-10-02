@@ -6,6 +6,7 @@
 package com.nhom25.repository;
 
 import com.nhom25.pojo.Orders;
+import com.nhom25.pojo.Shift;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +22,7 @@ public interface OrdersRepository {
     Orders addOrders(Orders od);
     Orders saveOrders(Orders ord);
     boolean confirmBooking(Orders orderId);
+    
+    Shift getShiftById(int shiftId);
+    List<Shift> getShifts();
 }

@@ -6,6 +6,7 @@
 package com.nhom25.repository.impl;
 
 import com.nhom25.pojo.Orders;
+import com.nhom25.pojo.Shift;
 import com.nhom25.repository.OrdersRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -124,6 +125,26 @@ public class OrdersRepositoryImpl implements OrdersRepository{
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Shift> getShifts() {
+        List<Shift> shift;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Shift> cr = builder.createQuery(Shift.class);
+        Root<Shift> root = cr.from(Shift.class);
+
+        CriteriaQuery query = cr.select(root);
+
+        shift = session.createQuery(query).getResultList();        
+        return shift;
+    }
+
+    @Override
+    public Shift getShiftById(int shiftId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Shift.class, shiftId);
     }
 
 }

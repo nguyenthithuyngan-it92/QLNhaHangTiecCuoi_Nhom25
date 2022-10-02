@@ -8,6 +8,7 @@ package com.nhom25.services.impl;
 import com.nhom25.pojo.Food;
 import com.nhom25.pojo.ListFood;
 import com.nhom25.pojo.Orders;
+import com.nhom25.pojo.Shift;
 import com.nhom25.repository.OrdersRepository;
 import com.nhom25.services.FoodService;
 import com.nhom25.services.OrdersService;
@@ -57,12 +58,14 @@ public class OrdersServiceImpl implements OrdersService{
         Orders newOrder = this.ordersService.getOrdersById(orderId);
         Set<Food> setFoods = new HashSet<>();
         
-        lf.getFoods().stream().map(food -> this.foodService.getFoodById(Integer.parseInt(food.get("foodId")))).map(f -> {
-            f.getOrders().add(newOrder);
-            return f;
-        }).forEachOrdered(f -> {
-            setFoods.add(f);
-        });
+        lf.getFoods().stream().map(food -> 
+                this.foodService.getFoodById(Integer.parseInt(food.get("foodId"))))
+                .map(f -> {
+                    f.getOrders().add(newOrder);
+                    return f;
+                }).forEachOrdered(f -> {
+                    setFoods.add(f);
+                });
         newOrder.getFoods().addAll(setFoods);
         return this.ordersRepository.saveOrders(newOrder);
     }
@@ -75,6 +78,16 @@ public class OrdersServiceImpl implements OrdersService{
         ord.setStatus(Boolean.TRUE);
         
         return this.ordersRepository.confirmBooking(ord);
+    }
+
+    @Override
+    public Shift getShiftById(int shiftId) {
+        return this.ordersRepository.getShiftById(shiftId);
+    }
+
+    @Override
+    public List<Shift> getShifts() {
+        return this.ordersRepository.getShifts();
     }
     
 }

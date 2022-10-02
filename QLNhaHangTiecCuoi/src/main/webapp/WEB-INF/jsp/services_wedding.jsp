@@ -129,7 +129,7 @@
 
 <!--HÌNH ẢNH MINH HỌA-->
 <div class="widget block block-static-block"><div class="home-service">
-        <div class="container">
+        <div class="container-services">
             <div class="about-service">
                 <div class="service-one">
                     <div class="details-service">

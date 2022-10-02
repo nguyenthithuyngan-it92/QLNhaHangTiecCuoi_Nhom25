@@ -50,7 +50,7 @@ public class WeddingCusServiceImpl implements WeddingCusService {
     }
 
     @Override
-    public int feedbackCounter() {
-        return this.weddingCusRepository.feedbackCounter();
+    public int feedbackCounter(int wdhallId) {
+        return this.weddingCusRepository.feedbackCounter(wdhallId);
     }
 }
