@@ -233,7 +233,7 @@
                             <span class="spinner-wd-user spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
                             XÁC NHẬN ĐẶT TIỆC
                         </button>
-                        <button type="reset" class="btn btn-danger"><a href="<c:url value="/weddings" />" style="text-decoration: none; color: white;">THOÁT</a></button>
+                        <button type="reset" id="btnClose" class="btn btn-danger"><a href="<c:url value="/weddings" />" style="text-decoration: none; color: white;">THOÁT</a></button>
                     </div>
                 </c:when>
 
@@ -454,6 +454,7 @@
                             <span class="spinner-wd-user spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
                             XÁC NHẬN ĐẶT TIỆC
                         </button>
+                        <button type="reset" id="btnClose" class="btn btn-danger"><a href="<c:url value="/weddings" />" style="text-decoration: none; color: white;">THOÁT</a></button>
                     </div>
                 </c:when>
                 <c:when test="${currentUser.user.userRole == 'ADMIN'}">

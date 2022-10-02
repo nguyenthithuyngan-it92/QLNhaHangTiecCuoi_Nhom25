@@ -50,7 +50,7 @@
     </div>
 </div>
 
-<div class="canvasStats2">
+<div class="canvasStats">
     <canvas id="myChart2"></canvas>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -7,7 +7,7 @@
 function densityStats(labels, data) {
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
             labels: labels,
             datasets: [{
@@ -45,7 +45,7 @@ function densityStats(labels, data) {
 function monthStats(labels, data) {
     const ctx = document.getElementById('myChart2').getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'pie',
+        type: 'line',
         data: {
             labels: labels,
             datasets: [{
