@@ -49,6 +49,7 @@ window.onload = () => {
     const totalPriceBookingWeddingText = document.getElementById("total-price-wedding");
     
     const spinnerAddWedding = document.querySelector('.spinner-wd-user'); 
+    const btnCloseForm = document.getElementById('btnClose');
     
     let priceHall = document.getElementById('weddinghallPrice');
     let paymentmethodsId = document.querySelectorAll('.paymentmethodsId');
@@ -96,6 +97,24 @@ window.onload = () => {
     emailInput.addEventListener('change', (event) => handleValidateForm(event, 'email'));
 
     cmndInput.addEventListener('change', (event) => handleValidateForm(event, 'cmnd'));
+    
+    //kiểm tra chọn ngày đặt tiệc
+    let partyDate = document.getElementById('partyDateId');
+    if (partyDate) {
+        const currentDate = new Date();
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        let date = currentDate.getDate() + 7;
+
+        if (month < 10) {
+            month = `0${month}`;
+        }
+        if (date < 10) {
+            date = `0${date}`;
+        }
+
+        partyDate.setAttribute('min', `${year}-${month}-${date}`);
+    }
     
     //get service and shift
     let previewPriceServiceInput = document.getElementById('weddingservicesPricePreview');
@@ -268,24 +287,6 @@ window.onload = () => {
         });
     }
 
-    //kiểm tra chọn ngày đặt tiệc
-    let partyDate = document.getElementById('partyDateId');
-    if (partyDate) {
-        const currentDate = new Date();
-        let year = currentDate.getFullYear();
-        let month = currentDate.getMonth() + 1;
-        let date = currentDate.getDate() + 7;
-
-        if (month < 10) {
-            month = `0${month}`;
-        }
-        if (date < 10) {
-            date = `0${date}`;
-        }
-
-        partyDate.setAttribute('min', `${year}-${month}-${date}`);
-    }
-
     // Set lại text Total Price
     totalPriceBookingWeddingText.dataset.totalprice = handleGetTotalPrice(orderSelected);
 
@@ -330,6 +331,7 @@ window.onload = () => {
         // Disabled button submit
         e.target.disabled = true;
         spinnerAddWedding.classList.remove('visually-hidden');
+        btnCloseForm.disabled = true;
 
         // Submit data
         if (!userEle) {
@@ -386,6 +388,7 @@ window.onload = () => {
                 }).then(data => {
                     // Active button submit
                     e.target.disabled = false;
+                    btnCloseForm.disabled = false;
                     spinnerAddWedding.classList.add('visually-hidden');
 
                     setTimeout(() => {
@@ -405,6 +408,7 @@ window.onload = () => {
                 }).catch((error) => {
                     // Active button submit
                     e.target.disabled = false;
+                    btnCloseForm.disabled = false;
                     spinnerAddWedding.classList.add('visually-hidden');
 
                     console.error(error);
@@ -447,6 +451,7 @@ window.onload = () => {
             }).then(data => {
                 // Active button submit
                 e.target.disabled = false;
+                btnCloseForm.disabled = false;
                 spinnerAddWedding.classList.add('visually-hidden');
 
                 setTimeout(() => {
@@ -466,6 +471,7 @@ window.onload = () => {
             }).catch((error) => {
                 // Active button submit
                 e.target.disabled = false;
+                btnCloseForm.disabled = false;
                 spinnerAddWedding.classList.add('visually-hidden');
 
                 console.error(error);

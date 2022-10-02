@@ -37,7 +37,7 @@
         </form>
     </div>
 </div>
-<div class="canvasStats">
+<div class="canvasStats2">
     <canvas id="myChart"></canvas>
 </div>
             
