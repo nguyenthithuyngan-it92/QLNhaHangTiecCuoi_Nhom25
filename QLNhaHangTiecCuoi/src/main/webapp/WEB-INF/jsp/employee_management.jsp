@@ -72,7 +72,7 @@
                 <c:forEach items="${users}" var="user">
                     <c:if test="${(user.userRole == 'ADMIN' || user.userRole == 'EMPLOYEE') && user.account.userId == user.userId}">
                         <tr>
-                            <td>${user.name}</td>
+                            <td id="name${user.userId}">${user.name}</td>
                             <td>
                                 <c:if test="${user.account.userId == user.userId}">
                                     <p>${user.account.username}</p>
@@ -81,11 +81,11 @@
                                     <i>Không có tài khoản</i>
                                 </c:if>
                             </td>
-                            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
-                            <td>${user.sex}</td>
-                            <td>${user.identityCard}</td>
-                            <td>${user.phone}</td>
-                            <td>
+                            <td id="birthDay${user.userId}"><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
+                            <td id="sex${user.userId}">${user.sex}</td>
+                            <td id="identityCard${user.userId}">${user.identityCard}</td>
+                            <td id="phone${user.userId}">${user.phone}</td>
+                            <td id="mail${user.userId}">
                                 <c:if test="${user.email != null}">
                                     <p>${user.email}</p>
                                 </c:if>
@@ -93,8 +93,8 @@
                                     <i>Không có dữ liệu</i>
                                 </c:if>
                             </td>
-                            <td>${user.position}</td>
-                            <td>${user.userRole}</td>
+                            <td id="position${user.userId}">${user.position}</td>
+                            <td id="role${user.userId}">${user.userRole}</td>
                             <td> 
                                 <c:if test="${user.account.userId == user.userId && user.account.active == true}">
                                     <i class="fa-solid fa-user-large text-success"></i>
@@ -106,16 +106,17 @@
 
                             <sec:authorize access="hasAuthority('ADMIN')">
                                 <td class="d-flex">
-                                    <a class="user-edit" href="javascript:;" onclick="">
+                                    <a class="user-edit" href="javascript:;" 
+                                       onclick="getEmployeeUserInfo(${user.userId})"
+                                       data-bs-toggle="modal" data-bs-target="#myModal">
                                         <i class="fas fa-user-edit text-info" 
                                            data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
                                     </a>
-                                    <%--<c:if test="${user.orders.isEmpty()}">--%>
+                                       
                                     <a class="user-delete" href="javascript:;" onclick="">
                                         <i class="fa-solid fa-user-xmark text-warning"
                                            data-bs-toggle="tooltip" title="Xóa"></i>
                                     </a>
-                                    <%--</c:if>--%>
                                 </td>
                             </sec:authorize>
                         </tr>

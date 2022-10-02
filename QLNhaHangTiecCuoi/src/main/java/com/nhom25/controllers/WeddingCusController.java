@@ -44,6 +44,7 @@ public class WeddingCusController {
     @GetMapping("/wedding/{weddinghallId}")
     public String weddingHallDetails(Model model ,@PathVariable(value="weddinghallId") int id){
         model.addAttribute("weddinghall", this.weddingCusService.getWeddingHallById(id));
+        model.addAttribute("countFeedback", this.weddingCusService.feedbackCounter(id));
         return "detailWedding";
     }
 }

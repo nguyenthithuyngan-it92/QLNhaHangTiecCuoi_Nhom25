@@ -84,6 +84,7 @@ public class Orders implements Serializable {
     
     @JoinColumn(name = "shift_id", referencedColumnName = "shift_id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Shift shiftId;
     
     @JoinColumn(name = "weddinghall_id", referencedColumnName = "weddinghall_id")

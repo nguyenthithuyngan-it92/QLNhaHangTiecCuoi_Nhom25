@@ -93,10 +93,11 @@ public class WeddingCusRepositoryImpl implements WeddingCusRepository {
     }
 
     @Override
-    public int feedbackCounter() {
+    public int feedbackCounter(int wdhallId) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query query = session.createQuery("SELECT COUNT(*) FROM Feedback");
-
+        Weddinghall h = this.getWeddingHallById(wdhallId);
+        Query query = session.createQuery("SELECT COUNT(*) FROM Feedback WHERE weddinghallId=:wdhallId");
+        query.setParameter("wdhallId", h);
         return Integer.parseInt(query.getSingleResult().toString());
     }
 
