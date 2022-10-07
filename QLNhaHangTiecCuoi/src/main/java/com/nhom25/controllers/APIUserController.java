@@ -6,10 +6,13 @@
 package com.nhom25.controllers;
 
 import com.nhom25.pojo.Account;
+import com.nhom25.pojo.Orders;
 import com.nhom25.pojo.User;
+import com.nhom25.services.OrdersService;
 import com.nhom25.services.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +31,9 @@ public class APIUserController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private OrdersService ordersService;
 
     @PostMapping(path = "/api/add-user", produces = {
         MediaType.APPLICATION_JSON_VALUE
@@ -90,6 +96,24 @@ public class APIUserController {
             }
 
         } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    @PostMapping(path = "/api/get-notifications", produces = {
+        MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity<List<Orders>> getListOrderByUserId(@RequestBody Map<String, String> params) {
+        try {
+            String userId = params.get("userId");
+
+            List<Orders> listFoods = this.ordersService.getListOrderByUserId(Integer.parseInt(userId));
+
+            return new ResponseEntity<>(listFoods, HttpStatus.OK);
+
+        } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
 

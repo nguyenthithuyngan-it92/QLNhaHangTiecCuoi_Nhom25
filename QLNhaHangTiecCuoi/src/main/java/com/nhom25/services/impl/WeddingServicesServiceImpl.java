@@ -41,4 +41,9 @@ public class WeddingServicesServiceImpl implements WeddingServicesService{
     public boolean deleteWdService(int weddingservicesId) {
         return this.weddingServicesRepository.deleteWdService(weddingservicesId);
     }
+
+    @Override
+    public List<Object[]> countService() {
+        return this.weddingServicesRepository.countService();
+    }
 }

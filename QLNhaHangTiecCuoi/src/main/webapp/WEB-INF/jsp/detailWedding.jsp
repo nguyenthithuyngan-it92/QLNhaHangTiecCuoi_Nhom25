@@ -89,9 +89,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/wedding.js" />"></script>
 <script>
-                window.onload = function () {
-                    loadFeedback('${endpoint}');
-                }
+    window.onload = function () {
+        loadFeedback('${endpoint}');
+    }
 </script>
 
 <div>

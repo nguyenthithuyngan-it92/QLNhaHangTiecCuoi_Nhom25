@@ -144,18 +144,18 @@ public class ApiBookingWedding {
             //format price
             DecimalFormat fmPrice = new DecimalFormat("###,###,###");
 
-            sendMail("1951052129ngan@ou.edu.vn", u.getEmail(), "Dat tiec cuoi thanh cong - Nha hang tiec cuoi White Palace",
-                    "Chuc mung quy khach " + u.getName() + " da dat tiec cuoi thanh cong voi ma hoa don " + String.valueOf(o.getOrderId())
-                    + ". Quy khach vui long kiem tra nhung thong tin dat tiec sau: "
-                    + "\n   + Sanh tiec: " + String.valueOf(h.getName())
-                    + "\n   + Goi dich vu: " + String.valueOf(s.getName())
-                    + "\n   + Ngay to chuc tiec cuoi: " + String.valueOf(fmDate.format(o.getPartyDate()))
-                    + "\n   + Ca to chuc tiec: " + String.valueOf(sh.getName())
-                    + "\n   + So luong ban tiec: " + String.valueOf(o.getQuantityTable()) + " bàn"
-                    + "\n   + Tong tien hoa don: " + String.valueOf(fmPrice.format(o.getTotalPrice())) + " VNĐ"
-                    + "\nNeu thong tin tren da chinh xac thi quy khach can den nha hang thanh toan hoa don truoc ngay " + String.valueOf(fmDate.format(o.getPartyDate()))
-                    + "\nNeu thong tin co sai sot vui long lien he voi chung toi bang cach phan hoi lai qua mail nay de dieu chinh thong tin truoc ngay " + String.valueOf(fmDate.format(o.getPartyDate()))
-                    + "\nCam on quy khach da tin tuong va lua chon nha hang chung toi!!"
+            sendMail("1951052129ngan@ou.edu.vn", u.getEmail(), "Đặt tiệc cưới thành công - Nhà hàng tiệc cưới White Palace",
+                    "Chúc mừng quý khách " + u.getName() + " đã đặt tiệc cưới thành công với mã hóa đơn " + String.valueOf(o.getOrderId())
+                    + ". Quý khách vui lòng kiểm tra lại thông tin đặt tiệc sau: "
+                    + "\n   + Sảnh tiệc: " + String.valueOf(h.getName())
+                    + "\n   + Gói dịch vụ: " + String.valueOf(s.getName())
+                    + "\n   + Ngày tổ chức tiệc cưới: " + String.valueOf(fmDate.format(o.getPartyDate()))
+                    + "\n   + Ca tổ chức tiệc: " + String.valueOf(sh.getName())
+                    + "\n   + Số lượng bàn tiệc: " + String.valueOf(o.getQuantityTable()) + " bàn"
+                    + "\n   + Tổng tiền hóa đơn: " + String.valueOf(fmPrice.format(o.getTotalPrice())) + " VNĐ"
+                    + "\nNếu thông tin trên đã chính xác, quý khách vui lòng đến nhà hàng thanh toán hóa đơn trước ngày " + String.valueOf(fmDate.format(o.getPartyDate()))
+                    + ".\nNếu thông tin có sai sót vui lòng liên hệ với chúng tôi bằng cách phản hồi lại mail này để điều chỉnh thông tin trước ngày " + String.valueOf(fmDate.format(o.getPartyDate()))
+                    + ".\nCảm ơn quý khách đã tin tưởng và lựa chọn chúng tôi!!"
                     + "\nWhite Palace."
             );
 
@@ -182,11 +182,11 @@ public class ApiBookingWedding {
         //format price
         DecimalFormat fmPrice = new DecimalFormat("###,###,###");
 
-        sendMail("1951052129ngan@ou.edu.vn", u.getEmail(), "Thanh toan hoa don - Nha hang tiec cuoi White Palace",
-                "Quy khach da thanh toan hoa don " + String.valueOf(o.getOrderId())
-                + " voi tong so tien la " + String.valueOf(fmPrice.format(o.getTotalPrice())) + " VNĐ "
-                + " vao ngay " + String.valueOf(fmDate.format(new Date()))
-                + "\nCam on quy khach da thanh toan hoa don dung han. Chung toi rat han hanh duoc phuc vu quy khach!!"
+        sendMail("1951052129ngan@ou.edu.vn", u.getEmail(), "Thanh toán hóa đơn - Nhà hàng tiệc cưới White Palace",
+                "Qúy khách đã thanh toán hóa đơn " + String.valueOf(o.getOrderId())
+                + " với tổng số tiền là " + String.valueOf(fmPrice.format(o.getTotalPrice())) + " VNĐ"
+                + " vào ngày " + String.valueOf(fmDate.format(new Date()))
+                + ".\nCản ơn quý khách đã thanh toán hóa đơn đúng hạn. Chúng tôi rất hân hạnh được phục vụ quý khách!!"
                 + "\nWhite Palace."
         );
         return new ResponseEntity<>(this.ordersService.confirmBooking(orderId), HttpStatus.OK);

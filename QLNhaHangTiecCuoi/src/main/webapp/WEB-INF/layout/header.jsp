@@ -14,9 +14,9 @@
     <span class="site-heading-lower">WHITE PALACE</span>
 </h1>
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
     <div class="container-fluid mb-0">
-<!--        <a class="navbar-brand" href="javascript:void(0)">Nhà hàng tiệc cưới</a>-->
+        <!--        <a class="navbar-brand" href="javascript:void(0)">Nhà hàng tiệc cưới</a>-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -60,10 +60,25 @@
                         </li>
                     </c:when>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
+                        <sec:authorize access="hasAnyAuthority('CUSTOMER')">
+                            <div class="dropdown">
+                                <li class="nav-item have_dots" data-bs-toggle="dropdown">
+                                    <span><i class="far fa-bell"></i></span>
+                                </li>
+
+                                <ul class="dropdown-menu bell">
+                                    <li><h5 class="dropdown-header">THÔNG BÁO</h5></li>
+
+                                    <div id="notifications">
+
+                                    </div>
+                                </ul>
+                            </div>
+                        </sec:authorize>
                         <li class="nav-item">
                             <a class="nav-link text-info" href="#">
                                 <c:if test="${currentUser.avatar != null}">
-                                    <img src="${currentUser.avatar}" class="rounded-circle" />
+                                    <img id="profile-user-id" data-iduser="${currentUser.userId}" src="${currentUser.avatar}" class="rounded-circle" />
                                 </c:if>
                                 <c:if test="${currentUser.avatar == null}">
                                     <img src="<c:url value="/img/avt.png"/>" class="rounded-circle" style="width: 30px;"/>
@@ -81,3 +96,5 @@
         </div>
     </div>
 </nav>
+
+<script src="<c:url value="/js/order.js"/>"></script>

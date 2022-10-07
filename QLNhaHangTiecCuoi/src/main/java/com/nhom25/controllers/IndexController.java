@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @ControllerAdvice
 public class IndexController {
-    
+   
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
         model.addAttribute("currentUser", session.getAttribute("currentUser"));

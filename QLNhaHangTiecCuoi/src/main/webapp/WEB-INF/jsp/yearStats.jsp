@@ -10,8 +10,20 @@
 
 <h1 class="text-center text-info">THỐNG KÊ DOANH THU THEO NĂM</h1>
 <br><br>
+<c:url value="/admin/yearStats" var="action" />
+<form action="${action}" class="d-flex searchStats" style="margin-left: 40%;">
+    <input type="number" class="form-control" placeholder="Nhập năm..." name="year">
+    <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
+</form>
 <div class="row">
-    <div class="col-md-8 col-xs-12">
+    <div class="col-md-5 col-xs-12">
+        <h2 class="section-title2 section-title-center">
+            <b></b>
+            <span class="section-title-main" style="color:rgb(210, 80, 0);">
+                BẢNG THỐNG KÊ DOANH THU THEO NĂM
+            </span>
+            <b></b>
+        </h2>
         <table class="table stats">
             <tr>
                 <th class="id">Mã</th>
@@ -23,25 +35,28 @@
                     <td>${y[0]}</td>
                     <td>${y[1]}</td>
                     <td>
-                        <fmt:formatNumber type="number" value="${y[2]}" maxFractionDigits="3" /> VND
+                        <fmt:formatNumber type="number" value="${y[2]}" maxFractionDigits="3" /> VNĐ
                     </td>
                 </tr>
             </c:forEach>
         </table>
     </div>
-    <div class="col-md-4 col-xs-12">
-        <c:url value="/admin/yearStats" var="action" />
-        <form action="${action}" class="searchStats">
-            <div class="mb-3">
-                <input type="number" class="form-control" placeholder="Nhập năm..." name="year">
-            </div>
-            <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
-        </form>
+    <div class="col-md-7 col-xs-12">
+        <h2 class="section-title2 section-title-center">
+            <b></b>
+            <span class="section-title-main" style="color:rgb(210, 80, 0);">
+                BIỂU ĐỒ DOANH THU THEO NĂM
+            </span>
+            <b></b>
+        </h2>
+        <div class="canvasStats">
+            <canvas id="myChart4"></canvas>
+        </div>
+
     </div>
 </div>
-<div class="canvasStats">
-    <canvas id="myChart4"></canvas>
-</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<c:url value="/js/stats.js" />"></script>
 <script>

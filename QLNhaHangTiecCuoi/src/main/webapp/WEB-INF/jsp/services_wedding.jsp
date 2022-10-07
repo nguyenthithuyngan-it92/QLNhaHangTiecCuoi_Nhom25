@@ -117,13 +117,20 @@
             - Dịch vụ MC và tiết mục biểu diễn
         </p>
         <p style="padding: 0 15px 0 15px;text-align:center;font-size:13px;">Bên cạnh mỗi gói dịch vụ của nhà hàng còn có những đặc trưng riêng, phong cách trang trí riêng, các nghi thức lễ cưới độc đáo để lễ cưới của các cặp đôi mang đậm phong cách riêng để lại dấu ấn đẹp trong ngày trọng đại.</p>
-        <h2 class="section-title2 section-title-center">
+        <h2 class="section-titleTop section-title-center">
             <b></b>
             <span class="section-title-main" style="color:rgb(210, 80, 0);">
                 CÁC GÓI DỊCH VỤ ĐƯỢC YÊU THÍCH
             </span>
             <b></b>
         </h2>
+        <div class="top-services" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+            <c:forEach items="${countServiceTop}" var="topS">
+                <div class="name-topService" >
+                    <a href="#service">${topS[1]}</a>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </div>
 
@@ -213,10 +220,10 @@
     </span>
     <b></b>
 </h2>
-<div class="info-Services row">
+<div class="info-Services row" id="service">
     <c:forEach items="${services}" var="s">
         <c:if test="${s.active == true}">
-            <div class="service col-md-5 col-xs-12">
+            <div class="service col-md-5 col-xs-12" >
                 <div class="name">
                     <h4 class="name-service">${s.name}</h4>
                     <h6 class="price-service"><fmt:formatNumber type="number" maxFractionDigits="3" 

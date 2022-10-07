@@ -5,6 +5,7 @@
  */
 package com.nhom25.repository.impl;
 
+import com.nhom25.pojo.Orders;
 import com.nhom25.pojo.Weddingservices;
 import com.nhom25.repository.WeddingServicesRepository;
 import java.util.List;
@@ -28,7 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @PropertySource("classpath:databases.properties")
 @Transactional
-public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
+public class WeddingServicesRepositoryImpl implements WeddingServicesRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
@@ -39,12 +41,12 @@ public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
         CriteriaQuery<Weddingservices> query = builder.createQuery(Weddingservices.class);
         Root root = query.from(Weddingservices.class);
         query.select(root);
-        
-        if(name != null){
+
+        if (name != null) {
             Predicate p = builder.like(root.get("name").as(String.class), String.format("%%%s%%", name));
-            query = query.where(p); 
+            query = query.where(p);
         }
-        
+
         Query q = session.createQuery(query);
         return q.getResultList();
     }
@@ -52,16 +54,16 @@ public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
     @Override
     public Weddingservices getWeddingServiceById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         return session.get(Weddingservices.class, id);
     }
 
     @Override
     public boolean addOrUpdateWeddingService(Weddingservices ws) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         try {
-            if(ws.getWeddingservicesId() == 0){
+            if (ws.getWeddingservicesId() == 0) {
                 session.save(ws);
             } else {
                 session.update(ws);
@@ -72,7 +74,7 @@ public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
     @Override
@@ -81,13 +83,37 @@ public class WeddingServicesRepositoryImpl implements WeddingServicesRepository{
         try {
             Weddingservices ws = session.get(Weddingservices.class, weddingservicesId);
             session.delete(ws);
-            
+
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
-        
+
         return false;
     }
-    
+
+    @Override
+    public List<Object[]> countService() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cr = builder.createQuery(Object[].class);
+
+        Root root = cr.from(Orders.class);
+        Root rootS = cr.from(Weddingservices.class);
+
+        cr.where(builder.equal(root.get("weddingservicesId"), rootS.get("weddingservicesId")));
+
+        cr.multiselect(root.get("weddingservicesId"), rootS.get("name"), builder.count(root.get("weddingservicesId")));
+        cr.groupBy(root.get("weddingservicesId"));
+
+        cr.orderBy(builder.desc(builder.count(root.get("weddingservicesId"))));
+
+        Query query = session.createQuery(cr);
+        
+        query.setMaxResults(3);
+
+        return query.getResultList();
+
+    }
+
 }

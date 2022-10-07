@@ -11,8 +11,26 @@
 
 <h1 class="text-center text-info">THỐNG KÊ DOANH THU THEO QUÝ</h1>
 <br><br>
+<c:url value="/admin/quarterStats" var="action" />
+<form action="${action}" class="d-flex searchStats">
+    <select class="form-control" name="quarter">
+        <option selected disabled>Chọn quý</option>
+        <c:forEach begin="1" end="4" var="i">
+            <option value="${i}">${i}</option>
+        </c:forEach>
+    </select>
+    <input type="number" class="form-control" placeholder="Nhập năm..." name="year">
+    <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
+</form>
 <div class="row">
-    <div class="col-md-8 col-xs-12">
+    <div class="col-md-5 col-xs-12">
+        <h2 class="section-title2 section-title-center">
+            <b></b>
+            <span class="section-title-main" style="color:rgb(210, 80, 0);">
+                BẢNG DOANH THU THEO QUÝ
+            </span>
+            <b></b>
+        </h2>
         <table class="table stats">
             <tr>
                 <th class="id">Mã</th>
@@ -24,34 +42,28 @@
                     <td>${r[0]}</td>
                     <td>${r[1]}</td>
                     <td>
-                        <fmt:formatNumber type="number" value="${r[2]}" maxFractionDigits="3" /> VND
+                        <fmt:formatNumber type="number" value="${r[2]}" maxFractionDigits="3" /> VNĐ
                     </td>
                 </tr>
             </c:forEach>
         </table>
     </div>
-    <div class="col-md-4 col-xs-12">
-        <c:url value="/admin/quarterStats" var="action" />
-        <form action="${action}" class="searchStats">
-            <div class="mb-3 mt-3">
-                <select class="form-control" name="quarter">
-                    <option selected disabled>Chọn quý</option>
-                    <c:forEach begin="1" end="4" var="i">
-                        <option value="${i}">${i}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="mb-3">
-                <input type="number" class="form-control" placeholder="Nhập năm..." name="year">
-            </div>
-            <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
-        </form>
+    <div class="col-md-7 col-xs-12">
+        <h2 class="section-title2 section-title-center">
+            <b></b>
+            <span class="section-title-main" style="color:rgb(210, 80, 0);">
+                BIỂU ĐỒ DOANH THU THEO QUÝ
+            </span>
+            <b></b>
+        </h2>
+        <div class="canvasStats">
+            <canvas id="myChart3"></canvas>
+        </div>
+
     </div>
 </div>
-<div class="canvasStats">
-    <canvas id="myChart3"></canvas>
-</div>
-            
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<c:url value="/js/stats.js" />"></script>
 <script>

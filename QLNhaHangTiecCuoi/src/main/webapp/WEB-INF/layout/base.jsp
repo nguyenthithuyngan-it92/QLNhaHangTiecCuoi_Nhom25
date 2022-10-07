@@ -35,13 +35,11 @@
     <body>
         <tiles:insertAttribute name="header" />
 
-
         <tiles:insertAttribute name="content" />
-
 
         <tiles:insertAttribute name="footer" />
 
-        <div id="toastMessage" class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+        <div id="toastMessage" class="position-fixed top-50 end-0 p-3" style="z-index: 11">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <!--<img src="..." class="rounded me-2" alt="...">-->

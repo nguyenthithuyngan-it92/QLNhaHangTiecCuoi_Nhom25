@@ -81,4 +81,3 @@ function addFeedback(endpoint, weddinghallId) {
         d.insertAdjacentHTML("beforebegin", h);
     });
 }
-

@@ -402,6 +402,7 @@ window.onload = () => {
                         toastMessageDate.innerHTML = new Date(data.createdDate).toLocaleDateString();
                         toastBody.innerText = `Quý khách ${name.value} đã đặt tiệc thành công với mã đặt hàng là ${data.orderId}. 
                                                 Quý khách vui lòng đến nhà hàng trước ngày ${new Date(data.partyDate).toLocaleDateString()} để thanh toán hóa đơn với tổng số tiền là ${data.totalPrice.toLocaleString('it-IT', {style: 'currency', currency: 'VND'})}. 
+                                                Để xem chi tiết quý khách vui lòng truy cập mail để kiểm tra lại thông tin.
                                                 Trân trọng cảm ơn quý khách!!`;
                     }
                     console.log(data);
@@ -464,7 +465,8 @@ window.onload = () => {
                 if (data) {
                     toastMessageDate.innerHTML = new Date(data.createdDate).toLocaleDateString();
                     toastBody.innerText = `Quý khách ${name.value} đã đặt tiệc thành công với mã đặt hàng là ${data.orderId}. 
-                                            Quý khách vui lòng đến nhà hàng trước ngày ${new Date(data.partyDate).toLocaleDateString()} để thanh toán hóa đơn với tổng số tiền là ${data.totalPrice.toLocaleString('it-IT', {style: 'currency', currency: 'VND'})}. 
+                                            Quý khách vui lòng đến nhà hàng trước ngày ${new Date(data.partyDate).toLocaleDateString()} để thanh toán hóa đơn với tổng số tiền là ${data.totalPrice.toLocaleString('it-IT', {style: 'currency', currency: 'VND'})}.
+                                            Quý khách vui lòng kiểm tra mail cá nhân để xác nhận lại thông tin.
                                             Trân trọng cảm ơn quý khách!!`;
                 }
                 console.log(data);

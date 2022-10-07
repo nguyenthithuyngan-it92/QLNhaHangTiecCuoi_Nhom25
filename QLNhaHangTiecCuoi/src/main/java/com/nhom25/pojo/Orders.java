@@ -53,8 +53,8 @@ public class Orders implements Serializable {
     @Column(name = "order_id")
     private Integer orderId;
     @Column(name = "created_date")
-    @Temporal(TemporalType.DATE)
-    private Date createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate = new Date();
     @Column(name = "status")
     private Boolean status;
     @Column(name = "party_date")
@@ -65,10 +65,10 @@ public class Orders implements Serializable {
     @Column(name = "total_price")
     private Long totalPrice;
     @Column(name = "payment_date")
-    @Temporal(TemporalType.DATE)
-    private Date paymentDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date paymentDate = new Date();
     
-    @ManyToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Food> foods = new HashSet<>();
     

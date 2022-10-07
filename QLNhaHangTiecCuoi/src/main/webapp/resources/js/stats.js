@@ -44,6 +44,7 @@ function densityStats(labels, data) {
 
 function monthStats(labels, data) {
     const ctx = document.getElementById('myChart2').getContext('2d');
+    
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {

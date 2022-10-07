@@ -884,22 +884,108 @@ header, .main-content {
 
 /*THỐNG KÊ*/
 .canvasStats{
-    width: 75%;
+    width: 90%;
     margin: auto;
-    padding: 40px;
+    padding: 10px;
 }
 .canvasStats2{
-    width: 60%;
+    width: 62%;
     margin: auto;
-    padding: 40px;
+    padding: 10px;
 }
 .table.stats {
     font-size: 15px;
     text-align: center;
+    margin-top: 20px;
 }
 
 .searchStats input,
 .searchStats button,
 .searchStats select{
     font-size: 15px;
+    margin: 10px;
+    width: 40% !important;
+}
+
+.searchStats button{
+    width: 200px !important;
+}
+
+.section-title2 {
+    position: relative;
+    -js-display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.6em;
+    line-height: 1.3;
+    margin-top: 20px;
+    overflow-wrap: break-word;
+}
+
+.section-title2 b {
+    display: block;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 2px;
+    opacity: .1;
+    background-color: currentColor;
+}
+
+/* Style the tab */
+.tab {
+  margin-top: 10px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+  color: black !important;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.main-title {
+    margin: 15px 0 0;
 }

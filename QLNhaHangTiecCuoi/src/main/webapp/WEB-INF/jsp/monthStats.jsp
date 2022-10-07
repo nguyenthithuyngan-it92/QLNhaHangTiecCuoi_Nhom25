@@ -10,48 +10,61 @@
 
 <h1 class="text-center text-info">THỐNG KÊ DOANH THU THEO THÁNG</h1>
 <br><br>
-<div class="row">
-    <div class="col-md-8 col-xs-12">
+
+<c:url value="/admin/monthStats" var="action" />
+<form action="${action}" class="d-flex searchStats">
+    <select class="form-control" name="month">
+        <option selected disabled>Chọn tháng</option>
+        <c:forEach begin="1" end="12" var="i">
+            <option value="${i}">${i}</option>
+        </c:forEach>
+    </select>
+    <input type="number" class="form-control" placeholder="Nhập năm..." name="year">
+    <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
+
+</form>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-5 col-xs-12">
+        <h2 class="section-title2 section-title-center">
+            <b></b>
+            <span class="section-title-main" style="color:rgb(210, 80, 0);">
+                BẢNG DOANH THU THEO THÁNG
+            </span>
+            <b></b>
+        </h2>
         <table class="table stats">
             <tr>
                 <th class="id">Mã</th>
                 <th>Tên tiệc cưới</th>
                 <th>Doanh thu</th>
             </tr>
-            
+
             <c:forEach items="${monthStats}" var="m">
                 <tr>
                     <td>${m[0]}</td>
                     <td>${m[1]}</td>
                     <td>
-                        <fmt:formatNumber type="number" value="${m[2]}" maxFractionDigits="3" /> VND
+                        <fmt:formatNumber type="number" value="${m[2]}" maxFractionDigits="3" /> VNĐ
                     </td>
                 </tr>
             </c:forEach>
         </table>
-    </div>
-    <div class="col-md-4 col-xs-12">
-        <c:url value="/admin/monthStats" var="action" />
-        <form action="${action}" class="searchStats">
-            <div class="mb-3 mt-3">
-                <select class="form-control" name="month">
-                    <option selected disabled>Chọn tháng</option>
-                    <c:forEach begin="1" end="12" var="i">
-                        <option value="${i}">${i}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="mb-3">
-                <input type="number" class="form-control" placeholder="Nhập năm..." name="year">
-            </div>
-            <button type="submit" class="btn btn-primary">Lọc dữ liệu</button>
-        </form>
 
     </div>
-</div>
 
-<div class="canvasStats">
-    <canvas id="myChart2"></canvas>
+    <div class="col-md-7 col-xs-12">
+        <h2 class="section-title2 section-title-center">
+            <b></b>
+            <span class="section-title-main" style="color:rgb(210, 80, 0);">
+                BIỂU ĐỒ DOANH THU THEO THÁNG
+            </span>
+            <b></b>
+        </h2>
+        <div class="canvasStats">
+            <canvas id="myChart2"></canvas>
+        </div> 
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<c:url value="/js/stats.js" />"></script>
@@ -59,12 +72,13 @@
     window.onload = function () {
         let data = [];
         let labels = [];
+        let msg = document.getElementById('msg');
 
     <c:forEach items="${monthStats}" var="m">
         data.push(${m[2]});
-        labels.push('${m[1]}');
+        labels.push('${m[0]}-${m[1]}');
     </c:forEach>
 
-        monthStats(labels, data);
-    }
+                monthStats(labels, data);
+            }
 </script>
