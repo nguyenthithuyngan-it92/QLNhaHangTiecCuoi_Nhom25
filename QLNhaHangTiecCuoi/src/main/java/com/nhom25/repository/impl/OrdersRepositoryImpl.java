@@ -147,4 +147,20 @@ public class OrdersRepositoryImpl implements OrdersRepository{
         return session.get(Shift.class, shiftId);
     }
 
+    @Override
+    public List<Orders> getListOrderByUserId(int userId) {
+        List<Orders> orders;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Orders> cr = builder.createQuery(Orders.class);
+        Root<Orders> root = cr.from(Orders.class);
+        
+        cr.where(builder.equal(root.get("userId"), userId));
+        cr.orderBy(builder.desc(root.get("createdDate")));
+        CriteriaQuery query = cr.select(root);
+
+        orders = session.createQuery(query).getResultList();        
+        return orders;
+    }
+
 }

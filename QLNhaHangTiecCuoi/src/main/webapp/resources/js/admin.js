@@ -9,7 +9,7 @@ var bar = document.querySelector('.bar');
 var subNav = document.querySelectorAll('.side-bar-nav ul li .link-wrapper');
 
 //kiểm tra chọn ngày sinh
-let dateOfBirth = document.getElementById('dateOfBirthId');
+let dateOfBirth = document.getElementById('inputBirthDay');
 if (dateOfBirth) {
     const currentDate = new Date();
     let year = currentDate.getFullYear() - 18;

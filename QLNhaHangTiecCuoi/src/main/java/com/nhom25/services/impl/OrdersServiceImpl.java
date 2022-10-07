@@ -89,5 +89,10 @@ public class OrdersServiceImpl implements OrdersService{
     public List<Shift> getShifts() {
         return this.ordersRepository.getShifts();
     }
+
+    @Override
+    public List<Orders> getListOrderByUserId(int userId) {
+        return this.ordersRepository.getListOrderByUserId(userId);
+    }
     
 }

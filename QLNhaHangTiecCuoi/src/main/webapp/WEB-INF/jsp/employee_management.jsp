@@ -43,185 +43,195 @@
         </c:when>
     </c:choose>
 </div>
+<!-- Tab links -->
+<div class="tab">
+    <button class="tablinks text-info active"  onclick="openCity(event, 'In')">NHÂN VIÊN TRONG HỆ THỐNG</button>
+    <button class="tablinks text-warning" onclick="openCity(event, 'Out')">NHÂN VIÊN CỦA NHÀ HÀNG</button>
+</div>
 
-<!--TABLE NHÂN VIÊN TRONG HỆ THỐNG-->
-<div class="main-table">
-    <div class="main-title">
-        <h2 class="text-uppercase text-center text-info">DANH SÁCH NHÂN VIÊN TRONG HỆ THỐNG</h2>
-    </div>
-    <div class="user-table">
-        <table class="table">
-            <thead class="table-success">
-                <tr class="text-uppercase text-center">
-                    <th class="name">Họ tên</th>
-                    <th>Tên tài khoản</th>
-                    <th>Ngày sinh</th>
-                    <th>Giới tính</th>
-                    <th>CMND/CCCD</th>
-                    <th>Số điện thoại</th>
-                    <th>Email</th>
-                    <th>Chức vụ</th>
-                    <th>Vai trò</th>
-                    <th>Trạng thái</th>
-                        <sec:authorize access="hasAuthority('ADMIN')">
-                        <th>Hành động</th>
-                        </sec:authorize>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${users}" var="user">
-                    <c:if test="${(user.userRole == 'ADMIN' || user.userRole == 'EMPLOYEE') && user.account.userId == user.userId}">
-                        <tr>
-                            <td id="name${user.userId}">${user.name}</td>
-                            <td>
-                                <c:if test="${user.account.userId == user.userId}">
-                                    <p>${user.account.username}</p>
-                                </c:if>
-                                <c:if test="${user.account.userId != user.userId}">
-                                    <i>Không có tài khoản</i>
-                                </c:if>
-                            </td>
-                            <td id="birthDay${user.userId}"><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
-                            <td id="sex${user.userId}">${user.sex}</td>
-                            <td id="identityCard${user.userId}">${user.identityCard}</td>
-                            <td id="phone${user.userId}">${user.phone}</td>
-                            <td id="mail${user.userId}">
-                                <c:if test="${user.email != null}">
-                                    <p>${user.email}</p>
-                                </c:if>
-                                <c:if test="${user.email == '' || user.email == null}">
-                                    <i>Không có dữ liệu</i>
-                                </c:if>
-                            </td>
-                            <td id="position${user.userId}">${user.position}</td>
-                            <td id="role${user.userId}">${user.userRole}</td>
-                            <td> 
-                                <c:if test="${user.account.userId == user.userId && user.account.active == true}">
-                                    <i class="fa-solid fa-user-large text-success"></i>
-                                </c:if>
-                                <c:if test="${user.account.userId != user.userId || user.account.active == false}">
-                                    <i class="fa-solid fa-user-large-slash text-danger"></i>
-                                </c:if>
-                            </td>
-
+<!-- Tab content -->
+<div id="In" class="tabcontent" style="display:block;">
+    <!--TABLE NHÂN VIÊN TRONG HỆ THỐNG-->
+    <div class="main-table">
+        <div class="main-titleS">
+            <h2 class="text-uppercase text-center text-info">DANH SÁCH NHÂN VIÊN TRONG HỆ THỐNG</h2>
+        </div>
+        <div class="user-table">
+            <table class="table">
+                <thead class="table-success">
+                    <tr class="text-uppercase text-center">
+                        <th class="name">Họ tên</th>
+                        <th>Tên tài khoản</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>CMND/CCCD</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Chức vụ</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
                             <sec:authorize access="hasAuthority('ADMIN')">
-                                <td class="d-flex">
-                                    <a class="user-edit" href="javascript:;" 
-                                       onclick="getEmployeeUserInfo(${user.userId})"
-                                       data-bs-toggle="modal" data-bs-target="#myModal">
-                                        <i class="fas fa-user-edit text-info" 
-                                           data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
-                                    </a>
-                                       
-                                    <a class="user-delete" href="javascript:;" onclick="">
-                                        <i class="fa-solid fa-user-xmark text-warning"
-                                           data-bs-toggle="tooltip" title="Xóa"></i>
-                                    </a>
-                                </td>
+                            <th>Hành động</th>
                             </sec:authorize>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${users}" var="user">
+                        <c:if test="${(user.userRole == 'ADMIN' || user.userRole == 'EMPLOYEE') && user.account.userId == user.userId}">
+                            <tr>
+                                <td id="name${user.userId}">${user.name}</td>
+                                <td>
+                                    <c:if test="${user.account.userId == user.userId}">
+                                        <p>${user.account.username}</p>
+                                    </c:if>
+                                    <c:if test="${user.account.userId != user.userId}">
+                                        <i>Không có tài khoản</i>
+                                    </c:if>
+                                </td>
+                                <td id="birthDay${user.userId}">
+                                    <fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/>
+                                </td>
+                                <td id="sex${user.userId}">${user.sex}</td>
+                                <td id="identityCard${user.userId}">${user.identityCard}</td>
+                                <td id="phone${user.userId}">${user.phone}</td>
+                                <td id="mail${user.userId}">
+                                    <c:if test="${user.email != null}">
+                                        <p>${user.email}</p>
+                                    </c:if>
+                                    <c:if test="${user.email == '' || user.email == null}">
+                                        <i>Không có dữ liệu</i>
+                                    </c:if>
+                                </td>
+                                <td id="position${user.userId}">${user.position}</td>
+                                <td id="role${user.userId}">${user.userRole}</td>
+                                <td> 
+                                    <c:if test="${user.account.userId == user.userId && user.account.active == true}">
+                                        <i class="fa-solid fa-user-large text-success"></i>
+                                    </c:if>
+                                    <c:if test="${user.account.userId != user.userId || user.account.active == false}">
+                                        <i class="fa-solid fa-user-large-slash text-danger"></i>
+                                    </c:if>
+                                </td>
+
+                                <sec:authorize access="hasAuthority('ADMIN')">
+                                    <td class="d-flex">
+                                        <a class="user-edit" href="javascript:;" 
+                                           onclick="getEmployeeUserInfo(${user.userId})"
+                                           data-bs-toggle="modal" data-bs-target="#myModal">
+                                            <i class="fas fa-user-edit text-info" 
+                                               data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
+                                        </a>
+
+                                        <a class="user-delete" href="javascript:;" onclick="">
+                                            <i class="fa-solid fa-user-xmark text-warning"
+                                               data-bs-toggle="tooltip" title="Xóa"></i>
+                                        </a>
+                                    </td>
+                                </sec:authorize>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<!--TABLE NHÂN VIÊN CỦA NHÀ HÀNG-->
-<div class="main-table">
-    <div class="main-title">
-        <h2 class="text-uppercase text-center text-warning">DANH SÁCH NHÂN VIÊN CỦA NHÀ HÀNG</h2>
-    </div>
-    <div class="user-table">
-        <table class="table">
-            <thead class="table-warning">
-                <tr class="text-uppercase text-center">
-                    <th class="name">Họ tên</th>
-                    <th>Tên tài khoản</th>
-                    <th>Ngày sinh</th>
-                    <th>Giới tính</th>
-                    <th>CMND/CCCD</th>
-                    <th>Số điện thoại</th>
-                    <th>Email</th>
-                    <th>Chức vụ</th>
-                    <th>Vai trò</th>
-                        <sec:authorize access="hasAuthority('ADMIN')">
-                        <th>Hành động</th>
-                        </sec:authorize>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${users}" var="user">
-                    <c:if test="${(user.userRole == 'ADMIN' || user.userRole == 'EMPLOYEE') && user.account.userId != user.userId}">
-                        <tr>
-                            <td id="name${user.userId}">${user.name}</td>
-                            <td>
-                                <c:if test="${user.account.userId == user.userId}">
-                                    <p>${user.account.username}</p>
-                                </c:if>
-                                <c:if test="${user.account.userId != user.userId}">
-                                    <i>Chưa có tài khoản</i>
-                                </c:if>
-                            </td>
-                            <td id="birthDay${user.userId}"><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
-                            <td id="sex${user.userId}">${user.sex}</td>
-                            <td id="identityCard${user.userId}">${user.identityCard}</td>
-                            <td id="phone${user.userId}">${user.phone}</td>
-                            <td id="mail${user.userId}">
-                                <c:if test="${user.email != null}">
-                                    <p>${user.email}</p>
-                                </c:if>
-                                <c:if test="${user.email == '' || user.email == null}">
-                                    <i>Không có dữ liệu</i>
-                                </c:if>
-                            </td>
-                            <td id="position${user.userId}">${user.position}</td>
-                            <td id="role${user.userId}">${user.userRole}</td>
-
+<div id="Out" class="tabcontent">
+    <div class="main-table">
+        <div class="main-titleS">
+            <h2 class="text-uppercase text-center text-warning">DANH SÁCH NHÂN VIÊN CỦA NHÀ HÀNG</h2>
+        </div>
+        <div class="user-table">
+            <table class="table">
+                <thead class="table-warning">
+                    <tr class="text-uppercase text-center">
+                        <th class="name">Họ tên</th>
+                        <th>Tên tài khoản</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>CMND/CCCD</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Chức vụ</th>
+                        <th>Vai trò</th>
                             <sec:authorize access="hasAuthority('ADMIN')">
-                                <td class="d-flex">
-                                    <c:if test="${user.account.userId != user.userId}">
-                                        <a class="user-edit" href="javascript:;" 
-                                           onclick="getUserId(${user.userId})" 
-                                           data-bs-toggle="modal" data-bs-target="#myModalAccount">
-                                            <i class="fa-solid fa-user-check text-success" 
-                                               data-bs-toggle="tooltip" title="Tạo tài khoản"></i>
-                                        </a>
+                            <th>Hành động</th>
+                            </sec:authorize>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${users}" var="user">
+                        <c:if test="${(user.userRole == 'ADMIN' || user.userRole == 'EMPLOYEE') && user.account.userId != user.userId}">
+                            <tr>
+                                <td id="name${user.userId}">${user.name}</td>
+                                <td>
+                                    <c:if test="${user.account.userId == user.userId}">
+                                        <p>${user.account.username}</p>
                                     </c:if>
+                                    <c:if test="${user.account.userId != user.userId}">
+                                        <i>Chưa có tài khoản</i>
+                                    </c:if>
+                                </td>
+                                <td id="birthDay${user.userId}"><fmt:formatDate pattern="dd-MM-yyyy" value="${user.dateOfBirth}"/></td>
+                                <td id="sex${user.userId}">${user.sex}</td>
+                                <td id="identityCard${user.userId}">${user.identityCard}</td>
+                                <td id="phone${user.userId}">${user.phone}</td>
+                                <td id="mail${user.userId}">
+                                    <c:if test="${user.email != null}">
+                                        <p>${user.email}</p>
+                                    </c:if>
+                                    <c:if test="${user.email == '' || user.email == null}">
+                                        <i>Không có dữ liệu</i>
+                                    </c:if>
+                                </td>
+                                <td id="position${user.userId}">${user.position}</td>
+                                <td id="role${user.userId}">${user.userRole}</td>
 
-                                    <a class="user-edit" href="javascript:;" 
-                                       onclick="getEmployeeUserInfo(${user.userId})"
-                                       data-bs-toggle="modal" data-bs-target="#myModal">
-                                        <i class="fas fa-user-edit text-info" 
-                                           data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
-                                    </a>
+                                <sec:authorize access="hasAuthority('ADMIN')">
+                                    <td class="d-flex">
+                                        <c:if test="${user.account.userId != user.userId}">
+                                            <a class="user-edit" href="javascript:;" 
+                                               onclick="getUserId(${user.userId})" 
+                                               data-bs-toggle="modal" data-bs-target="#myModalAccount">
+                                                <i class="fa-solid fa-user-check text-success" 
+                                                   data-bs-toggle="tooltip" title="Tạo tài khoản"></i>
+                                            </a>
+                                        </c:if>
 
-                                    <!--XÓA-->
-                                    <c:choose>
-                                        <c:when test="${user.feedbackSet.isEmpty() || user.feedbackSet == null}">
+                                        <a class="user-edit" href="javascript:;" 
+                                           onclick="getEmployeeUserInfo(${user.userId})"
+                                           data-bs-toggle="modal" data-bs-target="#myModal">
+                                            <i class="fas fa-user-edit text-info" 
+                                               data-bs-toggle="tooltip" title="Chỉnh sửa"></i>
+                                        </a>
+
+                                        <!--XÓA-->
+                                        <c:choose>
+                                            <c:when test="${user.feedbackSet.isEmpty() || user.feedbackSet == null}">
                                                 <a class="user-delete" href="javascript:;" onclick="deleteEmployee(${user.userId})">
                                                     <i class="fa-solid fa-user-xmark text-danger"
                                                        data-bs-toggle="tooltip" title="Xóa"></i>
                                                 </a>
-                                        </c:when>
-                                        <c:when test="${!user.feedbackSet.isEmpty() || user.feedbackSet != null}">
+                                            </c:when>
+                                            <c:when test="${!user.feedbackSet.isEmpty() || user.feedbackSet != null}">
                                                 <a class="user-delete disabled" href="javascript:;" onclick="" disabled>
                                                     <i class="fa-solid fa-user-xmark text-danger" 
                                                        data-bs-toggle="tooltip" title="Không thể xóa!"></i>
                                                 </a>
-                                        </c:when>
-                                    </c:choose>
+                                            </c:when>
+                                        </c:choose>
 
-                                </td>
-                            </sec:authorize>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </tbody>
-        </table>
+                                    </td>
+                                </sec:authorize>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<!--END TABLE NHÂN VIÊN CỦA NHÀ HÀNG-->
 
 <!-- The Modal THÊM NHÂN VIÊN -->
 <div class="modal" id="myModal">
@@ -416,6 +426,22 @@
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
+</script>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 </script>
 
 <script src="<c:url value="/js/management.js"/>"></script>

@@ -17,4 +17,6 @@ public interface WeddingServicesService {
     Weddingservices getWeddingServiceById(int id);
     boolean addOrUpdateWeddingService(Weddingservices ws);
     boolean deleteWdService(int weddingservicesId);
+    
+    List<Object[]> countService();
 }

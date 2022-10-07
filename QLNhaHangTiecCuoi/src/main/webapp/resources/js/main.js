@@ -11,7 +11,7 @@ window.onload = () => {
 //    const uploadBtn = document.getElementById("upload_widget");
     const spinnerRegister = document.querySelector('.spinner-register');
     let userId;
-
+    
     let dateOfBirth = document.getElementById('dateOfBirth');
     let phoneInput = document.getElementById('phone');
     let emailInput = document.getElementById('email');

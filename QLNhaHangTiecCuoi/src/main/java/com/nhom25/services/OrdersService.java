@@ -18,6 +18,7 @@ import java.util.Map;
 public interface OrdersService {
     List<Orders> getListOrders(Map<String, String> params);
     Orders getOrdersById(int orderId);
+    List<Orders> getListOrderByUserId(int userId);
     
     //Booking
     Orders addOrders(Orders od);

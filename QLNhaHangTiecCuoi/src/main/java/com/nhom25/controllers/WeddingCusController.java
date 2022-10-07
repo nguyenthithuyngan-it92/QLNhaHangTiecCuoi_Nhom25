@@ -6,6 +6,7 @@
 package com.nhom25.controllers;
 
 import com.nhom25.services.WeddingCusService;
+import com.nhom25.services.WeddingServicesService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class WeddingCusController {
     @Autowired
     private WeddingCusService weddingCusService;
     
+    @Autowired
+    private WeddingServicesService weddingServicesService;
+    
     @GetMapping("/weddings")
     public String listWeddingHall(Model model, @RequestParam Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -37,7 +41,7 @@ public class WeddingCusController {
     @GetMapping("/combo-services")
     public String listWeddingServices(Model model, @RequestParam Map<String, String> params) {
 //        model.addAttribute("weddinghall", this.weddingCusService.getList(params, page));
-        
+        model.addAttribute("countServiceTop", this.weddingServicesService.countService());
         return "servicesWedding";
     }
     
