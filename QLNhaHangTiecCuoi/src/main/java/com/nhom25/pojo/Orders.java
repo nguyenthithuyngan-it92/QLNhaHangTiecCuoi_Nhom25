@@ -66,9 +66,9 @@ public class Orders implements Serializable {
     private Long totalPrice;
     @Column(name = "payment_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date paymentDate = new Date();
+    private Date paymentDate;
     
-    @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Food> foods = new HashSet<>();
     
