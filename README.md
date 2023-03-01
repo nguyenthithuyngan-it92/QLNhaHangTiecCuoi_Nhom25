@@ -1,5 +1,5 @@
 # QLNhaHangTiecCuoi_Nhom25
-Project Website Quản lý Nhà hàng tiệc cưới phát triển bằng Spring MVC, chứng thực và phân quyền phải thực hiện thông qua Spring Security
+Project Website Quản lý Nhà hàng tiệc cưới phát triển bằng Spring MVC, chứng thực và phân quyền phải thực hiện thông qua Spring Security, sử dụng CSDL MySQL.
   - Đăng nhập (có các vai trò admin/nhân viên/khách hàng)
   - Đăng ký khách hàng (phải có avatar)
   - Admin quản lý (thêm/xoá/sửa/tìm kiếm) nhân viên nhà hàng, sảnh cưới, các dịch vụ cưới.
